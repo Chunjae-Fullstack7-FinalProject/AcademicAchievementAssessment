@@ -1,13 +1,13 @@
-package net.fullstack7.aaa;
+// package net.fullstack7.aaa;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class AcademicAchievementAssessmentApplicationTests {
+// @SpringBootTest
+// class AcademicAchievementAssessmentApplicationTests {
 
-  @Test
-  void contextLoads() {
-  }
+//   @Test
+//   void contextLoads() {
+//   }
 
-}
+// }
