@@ -66,6 +66,9 @@ dependencies {
 
     // 메일 관련
     // implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+    //AOP
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
 }
 
 sourceSets {
