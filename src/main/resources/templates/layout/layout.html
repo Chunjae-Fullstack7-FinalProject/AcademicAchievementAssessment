@@ -3,12 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <title>$Title$</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="/assets/css/common/reset.css" />
-    <!-- <link rel="stylesheet" href="/assets/css/common/style.css" /> -->
+    <link rel="stylesheet" href="/assets/css/common/style.css" />
     <link rel="stylesheet" href="/assets/css/main/main.css" />
+
+    <!-- jquery -->
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
+    />
+    <!-- jquery -->
+
     <!-- Google tag (gtag.js) -->
-    <script
+    <!-- <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-FQ19XPZ5J7"
     ></script>
@@ -20,28 +29,12 @@
       gtag("js", new Date());
 
       gtag("config", "G-FQ19XPZ5J7");
-    </script>
+    </script> -->
   </head>
   <body>
     <div class="wrap">
       <!-- header -->
-      <header id="header">
-        <nav class="menu">
-          <ul>
-            <li><a href="#none">학업성취도 평가대비 교재 소개</a></li>
-            <li><a href="#none">밀크T아이</a></li>
-            <li><a href="#none">밀크T초등</a></li>
-            <li><a href="#none">밀크T중등</a></li>
-            <li><a href="#none">밀크T고등</a></li>
-            <li>
-              <a href="#none"
-                ><i class="fa-regular fa-star mr05" style="color: #ffd800"></i
-                >즐겨찾기 추가</a
-              >
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <th:block th:include="~{common/header}"></th:block>
       <!-- header -->
 
       <div layout:fragment="main" class="container"></div>
