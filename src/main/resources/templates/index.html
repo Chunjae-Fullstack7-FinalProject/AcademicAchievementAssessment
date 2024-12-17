@@ -1,9 +1,78 @@
 <!DOCTYPE html>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout.html}"
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layout.html}"
 >
-<div layout:fragment="main">
-    $END$
-</div>
+  <div layout:fragment="main">
+    <div class="tit-wrap">
+      <span class="tit">온라인 학업성취도 평가</span>
+      <div>asdas</div>
+    </div>
+    <div class="tab-wrap">
+      <!-- S: 로그인 후 노출되는 타이틀 주석-->
+      <!--<ul class="tab-btn">
+                        <li class="on">
+                            <a href="#">초등</a>
+                        </li>
+                    </ul>-->
+      <!-- E: 로그인 후 노출되는 타이틀 주석 -->
+      <div class="tab-cnt on">
+        <ul class="cnt-list">
+          <!--S: 220808 CBT 스타일 추가 -->
+          <li class="cbt-box">
+            <a href="#">
+              <span class="tit">CBT기능/유형 연습</span>
+              <span class="txt"
+                >실제 평가 시스템과<br />100% 동일한 화면으로<br />기능/ 유형
+                연습</span
+              >
+            </a>
+            <div class="cbt-overlay">
+              <div class="cbt-btn-list">
+                <a href="#">초등</a>
+                <a href="#">중등</a>
+                <a href="#">고등</a>
+              </div>
+            </div>
+          </li>
+          <!--E: 220808 CBT 스타일 추가 -->
+          <li>
+            <a href="#">
+              <span class="tit">실전시험 1회</span>
+              <span class="txt"
+                >기출문제를 CBT로<br />재구성한 문제로<br />실전 모의고사
+                응시</span
+              >
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="tit">실전시험 2회</span>
+              <span class="txt"
+                >적중률 높은<br />예상문제를 바탕으로<br />실전 모의고사
+                응시</span
+              >
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="tit">시험결과 REPORT</span>
+              <span class="txt"
+                >나의 성취도 파악과<br />취약점 분석,<br />시험 대비 학습
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- footer -->
+    <div class="footer">
+      <span class="copyright"
+        >COPYRIGHT(C) 2022 by KICE. ALL RIGHTS RESERVED.</span
+      >
+    </div>
+    <!-- footer -->
+  </div>
+</html>
