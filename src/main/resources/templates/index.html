@@ -1,9 +1,80 @@
 <!DOCTYPE html>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout.html}"
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layout.html}"
 >
-<div layout:fragment="main">
-    $END$
-</div>
+  <div layout:fragment="main">
+    <div class="tab-wrap">
+      <!-- S: 로그인 후 노출되는 타이틀 주석-->
+      <!--<ul class="tab-btn">
+                        <li class="on">
+                            <a href="#">초등</a>
+                        </li>
+                    </ul>-->
+      <!-- E: 로그인 후 노출되는 타이틀 주석 -->
+      <div class="tab-cnt on">
+        <ul class="cnt-list">
+          <!--S: 220808 CBT 스타일 추가 -->
+          <li class="cbt-box">
+            <a href="#">
+              <span class="tit">CBT기능/유형 연습</span>
+              <span class="txt"
+                >실제 평가 시스템과<br />100% 동일한 화면으로<br />기능/ 유형
+                연습</span
+              >
+            </a>
+            <div class="cbt-overlay">
+              <div class="cbt-btn-list">
+                <a href="#">초등</a>
+                <a href="#">중등</a>
+                <a href="#">고등</a>
+              </div>
+            </div>
+          </li>
+          <!--E: 220808 CBT 스타일 추가 -->
+          <li>
+            <a href="#">
+              <span class="tit">실전시험</span>
+              <span class="txt"
+                >기출문제를 CBT로<br />재구성한 문제로<br />실전 모의고사
+                응시</span
+              >
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              <span class="tit">시험결과 REPORT</span>
+              <span class="txt"
+                >나의 성취도 파악과<br />취약점 분석,<br />시험 대비 학습
+              </span>
+            </a>
+          </li>
+        </ul>
+        <p class="quide_txt">
+          ※ CBT 연습 일부 문항은 한국교육과정평가원의 문항을 사용하였으며, 각
+          문항별 출처표기를 하였습니다.
+        </p>
+      </div>
+    </div>
+    <!-- footer -->
+    <div class="footer">
+      <span
+        class="service_center"
+        style="
+          display: block;
+          color: #8f8f8f;
+          font-size: 14px;
+          text-align: center;
+        "
+        >고객센터 1577-0902 (평일 09:00 ~ 17:30)</span
+      >
+      <span class="copyright"
+        >COPYRIGHT© 2022 BY CHUNJAE CO.LTD ALL RIGHTS RESERVED.</span
+      >
+    </div>
+    <!-- footer -->
+  </div>
+</html>
