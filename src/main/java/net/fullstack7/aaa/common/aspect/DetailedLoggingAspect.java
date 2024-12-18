@@ -38,7 +38,7 @@ public class DetailedLoggingAspect {
             throw e;
         } finally {
             long endTime = System.currentTimeMillis();
-            logger.info("==> {} 종료: {}.{} - 실행 시간: {} ms", 
+            logger.info("==> {} 종료: {}.{} - 실행 시간: {} ms",
                 prefix, className, methodName, (endTime - startTime));
             logger.info("--------------종료---------------");
         }
