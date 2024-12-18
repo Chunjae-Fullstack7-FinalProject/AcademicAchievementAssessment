@@ -1,9 +1,9 @@
 ```mermaid
-graph TD;
-    A[Start] --> B{Is it working?};
-    B -->|Yes| C[Continue];
-    B -->|No| D[Fix it];
-    D --> B;
-    C --> E[End];
+flowchart TD
+    A[Christmas] -->|Get money| B(Go shopping)
+    B --> C{Let me think}
+    C -->|One| D[Laptop]
+    C -->|Two| E[iPhone]
+    C -->|Three| F[fa:fa-car Car]
 </code_block_to_apply_changes_from>
 ```
