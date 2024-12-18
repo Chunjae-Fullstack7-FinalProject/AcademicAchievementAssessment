@@ -1,12 +1,12 @@
-package net.fullstack7.service;
+package net.fullstack7.aaa.service.member;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import net.fullstack7.domain.Member;
-import net.fullstack7.dto.MemberDTO;
-import net.fullstack7.repository.MemberRepository;
+import net.fullstack7.aaa.domain.Member;
+import net.fullstack7.aaa.dto.member.MemberDTO;
+import net.fullstack7.aaa.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

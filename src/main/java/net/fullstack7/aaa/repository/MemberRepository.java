@@ -1,6 +1,6 @@
-package net.fullstack7.repository;
+package net.fullstack7.aaa.repository;
 
-import net.fullstack7.domain.Member;
+import net.fullstack7.aaa.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
