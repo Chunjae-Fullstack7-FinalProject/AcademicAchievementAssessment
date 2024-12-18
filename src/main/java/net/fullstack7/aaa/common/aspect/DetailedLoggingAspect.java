@@ -16,51 +16,31 @@ public class DetailedLoggingAspect {
 
     private static final Logger logger = LogManager.getLogger(DetailedLoggingAspect.class);
 
-    @Around("@annotation(logging)")
-    public Object logMethodExecution(ProceedingJoinPoint joinPoint, Logging logging) throws Throwable {
+    @Around("@annotation(logging) || @within(logging)")
+    public Object logExecution(ProceedingJoinPoint joinPoint, Logging logging) throws Throwable {
         String className = joinPoint.getTarget().getClass().getName();
         String methodName = joinPoint.getSignature().getName();
         Object[] args = joinPoint.getArgs();
         
-        logger.info("==> Starting method: {}.{} - {}", className, methodName, logging.message());
-        logger.info("==> Parameters: {}", Arrays.toString(args));
+        boolean isClassLevel = joinPoint.getSignature().getDeclaringType().isAnnotationPresent(Logging.class);
+        String prefix = isClassLevel ? "클래스 메소드" : "메소드";
+        logger.info("--------------시작---------------");
+        logger.info("==> {} 시작: {}.{} - {}", prefix, className, methodName, logging.message());
+        logger.info("==> 파라미터: {}", Arrays.toString(args));
         
         long startTime = System.currentTimeMillis();
         try {
             Object result = joinPoint.proceed();
-            logger.info("==> Method returned: {}", result);
+            logger.info("==> 메소드 반환: {}", result);
             return result;
         } catch (Exception e) {
-            logger.error("==> Method threw exception: {}", e.getMessage());
+            logger.error("==> 메소드 예외 발생: {}", e.getMessage());
             throw e;
         } finally {
             long endTime = System.currentTimeMillis();
-            logger.info("==> Finished method: {}.{} - Execution time: {} ms", 
-                className, methodName, (endTime - startTime));
-        }
-    }
-
-    @Around("@within(logging)")
-    public Object logClassExecution(ProceedingJoinPoint joinPoint, Logging logging) throws Throwable {
-        String className = joinPoint.getTarget().getClass().getName();
-        String methodName = joinPoint.getSignature().getName();
-        Object[] args = joinPoint.getArgs();
-        
-        logger.info("==> Starting class method: {}.{} - {}", className, methodName, logging.message());
-        logger.info("==> Parameters: {}", Arrays.toString(args));
-        
-        long startTime = System.currentTimeMillis();
-        try {
-            Object result = joinPoint.proceed();
-            logger.info("==> Method returned: {}", result);
-            return result;
-        } catch (Exception e) {
-            logger.error("==> Method threw exception: {}", e.getMessage());
-            throw e;
-        } finally {
-            long endTime = System.currentTimeMillis();
-            logger.info("==> Finished class method: {}.{} - Execution time: {} ms", 
-                className, methodName, (endTime - startTime));
+            logger.info("==> {} 종료: {}.{} - 실행 시간: {} ms", 
+                prefix, className, methodName, (endTime - startTime));
+            logger.info("--------------종료---------------");
         }
     }
 }

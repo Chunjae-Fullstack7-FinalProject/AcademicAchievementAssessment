@@ -19,7 +19,7 @@ import reactor.core.publisher.Mono;
 
 @Logging(message = "문제은행 API 점점부 더미데이터 서빙 API 엔드포인트")
 @RestController
-@RequestMapping("/api/exam")
+@RequestMapping("/dummy/api/exam")
 public class DummyApiController {
     //시험지 더미데이터
     public static Integer[] itemIdList = { 966536, 1588525, 1588526, 1589103, 1589104 };
