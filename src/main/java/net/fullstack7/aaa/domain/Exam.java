@@ -10,9 +10,9 @@ import lombok.Getter;
 public class Exam {
     @Id
     @Column(name="examId", nullable=false)
-    private int examId; // 시험id
-    @Column(name="subjectId", length = 10)
-    private String subjectId; // 과목 id
+    private Long examId; // 시험id
+    @Column(name="subjectId")
+    private Long subjectId; // 과목 id
     @Column(name="teacherId", length = 20)
     private String teacherId; // 선생님 id든 이름이든 받아서 쓰셈
     @Column(name="teacherName",length = 10)
