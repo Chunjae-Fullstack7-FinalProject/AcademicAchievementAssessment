@@ -1,40 +1,24 @@
-<!DOCTYPE html>
-<html lang="ko"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+      layout:decorate="~{test/header.html}">
 >
-<head>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>학업성취도평가</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-    <link th:href="@{/assets/css/test/reset.css}" rel="stylesheet"/>
-    <link th:href="@{/assets/css/test/main.css}" rel="stylesheet"/>
-    <script src="https://kit.fontawesome.com/266dd736a0.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="js/main.js"></script>
-</head>
-<body>
-<div class="wrap">
-    <!-- header -->
-    <header id="header">
-        <nav class="menu">
-            <ul>
-                <li><a href="#none">학업성취도 평가대비 교재 소개</a></li>
-                <li><a href="#none">밀크T아이</a></li>
-                <li><a href="#none">밀크T초등</a></li>
-                <li><a href="#none">밀크T중등</a></li>
-                <li><a href="#none">밀크T고등</a></li>
-                <li><a href="#none"><i class="fa-regular fa-star mr05" style="color: #ffd800;"></i>즐겨찾기 추가</a></li>
-            </ul>
-        </nav>
-    </header>
-    <!-- container -->
-    <div class="container">
-        <div class="tit-wrap">
-            <span class="tit">국가수준 학업성취도평가 대비 시스템</span>
-        </div>
+
+
+<div class="wrap" layout:fragment="maincontent" >
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>학업성취도평가</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+        <link th:href="@{/assets/css/test/reset.css}" rel="stylesheet"/>
+        <link th:href="@{/assets/css/main/main.css}" rel="stylesheet"/>
+        <link th:href="@{/assets/css/test/header.css}" rel="stylesheet"/>
+        <script src="https://kit.fontawesome.com/266dd736a0.js" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    </head>
         <div class="tab-wrap">
             <!-- S: 로그인 후 노출되는 타이틀 주석-->
             <!--<ul class="tab-btn">
@@ -43,12 +27,66 @@
                 </li>
             </ul>-->
             <!-- E: 로그인 후 노출되는 타이틀 주석 -->
+            <section class="banner">
+                <div class="main-banner" id="mainBanner" style="height: 500px; width: 100%">
+                    <img th:src="@{/assets/img/test/mainbanner1.png}" class="active" style="min-height: 500px;width: 100%;" />
+                    <img th:src="@{/assets/img/test/mainbanner3.png}" style="min-height: 500px;width: 100%;" />
+                    <div class="banner-dots" id="bannerDots"></div>
+                    <!-- 이전 버튼 -->
+                    <button id="prevBtn" class="banner-btn prev-btn" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); z-index: 10; color: white">
+                        ◀
+                    </button>
+                    <!-- 다음 버튼 -->
+                    <button id="nextBtn" class="banner-btn next-btn" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 10;color: white">
+                        ▶
+                    </button>
+                </div>
+                <script th:src="@{/assets/js/test/banner.js}"></script>
+            </section>
+
+            <div class="footer" style="margin-top: 20px;">
+                <div class="notice-list">
+                    <div class="inner">
+            <span class="tit" style="font-size: 20px;">
+                <em style="margin-left: 35px;">NOTICE</em>
+            </span>
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="tit">
+                                        <em class="cate2">오픈</em>
+                                        <span class="txt">국가수준 학업성취도 평가 대비 시스템 공지사항 입니다.</span>
+                                    </div>
+                                    <span class="date">2022.08.10</span>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="tit">
+                                        <em class="cate2">오픈</em>
+                                        <span class="txt">국가수준 학업성취도 평가 대비 시스템 공지사항 입니다.</span>
+                                    </div>
+                                    <span class="date">2022.08.11</span>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="tit">
+                                        <em class="cate2">오픈</em>
+                                        <span class="txt">국가수준 학업성취도 평가 대비 시스템 공지사항 입니다.</span>
+                                    </div>
+                                    <span class="date">2022.08.12</span>
+                                </div>
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div><script th:src="@{/assets/js/main/main.js}"></script></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="tab-cnt on">
                 <ul class="cnt-list">
                     <!--S: 220808 CBT 스타일 추가 -->
                     <li class="cbt-box">
                         <a href="#">
-                            <span class="tit">CBT기능/유형 연습</span>
+                            <span class="tit">과목별 시험 문제</span>
                             <span class="txt">실제 평가 시스템과<br>100% 동일한 화면으로<br>기능/ 유형 연습</span>
                         </a>
                         <div class="cbt-overlay">
@@ -79,49 +117,10 @@
                         </a>
                     </li>
                 </ul>
-                <a href="#" class="ft-btn">교재구입 인증하기</a>
             </div>
         </div>
     </div>
-    <!-- footer -->
-    <div class="footer">
-        <div class="notice-list">
-            <div class="inner">
-						<span class="tit">
-							공지사항
-							<em>NOTICE</em>
-						</span>
-                <div class="swiper mySwiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="tit">
-                                <em class="cate">오픈</em>
-                                <span class="txt">국가수준 학업성취도 평가 대비 시스템 공지사항 입니다.</span>
-                            </div>
-                            <span class="date">2022.08.10</span>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="tit">
-                                <em class="cate">오픈</em>
-                                <span class="txt">국가수준 학업성취도 평가 대비 시스템 공지사항 입니다.</span>
-                            </div>
-                            <span class="date">2022.08.11</span>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="tit">
-                                <em class="cate">오픈</em>
-                                <span class="txt">국가수준 학업성취도 평가 대비 시스템 공지사항 입니다.</span>
-                            </div>
-                            <span class="date">2022.08.12</span>
-                        </div>
-                    </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
-            </div>
-        </div>
-        <span class="copyright">COPYRIGHT(C) 2022 by KICE. ALL RIGHTS RESERVED.</span>
-    </div>
+
 </div>
-</body>
+
 </html>

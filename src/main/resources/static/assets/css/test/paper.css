@@ -395,7 +395,7 @@ select.active { border-color: #1e90ff;}
 
 .swiper-button-prev:after { content: "❮ 이전"; }
 
-.swiper-slide { background: #ddd; overflow: auto; }
+.swiper-slide { background: #ffffff; overflow: auto; }
 
 @media (max-width: 480px) { .header .btn-wrap button { width: auto; }
   .header .time-box { width: auto; }

@@ -2,29 +2,17 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+      layout:decorate="~{test/header.html}">
 >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>스마트해법</title>
     <style>
-        /* 전역 스타일 초기화 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-
-        body {
-            background-image: url(assets/upload/background.jpeg);
-            color: #333;
-            line-height: 1.6;
-        }
 
         .body2 {
             background-color: white;
-            width: 1500px;
+            width: 1000px;
             margin: 0 auto;
         }
 
@@ -39,7 +27,7 @@
             background-color: white;
         }
 
-        h1 {
+        .h1 {
             text-align: center;
             margin-bottom: 20px;
         }
@@ -147,50 +135,15 @@
             background-color: #f1f1f1;
         }
 
-        .footer {
-            background-color: #0044cc;
-            color: white;
-            text-align: center;
-            padding: 15px 0;
-            margin-top: 20px;
-        }
-
-        .footer p {
-            margin: 0;
-            font-size: 14px;
-        }
 
         html {
             scroll-behavior: smooth;
         }
 
-        .scroll-top-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #888787;
-            color: white;
-            border: none;
-            font-size: 24px;
-            text-align: center;
-            line-height: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        .scroll-top-button:hover {
-            background-color: #0056b3;
-            transform: scale(1.1);
-        }
     </style>
 </head>
 <body>
-<div class="body2" id="main">
-    <img th:src="@{/assets/upload/banner4.png}" alt="이미지">
+<div class="body2" id="main"  layout:fragment="maincontent" >
 
     <div class="tab-menu">
         <ul class="tabs">
@@ -204,18 +157,19 @@
         </ul>
     </div>
 
-    <a href="#main" class="scroll-top-button" onclick="scrollToTop(event)">▲</a>
 
     <div class="container">
-        <h1>${param.subject != null ? param.subject : "전체"}</h1>
+        <h1 class="h1">전체 과목</h1>
         <div class="teacher-grid">
 
                 <div class="teacher-card">
-                    <img src="<%= request.getContextPath() %>/uploads/teacher/${item.teacherId}_profile.png" alt="${item.name}">
-                    <h4>${item.description}</h4>
-                    <p>${item.name} 선생님</p>
+                    <img src="#" >
+                    <h4>미적분</h4>
+                    <p>시험 시간 : 60분</p>
+                    <p>시험 갯수 : 30</p>
+                    <p>김하나 선생님</p>
                     <div class="buttons">
-                        <button onclick="location.href='/teacher/view?id=${item.teacherId}'">프로필</button>
+                        <button onclick="location.href='/teacher/view?id=${item.teacherId}'">풀기</button>
                     </div>
                 </div>
 

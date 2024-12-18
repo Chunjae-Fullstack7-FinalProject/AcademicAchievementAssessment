@@ -1,0 +1,241 @@
+.section-title {
+    font-size: 24px;
+    margin: 30px 0;
+    color: #333;
+    text-align: center; /* 텍스트를 가운데 정렬 */
+}
+
+
+.banner {
+    position: relative;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 800px;
+}
+
+.banner img {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.banner-text h2 {
+    font-size: 36px;
+    margin-bottom: 5px;
+}
+
+.banner-text p {
+    font-size: 16px;
+}
+
+.content {
+    margin: 40px auto;
+    width: 80%;
+    max-width: 800px;
+    text-align: left;
+    color: #333;
+}
+
+.content h3 {
+    font-size: 20px;
+    color: #444;
+    margin-top: 30px;
+}
+
+.content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+/*성장을 보여주는 그래프 부분*/
+
+.timeline {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.timeline h2 {
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+
+.timeline-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
+.timeline-item {
+    position: relative;
+    text-align: center;
+    width: 20%;
+}
+
+.timeline-item .circle {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.66);
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+}
+
+.timeline-item .year {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.66);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.timeline-item img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.timeline-item p {
+    font-size: 14px;
+}
+
+/*하단 배너*/
+.description {
+    background-image: url('<%= request.getContextPath() %>/resources/images/introbanner/bannerintro.png');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.description::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 어두운 배경 오버레이 */
+    z-index: 1;
+}
+
+.description-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+.description-content p {
+    margin-bottom: 20px;
+}
+
+.description-content strong {
+    color: #000000; /* 강조된 연도 색상 */
+}
+
+
+.organization-chart {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.organization-chart h2 {
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.ceo {
+    background-color: #fff;
+    color: #000000;
+    border: 2px solid rgba(0, 0, 0, 0.66);
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.department-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.department {
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 20px;
+    border-radius: 25px;
+    position: relative;
+    width: 180px;
+    text-align: center;
+}
+
+.sub-department {
+    background-color: rgba(0, 0, 0, 0.66);
+    color: #fff;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.management-vision {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #f9f9f9;
+}
+
+.management-vision p {
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.management-vision h3 {
+    font-size: 20px;
+    margin: 40px 0 20px;
+}
+
+.management-vision h4 {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.vision-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.vision-item {
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid rgb(0, 0, 0);
+    color: rgba(0, 0, 0, 0.66);
+    background-color: #fff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.vision-item:hover {
+    background-color: rgba(0, 0, 0, 0.66);
+    color: #fff;
+}
