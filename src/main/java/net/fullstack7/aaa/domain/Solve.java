@@ -13,7 +13,7 @@ public class Solve {
     private int idx; // 고유 id
 
     @Column(name = "examId",nullable = false)
-    private Long examId L; // 시험지 id
+    private Long examId; // 시험지 id
 
     @Column(name = "itemId",nullable = false)
     private Long itemId; // 문제 id
