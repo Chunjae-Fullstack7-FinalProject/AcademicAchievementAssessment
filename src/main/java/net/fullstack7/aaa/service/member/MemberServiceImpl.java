@@ -1,5 +1,8 @@
 package net.fullstack7.aaa.service.member;
 
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.fullstack7.aaa.domain.Member;
@@ -13,6 +16,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Log4j2
 @Service
+
 public class MemberServiceImpl implements MemberServiceIf {
     private final MemberRepository memberRepository;
 
