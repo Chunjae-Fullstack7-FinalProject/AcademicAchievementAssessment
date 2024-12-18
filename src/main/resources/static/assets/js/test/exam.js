@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function() {
     try {
         // API에서 문제 데이터 가져오기
-        const response = await fetch(`/proxy/tsherpa/item/item-list`, {
+        const response = await fetch(`${API_BASE_URL}/item/item-list`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

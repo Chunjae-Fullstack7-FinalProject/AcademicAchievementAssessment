@@ -36,4 +36,9 @@ public class DummyController {
     public String dummy1() {
         return "dummy-templates/dummy1";
     }
+
+    @GetMapping("/dummy_submit")
+    public String dummySubmit() {
+        return "dummy-templates/dummy_submit";
+    }
 }
