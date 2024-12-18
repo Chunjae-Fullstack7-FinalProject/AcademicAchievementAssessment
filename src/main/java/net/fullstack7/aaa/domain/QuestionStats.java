@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class QuestionStats {
     @Id
     @Column(nullable = false)
-    private int itemId; // 문제id
+    private Long itemId; // 문제id
 
     private int correctCount; // 정답자수
 
