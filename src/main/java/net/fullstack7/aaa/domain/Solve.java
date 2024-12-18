@@ -1,12 +1,16 @@
 package net.fullstack7.aaa.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Solve {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT 설정
@@ -15,8 +19,8 @@ public class Solve {
     @Column(name = "examId",nullable = false)
     private Long examId; // 시험지 id
 
-    @Column(name = "itemId",nullable = false)
-    private Long itemId; // 문제 id
+    @Column(name = "questionId",nullable = false)
+    private Long questionId; // 문제 id
 
     @ManyToOne
     @JoinColumn(name = "memberId", nullable = false)
@@ -31,7 +35,7 @@ public class Solve {
     @Column(nullable = false)
     private int time; // 문제별 풀이시간
 
-    @Column(name = "regDate", nullable = false)
-    private LocalDateTime regDate; // 저장일
+    @Column(name = "submittedAt", nullable = false)
+    private LocalDateTime submittedAt; // 저장일
 
 }

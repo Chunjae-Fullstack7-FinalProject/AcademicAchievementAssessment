@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Logging(message = "문제은행 API 점점부 더미데이터 서빙 API 엔드포인트")
 @RestController
 @RequestMapping("/dummy/api/exam")
+@RequiredArgsConstructor
 public class DummyApiController {
     // 시험지 더미데이터
     public static Integer[] itemIdList = { 966536, 1588525, 1588526, 1589103, 1589104 };
