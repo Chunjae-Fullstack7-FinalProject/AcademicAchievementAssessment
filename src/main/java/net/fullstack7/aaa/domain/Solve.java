@@ -12,12 +12,11 @@ public class Solve {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT 설정
     private int idx; // 고유 id
 
-    @ManyToOne
-    @JoinColumn(name = "examId",nullable = false)
-    private Exam Exam; // 시험지 id
+    @Column(name = "examId",nullable = false)
+    private Long examId L; // 시험지 id
 
     @Column(name = "itemId",nullable = false)
-    private int itemId; // 문제 id
+    private Long itemId; // 문제 id
 
     @ManyToOne
     @JoinColumn(name = "memberId", nullable = false)
