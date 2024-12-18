@@ -376,3 +376,105 @@
 - 퍼블리싱에 관한 부분에 대한 답변 : 디자인을 바꿔도 상관X
 - 재응시 및 이어하기 프로세스에대한 고려 필요
 
+#### 필요한 정보들 (통합)
+```json
+{
+    "examId": "number", //시험 아이디
+    "examName": "string", //시험 이름
+    "teacherId": "string", //선생님 아이디
+    "subject": "string", //과목
+    "itemIdList": ["number"] //문항 아이디 리스트
+}
+```
+
+***
+
+- 시험 아이디로 시험 문제 정보 조회
+request
+```json
+{
+    "examId": "number"
+}
+```
+response
+```json
+{
+    "examId": "number",
+    "examName": "string",
+    "teacherId": "string",
+    "subject": "string",
+    "itemIdList": ["number"]
+}
+```
+
+***
+
+- 과목 리스트 조회
+response
+```json
+{
+    "subjects": ["string"]
+}
+```
+
+- 과목으로 시험 리스트 조회
+request
+```json
+{
+    "subject": "string"
+}
+```
+response
+```json
+{
+    "exams": [
+        {
+            "examId": "number",
+            "teacherId": "string",
+            "subject": "string"
+        }
+    ]
+}
+```
+
+***
+```json
+//https://tsherpa.item-factory.com/item/item-list 엔드포인트
+//요청 : POST
+//body : {
+//    "itemIdList": [966536,1588525,1588526,1589103,1589104]
+//}
+//응답 : 문제정보 리스트
+"itemList": [
+        {
+            "itemNo": 1,
+            "itemId": 494519,
+            "questionFormCode": "50",
+            "questionFormName": "5지 선택",
+            "difficultyCode": "02",
+            "difficultyName": "하",
+            "largeChapterId": 115401,
+            "largeChapterName": "1. 새로운 시작",
+            "mediumChapterId": 11540101,
+            "mediumChapterName": "(1) 시의 아름다움",
+            "smallChapterId": 1154010101,
+            "smallChapterName": "포근한 봄",
+            "topicChapterId": 115401010101,
+            "topicChapterName": "작품의 특징",
+            "passageId": 24310,
+            "passage": "[지문 내용]",  // 시 작품 지문
+            "passageHtml": "[HTML 형식의 지문]",  // HTML 형식의 지문
+            "question": "이 시에 대한 감상으로 알맞지 않은 것은?",
+            "questionHtml": "[HTML 형식의 문제]",  // HTML 형식의 문제
+            "choice1Html": "[1번 선택지]",  // HTML 형식의 1번 선택지
+            "choice2Html": "[2번 선택지]",  // HTML 형식의 2번 선택지
+            "choice3Html": "[3번 선택지]",  // HTML 형식의 3번 선택지
+            "choice4Html": "[4번 선택지]",  // HTML 형식의 4번 선택지
+            "choice5Html": "[5번 선택지]",  // HTML 형식의 5번 선택지
+            "answer": "3",
+            "answerHtml": "[HTML 형식의 정답]",  // HTML 형식의 정답
+            "explain": "[문제 해설]",  // 문제 해설 내용
+            "explainHtml": "[HTML 형식의 해설]"  // HTML 형식의 해설
+        }
+    ]
+```
