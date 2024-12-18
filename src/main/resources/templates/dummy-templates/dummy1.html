@@ -10,5 +10,15 @@
 <body>
     <h1>dummy1</h1>
     
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("/dummy/api/exam/items")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
 </body>
 </html>
