@@ -1,9 +1,43 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>$Title$</title>
+    <link rel="stylesheet" href="/assets/css/common/reset.css" />
+    <link rel="stylesheet" href="/assets/css/common/style.css" />
+    <link rel="stylesheet" href="/assets/css/main/main.css" />
+
+    <!-- jquery -->
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
+    />
+    <!-- jquery -->
+
+    <!-- Google tag (gtag.js) -->
+    <!-- <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-FQ19XPZ5J7"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-FQ19XPZ5J7");
+    </script> -->
+  </head>
+  <body>
+    <div class="wrap">
+      <!-- header -->
+      <th:block th:include="~{common/header}"></th:block>
+      <!-- header -->
+
+      <div layout:fragment="main" class="container"></div>
+    </div>
+  </body>
 </html>
