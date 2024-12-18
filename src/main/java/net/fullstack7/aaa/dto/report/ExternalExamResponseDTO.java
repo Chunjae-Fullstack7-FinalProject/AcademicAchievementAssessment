@@ -1,5 +1,6 @@
 package net.fullstack7.aaa.dto.report;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class ExternalExamResponseDTO {
 
     @Data
     public static class ItemDTO {
-        private Long questionId;
+        private Long itemId;
         private String answer;
     }
 }

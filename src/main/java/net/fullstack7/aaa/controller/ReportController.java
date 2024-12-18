@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/repost")
 @RequiredArgsConstructor
@@ -16,13 +18,13 @@ public class ReportController {
 
     @PostMapping("/submit")
     public ResponseEntity<?> submitExam(@RequestBody SubmitExamDTO submitExamDTO) {
-
         String memberId = "member1";
         try {
             reportService.examSubmission(memberId, submitExamDTO);
-            return ResponseEntity.ok("시험 제출 완료");
+            return ResponseEntity.ok(Map.of("message", "시험 제출 완료"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("에러 발생: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", e.getMessage()));
         }
     }
 }

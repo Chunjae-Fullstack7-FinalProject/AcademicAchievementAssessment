@@ -84,11 +84,11 @@
             console.log("제출하기");
             
             const answers = [
-                { questionId: 966536, answer: "1", timeSpent: 15 },
-                { questionId: 1588525, answer: "5", timeSpent: 10 },
-                { questionId: 1588526, answer: "3", timeSpent: 25 },
-                { questionId: 1589103, answer: "4", timeSpent: 17 },
-                { questionId: 1589104, answer: "2", timeSpent: 18 }
+                { itemId: 966536, answer: "1", timeSpent: 15 },
+                { itemId: 1588525, answer: "5", timeSpent: 10 },
+                { itemId: 1588526, answer: "3", timeSpent: 25 },
+                { itemId: 1589103, answer: "4", timeSpent: 17 },
+                { itemId: 1589104, answer: "2", timeSpent: 18 }
             ];
             
             const requestData = {
@@ -110,12 +110,13 @@
                 return response.json();
             })
             .then(data => {
-                console.log('Success:', data);
+                // console.log('Success:', data);
+                alert(data.message);
             })
             .catch(error => {
-                console.log(requestData);
-                console.error('Error:', error);
-            });
+                // console.log(requestData);
+                // console.error('Error:', error);
+                alert('오류가 error: ' + error.message);            });
         });
     </script>
 </body>

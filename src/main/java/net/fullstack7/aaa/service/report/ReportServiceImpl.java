@@ -1,6 +1,7 @@
 package net.fullstack7.aaa.service.report;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import net.fullstack7.aaa.common.annotation.Logging;
 import net.fullstack7.aaa.domain.Member;
 import net.fullstack7.aaa.domain.Solve;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Logging
+@Log4j2
 public class ReportServiceImpl {
 
     private final SolveRepository solveRepository;
@@ -33,24 +35,24 @@ public class ReportServiceImpl {
     @Transactional
     public void examSubmission(String memberId, SubmitExamDTO submitExamDTO) {
         List<Long> itemIdList = submitExamDTO.getAnswers().stream()
-                .map(SubmitExamDTO.AnswerDTO::getQuestionId)
+                .map(SubmitExamDTO.AnswerDTO::getItemId)
                 .collect(Collectors.toList());
 
         ExternalExamResponseDTO externalData = fetchExamData(itemIdList);
 
         Map<Long, String> answerMap = externalData.getItemList().stream()
-                .collect(Collectors.toMap(ExternalExamResponseDTO.ItemDTO::getQuestionId, ExternalExamResponseDTO.ItemDTO::getAnswer));
+                .collect(Collectors.toMap(ExternalExamResponseDTO.ItemDTO::getItemId, ExternalExamResponseDTO.ItemDTO::getAnswer));
 
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new RuntimeException("Member not found"));
+                .orElseThrow(() -> new RuntimeException("회원 정보가 없습니다"));
 
         for (SubmitExamDTO.AnswerDTO userAnswer : submitExamDTO.getAnswers()) {
-            String correctAnswer = answerMap.get(userAnswer.getQuestionId());
+            String correctAnswer = answerMap.get(userAnswer.getItemId());
             boolean isCorrect = correctAnswer != null && correctAnswer.equals(userAnswer.getAnswer());
 
             Solve solve = Solve.builder()
                     .examId(submitExamDTO.getExamId())
-                    .questionId(userAnswer.getQuestionId())
+                    .itemId(userAnswer.getItemId())
                     .member(member)
                     .answer(userAnswer.getAnswer())
                     .isCorrect(isCorrect)
@@ -59,29 +61,36 @@ public class ReportServiceImpl {
                     .build();
             solveRepository.save(solve);
 
-            questionStatsRepository.findById(userAnswer.getQuestionId()).ifPresent(stats -> {
-                if (isCorrect) {
-                    stats.incrementCorrectCount();
-                } else {
-                    stats.incrementWrongCount();
-                }
-                stats.updateTimestamp();
-                questionStatsRepository.save(stats);
-            });
+//            questionStatsRepository.findById(userAnswer.getItemId()).ifPresent(stats -> {
+//                if (isCorrect) {
+//                    stats.incrementCorrectCount();
+//                } else {
+//                    stats.incrementWrongCount();
+//                }
+//                stats.updateTimestamp();
+//                questionStatsRepository.save(stats);
+//            });
         }
     }
 
     private ExternalExamResponseDTO fetchExamData(List<Long> itemIdList) {
         String externalUrl = "https://tsherpa.item-factory.com/item/item-list";
-
         Map<String, List<Long>> requestBody = Map.of("itemIdList", itemIdList);
 
-        return webClient.post()
+//        log.info("Request Body{}", requestBody);
+
+        ExternalExamResponseDTO response = webClient.post()
                 .uri(externalUrl)
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(requestBody)
                 .retrieve()
                 .bodyToMono(ExternalExamResponseDTO.class)
-                .block();
+                .block(); // 테스트할때 사용
+
+        // 응답 데이터 로깅
+//        log.info("External API Response{}", response);
+
+        return response;
     }
+
 }

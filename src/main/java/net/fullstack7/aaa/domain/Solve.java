@@ -1,5 +1,6 @@
 package net.fullstack7.aaa.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,8 +20,8 @@ public class Solve {
     @Column(name = "examId",nullable = false)
     private Long examId; // 시험지 id
 
-    @Column(name = "questionId",nullable = false)
-    private Long questionId; // 문제 id
+    @Column(name = "itemId",nullable = false)
+    private Long itemId; // 문제 id
 
     @ManyToOne
     @JoinColumn(name = "memberId", nullable = false)

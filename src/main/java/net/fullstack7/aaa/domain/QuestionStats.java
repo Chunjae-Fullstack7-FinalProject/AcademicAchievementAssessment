@@ -1,5 +1,6 @@
 package net.fullstack7.aaa.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 public class QuestionStats {
     @Id
     @Column(nullable = false)
-    private Long questionId; // 문제id
+    private Long itemId; // 문제id
 
     private int correctCount; // 정답자수
 
