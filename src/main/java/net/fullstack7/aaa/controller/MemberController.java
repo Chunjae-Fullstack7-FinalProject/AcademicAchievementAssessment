@@ -6,10 +6,11 @@ import net.fullstack7.aaa.dto.member.MemberDTO;
 import net.fullstack7.aaa.service.member.MemberServiceImpl;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+@Controller
 @Log4j2
-@RestController
 @RequestMapping("/sign")
 @RequiredArgsConstructor
 public class MemberController {
@@ -37,10 +38,11 @@ public class MemberController {
     @PostMapping("/sign-in")
     public ResponseEntity<String> signIn(@RequestBody MemberDTO memberDTO){
         try{
-            return ResponseEntity.ok("로그인 완료");
+            String token = memberService.signIn(memberDTO.getMemberId(), memberDTO.getPassword());
+            return ResponseEntity.ok().header("Authorization", "Bearer " + token).body("로그인 완료");
         } catch (Exception e){
-            log.error(e.getMessage(), e);
-            return ResponseEntity.badRequest().body(e.getMessage());
+            log.error("로그인 실패 memberId:{}, 원인:{}", memberDTO.getMemberId(),e.getMessage(), e);
+            return ResponseEntity.badRequest().body("로그인 실패: "+e.getMessage());
         }
     }
 }

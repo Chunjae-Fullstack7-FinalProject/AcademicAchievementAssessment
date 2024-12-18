@@ -1,0 +1,70 @@
+package net.fullstack7.aaa.controller;
+
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import reactor.core.publisher.Mono;
+import jakarta.servlet.http.HttpServletRequest;
+import net.fullstack7.aaa.common.annotation.Logging;
+
+@RestController
+@RequestMapping("/proxy/tsherpa")
+@Logging(message = "프록시 요청")
+public class ProxyController {
+    private final WebClient webClient;
+
+    public ProxyController(WebClient webClient) {
+        this.webClient = webClient;
+    }
+
+    @RequestMapping(value = "/**", method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
+            RequestMethod.DELETE })
+    public Mono<ResponseEntity<String>> proxyRequest(
+            HttpServletRequest request,
+            @RequestBody(required = false) String body,
+            @RequestHeader HttpHeaders headers) {
+
+        // 프록시할 실제 경로 추출
+        String path = request.getRequestURI().replace("/proxy/tsherpa", "");
+
+        // WebClient 요청 생성
+        WebClient.RequestBodySpec requestBodySpec = webClient
+                .method(HttpMethod.valueOf(request.getMethod()))
+                .uri(path)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // 헤더 복사 (필요한 헤더만 선택적으로)
+        headers.forEach((key, values) -> {
+            if (!key.equalsIgnoreCase("host")) { // host 헤더는 제외
+                requestBodySpec.header(key, values.toArray(new String[0]));
+            }
+        });
+
+        // body가 있는 경우에만 body 추가
+        WebClient.RequestHeadersSpec<?> requestSpec = body != null ? requestBodySpec.bodyValue(body)
+                : requestBodySpec;
+
+        // 요청 실행 및 응답 반환
+        return requestSpec.exchangeToMono(response -> {
+            return response.bodyToMono(String.class)
+                    .map(responseBody -> ResponseEntity
+                            .status(response.statusCode())
+                            .headers(response.headers().asHttpHeaders())
+                            .body(responseBody));
+        });
+    }
+}

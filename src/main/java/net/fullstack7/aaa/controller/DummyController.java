@@ -42,5 +42,18 @@ public class DummyController {
         return "test/inform";
     }
 
+    @GetMapping("/geongmin-exam")
+    public String geongminExam() {
+        return "dummy-templates/dummy_exam";
+    }
 
+    @GetMapping("/dummy1")
+    public String dummy1() {
+        return "dummy-templates/dummy1";
+    }
+
+    @GetMapping("/dummy_submit")
+    public String dummySubmit() {
+        return "dummy-templates/dummy_submit";
+    }
 }
