@@ -1,4 +1,4 @@
-package net.fullstack7.dto;
+package net.fullstack7.aaa.dto.member;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
