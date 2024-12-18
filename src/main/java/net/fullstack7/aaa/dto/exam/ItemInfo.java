@@ -13,20 +13,20 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ItemInfo {
     private Integer itemNo;
-    private Integer itemId;
+    private Long itemId;
     private String questionFormCode;
     private String questionFormName;
     private String difficultyCode;
     private String difficultyName;
-    private Integer largeChapterId;
+    private Long largeChapterId;
     private String largeChapterName;
-    private Integer mediumChapterId;
+    private Long mediumChapterId;
     private String mediumChapterName;
-    private Integer smallChapterId;
+    private Long smallChapterId;
     private String smallChapterName;
-    private Integer topicChapterId;
+    private Long topicChapterId;
     private String topicChapterName;
-    private Integer passageId;
+    private Long passageId;
     private String passage;
     private String passageHtml;
     private String question;
