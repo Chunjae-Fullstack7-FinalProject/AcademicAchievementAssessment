@@ -27,4 +27,13 @@ public class DummyController {
         return "test/testlist";
     }
 
+    @GetMapping("/geongmin-exam")
+    public String geongminExam() {
+        return "dummy-templates/dummy_exam";
+    }
+
+    @GetMapping("/dummy1")
+    public String dummy1() {
+        return "dummy-templates/dummy1";
+    }
 }

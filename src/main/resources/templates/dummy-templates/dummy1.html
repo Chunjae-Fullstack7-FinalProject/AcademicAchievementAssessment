@@ -9,15 +9,24 @@
 </head>
 <body>
     <h1>dummy1</h1>
+    <button id="btn">버튼</button>
     
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch("/dummy/api/exam/items")
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => console.error("Error:", error));
+        //https://tsherpa.item-factory.com/
+        //req body : { "itemIdList": [966536, 1588525, 1588526, 1589103, 1589104] }
+        document.getElementById("btn").addEventListener("click", function() {
+            async function fetchItemList() {
+                const response = await fetch("https://tsherpa.item-factory.com/item/item-list", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ itemIdList: [966536, 1588525, 1588526, 1589103, 1589104] })
+                });
+                const itemList = await response.json();
+                console.log(itemList);
+            }
+            fetchItemList();
         });
     </script>
 </body>
