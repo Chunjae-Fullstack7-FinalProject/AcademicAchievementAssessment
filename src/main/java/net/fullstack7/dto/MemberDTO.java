@@ -29,7 +29,7 @@ public class MemberDTO {
     @NotBlank(message = "핸드폰 번호는 필수입니다.")
     @Pattern(regexp = "^\\d{11}$", message = "핸드폰 번호는 11자리 숫자여야 합니다.")
     private String phone;
-    private int schoolLevel;
+    private String schoolLevel;
     private LocalDateTime regDate;
     private LocalDateTime modifyDate;
 }

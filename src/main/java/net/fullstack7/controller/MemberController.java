@@ -1,6 +1,5 @@
 package net.fullstack7.controller;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.fullstack7.dto.MemberDTO;
@@ -15,8 +14,9 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberServiceImpl memberService;
 
-    @GetMapping("/sign-up")
-    public String signUp() { return "sign/sign-up";}
+    //회원가입
+    @GetMapping("/signUp")
+    public String signUp() { return "sign/signUp";}
 
     @PostMapping("/sign-up")
     public ResponseEntity<String> signUp(@RequestBody MemberDTO memberDTO){
@@ -26,6 +26,20 @@ public class MemberController {
         } catch (Exception e){
             log.error("회원가입 실패 memberId:{}, 원인:{}", memberDTO.getMemberId(), e.getMessage(), e);
             return ResponseEntity.badRequest().body("회원가입 실패 : " + e.getMessage());
+        }
+    }
+
+    //로그인(대충 잡아둔거)
+    @GetMapping("/signIn")
+    public String signIn(){ return "sign/signIn";}
+
+    @PostMapping("/sign-in")
+    public ResponseEntity<String> signIn(@RequestBody MemberDTO memberDTO){
+        try{
+            return ResponseEntity.ok("로그인 완료");
+        } catch (Exception e){
+            log.error(e.getMessage(), e);
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }
