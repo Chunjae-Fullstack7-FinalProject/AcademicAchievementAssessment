@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layout.html}"
+>
+  <div layout:fragment="main">
+    <div class="con_case">
+      <div class="container">
+        <div class="tabmenu">
+          <ul class="justify_center">
+            <li id="tab1" class="tab_btn">
+              <a href="/main/cbt-exam" class="tlabel1 label">CBT 대표유형</a>
+            </li>
+            <li id="tab2" class="tab_btn hereLi">
+              <a
+                href="/main/cbt-real"
+                class="tlabel2 label"
+                style="color: white"
+                >실전시험</a
+              >
+            </li>
+            <li id="tab3" class="tab_btn">
+              <a href="/main/report" class="tlabel2 label">Report</a>
+            </li>
+          </ul>
+
+          <div class="tab_con" style="display: block">
+            <div class="cnt_box">
+              <div class="page_tit pb20">시험 시간표 및 <em>시험응시</em></div>
+              <p class="page_info pb55">
+                교시별 시험 과목을 확인하고
+                <em>우측의 [응시하기] 버튼을 클릭</em>하여 주시기 바랍니다.<br />
+                과목별 응시 순서는 사용자가 선택할 수 있으며 재응시 횟수에는
+                제한은 없습니다.
+              </p>
+
+              <table class="tbl_list">
+                <colgroup>
+                  <col width="10%" />
+                  <col width="10%" />
+                  <col width="20%" />
+                  <col width="10%" />
+                  <col width="10%" />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col" class="first">교시</th>
+                    <th scope="col">과목</th>
+                    <th scope="col">시험시간</th>
+                    <th scope="col">문항 수</th>
+                    <th scope="col">시험 응시</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <c:forEach var="exam" items="${examList}" varStatus="index">
+                    <tr>
+                      <td class="first">${몇}교시</td>
+                      <td>${과목}</td>
+                      <td>응시 시각으로부터 60분</td>
+                      <td>${갯수가져와}문항</td>
+                      <td>
+                        <c:choose>
+                          <c:when
+                            test="${exam.completeYn eq 'Y' and isTesting eq false}"
+                          >
+                            <a
+                              href="javascript:restartExam('${exam.examResultId}','${exam.examId}');"
+                              class="startBtn"
+                              style="background-color: #ffae00"
+                              >재응시</a
+                            >
+                          </c:when>
+                          <c:when
+                            test="${exam.completeYn eq 'N' and not empty exam.examResultId}"
+                          >
+                            <a
+                              href="/user/exam/exam-view?exam_id=${exam.examId}"
+                              class="startBtn"
+                              style="background-color: #ee9490"
+                              >이어하기</a
+                            >
+                          </c:when>
+                          <c:when
+                            test="${empty exam.examResultId and isTesting eq false}"
+                          >
+                            <a
+                              href="/user/exam/user-exam-sound/${params.exam_round}?exam_id=${exam.examId}"
+                              class="startBtn"
+                              style="background-color: #3c6ebf"
+                              >응시하기</a
+                            >
+                          </c:when>
+                        </c:choose>
+                      </td>
+                    </tr>
+                  </c:forEach>
+                </tbody>
+              </table>
+              <div class="btn_info mt40">
+                <div class="btn ml60" style="background-color: #ffae00">
+                  재응시
+                </div>
+                <p style="font-size: 13px">시험을 재응시 할 수 있는 상태</p>
+                <div class="btn ml60" style="background-color: #ee9490">
+                  이어하기
+                </div>
+                <p style="font-size: 13px">
+                  진행 중인 시험을 이어할 수 있는 상태
+                </p>
+                <div class="btn blue ml60">응시하기</div>
+                <p style="font-size: 13px">시험에 응시할 수 있는 상태</p>
+              </div>
+              <a class="btn resultBtn mt100" href="/user/exam/report"
+                >결과 보기</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</html>
