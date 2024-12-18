@@ -16,559 +16,559 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
   <!-- <script src="https://code.jquery.com/jquery-3.0.0-alpha1.js"></script> -->
-  <script th:src="@{/assets/js/test/line.js}"></script>
-  <script th:src="@{/assets/js/test/exam.js}"></script>
 </head>
 <body>
-  <div class="wrap">
-    <div class="header">
-      <div class="logo">logo</div>
-      <div class="top-area">
-        <!-- s: 220711 추가 -->
-        <div class="btn-wrap">
-          <button type="button" class="pop-btn">메모장</button>
-          <button type="button" class="drawing-btn" id="drawing_btn">그리기</button>
-          <button type="button" class="clear-btn">지우기</button>
-        </div>
-        <!-- e: 220711 추가 -->
-        <div class="time-box">
-          <span class="txt">남은<br>시간</span>
-          <span class="time-txt">00:00</span>
-        </div>
-        <a href="javascript:;" class="btn-submit">최종제출</a>
+<div class="wrap">
+  <div class="header">
+    <div class="logo">logo</div>
+    <div class="top-area">
+      <!-- s: 220711 추가 -->
+      <div class="btn-wrap">
+        <button type="button" class="pop-btn">메모장</button>
+        <button type="button" class="drawing-btn" id="drawing_btn">그리기</button>
+        <button type="button" class="clear-btn">지우기</button>
       </div>
+      <!-- e: 220711 추가 -->
+      <div class="time-box">
+        <span class="txt">남은<br>시간</span>
+        <span class="time-txt">00:00</span>
+      </div>
+      <a href="javascript:;" class="btn-submit">최종제출</a>
     </div>
-    <div class="container">
-      <div class="viewer-omr">
-        <!-- <div class="swiper-pagination"></div> -->
-        
-        <div class="container1">
-          <div class="btn-wrap" style="display: flex; justify-content: center; align-items: center; height: 50px;">
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-          </div>
-          
-<!--          <h1>문제 풀이</h1>-->
-<!--      -->
-<!--          <div class="questions">-->
-<!--            <div class="question" data-qnum="1">-->
-<!--              <span>객관식 1:</span>-->
-<!--              <button class="button" onclick="selectAnswer(1, 1)">1</button>-->
-<!--              <button class="button" onclick="selectAnswer(1, 2)">2</button>-->
-<!--              <button  class="button" onclick="selectAnswer(1, 3)">3</button>-->
-<!--              <button class="button"  onclick="selectAnswer(1, 4)">4</button>-->
-<!--              <button class="button"  onclick="selectAnswer(1, 5)">5</button>-->
-<!--            </div>-->
-<!--            <div class="question" data-qnum="2">-->
-<!--              <span>객관식 2:</span>-->
-<!--              <button class="button"  onclick="selectAnswer(2, 1)">1</button>-->
-<!--              <button class="button"  onclick="selectAnswer(2, 2)">2</button>-->
-<!--              <button class="button"  onclick="selectAnswer(2, 3)">3</button>-->
-<!--              <button  class="button" onclick="selectAnswer(2, 4)">4</button>-->
-<!--              <button class="button"  onclick="selectAnswer(2, 5)">5</button>-->
-<!--            </div>-->
-<!--          </div>-->
-      
-          <!-- Results Table -->
-          <div class="results">
-            <h2 style="margin-top: 25px;">문제 정답 정오표</h2>
-            <table>
-              <thead>
-              <tr>
-                <th>문제</th>
-                <th>답</th>
-              </tr>
-              </thead>
-              <tbody id="results-body">
-              <tr>
-                <td>문제 1</td>
-                <td id="result-q1"></td>
-              </tr>
-              <tr>
-                <td>문제 2</td>
-                <td id="result-q2"></td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
+  </div>
+  <div class="container">
+    <div class="viewer-omr">
+      <!-- <div class="swiper-pagination"></div> -->
 
-          <div>
-            <script>
+      <div class="container1">
+        <div class="btn-wrap" style="display: flex; justify-content: center; align-items: center; height: 50px;">
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
 
-              const results = {}; // 사용자 답변 저장 객체
+        <!--          <h1>문제 풀이</h1>-->
+        <!--      -->
+        <!--          <div class="questions">-->
+        <!--            <div class="question" data-qnum="1">-->
+        <!--              <span>객관식 1:</span>-->
+        <!--              <button class="button" onclick="selectAnswer(1, 1)">1</button>-->
+        <!--              <button class="button" onclick="selectAnswer(1, 2)">2</button>-->
+        <!--              <button  class="button" onclick="selectAnswer(1, 3)">3</button>-->
+        <!--              <button class="button"  onclick="selectAnswer(1, 4)">4</button>-->
+        <!--              <button class="button"  onclick="selectAnswer(1, 5)">5</button>-->
+        <!--            </div>-->
+        <!--            <div class="question" data-qnum="2">-->
+        <!--              <span>객관식 2:</span>-->
+        <!--              <button class="button"  onclick="selectAnswer(2, 1)">1</button>-->
+        <!--              <button class="button"  onclick="selectAnswer(2, 2)">2</button>-->
+        <!--              <button class="button"  onclick="selectAnswer(2, 3)">3</button>-->
+        <!--              <button  class="button" onclick="selectAnswer(2, 4)">4</button>-->
+        <!--              <button class="button"  onclick="selectAnswer(2, 5)">5</button>-->
+        <!--            </div>-->
+        <!--          </div>-->
 
-              // 답안 선택 시 호출되는 함수
-              function selectAnswer(questionNumber, selectedAnswer) {
-                console.log(`문제 번호: ${questionNumber}, 선택한 답: ${selectedAnswer}`); // 디버깅용 로그
-                results[questionNumber] = selectedAnswer; // 문제 번호에 대한 답 저장
-                updateResultsTable(); // 결과 테이블 업데이트
-              }
+        <!-- Results Table -->
+        <div class="results">
+          <h2 style="margin-top: 25px;">문제 정답 정오표</h2>
+          <table>
+            <thead>
+            <tr>
+              <th>문제</th>
+              <th>답</th>
+            </tr>
+            </thead>
+            <tbody id="results-body">
+            <tr>
+              <td>문제 1</td>
+              <td id="result-q1"></td>
+            </tr>
+            <tr>
+              <td>문제 2</td>
+              <td id="result-q2"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
 
-              // 결과 테이블에 선택된 답을 표시하는 함수
-              function updateResultsTable() {
-                for (let questionNumber in results) {
-                  const resultCell = document.getElementById(`result-q${questionNumber}`);
-                  if (resultCell) {
-                    resultCell.innerText = results[questionNumber]; // 결과 업데이트
-                  }
+        <div>
+          <script>
+
+            const results = {}; // 사용자 답변 저장 객체
+
+            // 답안 선택 시 호출되는 함수
+            function selectAnswer(questionNumber, selectedAnswer) {
+              console.log(`문제 번호: ${questionNumber}, 선택한 답: ${selectedAnswer}`); // 디버깅용 로그
+              results[questionNumber] = selectedAnswer; // 문제 번호에 대한 답 저장
+              updateResultsTable(); // 결과 테이블 업데이트
+            }
+
+            // 결과 테이블에 선택된 답을 표시하는 함수
+            function updateResultsTable() {
+              for (let questionNumber in results) {
+                const resultCell = document.getElementById(`result-q${questionNumber}`);
+                if (resultCell) {
+                  resultCell.innerText = results[questionNumber]; // 결과 업데이트
                 }
               }
-            </script>
-          </div>
-
+            }
+          </script>
         </div>
 
       </div>
-      <div class="viewer-paper">
-        <div class="head">
-          <span class="txt">모의테스트(고)</span>
-          <i class="enterFullscreenBtn" style="align-items: center; justify-content: center;left: 50%; ">
-            <img th:src="@{/assets/upload/fullscreen.png}" alt="전체보기">
-          </i>
-        
-        </div>
-        <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide" >
-              <div class="page type01" >
-                <div class="inner">
-                  <div class="question type01">
-                    <div class="left">
-                      <div class="txt">
-                        (가) [앞부분 줄거리] ‘나’는 어릴 적에 아버지가 돌아가신 후, 개성 박적골에서 할아버지의 보살핌을 받♙며 자랐다. 큰아버지와 작은아버지는 일본식♙로 이름을 바꾸자고 주장했지만, 할아버지와 오빠의 반대로 바꾸지 않았다. 그래도 면사무소에서 일하는 큰아버지 덕에 오빠는 일본에 강제로 끌려가지도 않았고 집안도 평안하게 지낼 수 있었다.
-                        <br>
-                        우리가 일본이 망했다는 걸 안 것은 느닷없이 한 떼의 청년들이 몽둥이를 들고 우리 집으로 쳐들어오고 나서였다. 그들은 저희들끼리만 희희낙락 우쭐대면서 우지끈뚝딱 우리 집 세간이며 문짝을 때려 부수기 시작했다. 우리 마을 청년도 한두 명 섞여 있는 듯했지만 거의 모르는 얼굴들이었다.
-                        <br>
-                        그러나 그 고장 토박이인 큰숙모는 거의 다 안면이 있는 듯 자네들이 별안간 환장을 했나, 도대체 이게 무슨 짓인지 영문이나 좀 알자고 몸을 사시나무 떨 듯하면서도 의젓 하게 호령을 했다. 앞으로 나서진 못하고 뒤에 처졌던 박적골 청년이 잠시 피해있는 게 좋을 듯하다면서 일본이 망하고 우리나라가 해방이 됐다는 걸 우리에게 알려 주었다. 그러니까 박적골에선 우리 집이 친일파 집으로 몰려 분풀이를 당하고 있는 것이었다.
-                        <br>
-                        (중략)
-                        <br>
-                        튼튼한 대문짝까지 우지끈 깨부수고 난 ㉠ 청년 중의 하나가 문패를 떼서 패대기를 쳤다. 내가 어려서부터 익히 봐 온 할아버지의 문패였다. 할아버지가 돌아가시고 나서도 그 문패는 여전히 붙어 있었고, 숙부도 오빠도 그 옆이나 밑에 다른 문패를 추가하지 않았다.
-                        <br>
-                        ㉡ 나는 뭐라고 목청껏 악을 쓰며 그 청년을 향해 돌진했다. 할아버지 서책으로 그릇을 만드는 걸 볼 때는 재미만 있었는데 문패를 패대기치는 건 왜 그렇게 참을 수가 없었는지 모를 일이다. 난생 처음 보는 폭력 장면이 하나도 무섭지가 않았고 사생결단을 하다가 죽어도 좋다고 생각했다. 아마 오빠만 아니었다면 누구 한 사람 물어뜯기라도 하고 나서 기함*을 하고 나자빠졌을 것이다. 그보다 훨씬 어렸을 때이긴 하지만 자신도 제어할 수 없는 성깔 때문에 기함을 한 일이 더러 있었다.
-                        <br>
-                        오빠가 나를 질질 끌다시피 해서 집 뒤를 돌아 뒷동산에 올랐다. ㉢ 숙모와 할머니가 땅을 치며 통곡을 하고, 청년 중의 상당수는 고정하시라고 그들을 달래느라 쩔쩔매는 걸로 봐서 사람을 해칠 것 같지는 않았다. 그래도 나는 끌려가면서도 그들에게 정중하게 어른들의 안전을 부탁하는 오빠가 너무 바보 같고 어수룩해 보여서 기가 막혔다. 나는 뒷동산에 끌려가서도 오빠에게 마구 대들었다. 우리가 어째서 친일파냐? 우리는 창씨개명*도 안 했지 않느냐. 똥 묻은 개가 겨 묻은 개를 나무라도 분수가 있지. ㉣도쿠야마, 아라이, 기무라들이 뭐가 잘났다고 감히 반남 박씨 집을 때려 부수느냐는 게 내 항변의 대강의 요지였다.
-                        <br>
-                        오빠는 노한 청년들이 제풀에 물러날 때까지 속수무책으로 우리 집이 망가지는 걸 바라 보면서 한편 내 어깨를 다독거리며 내 생각이 옳지 않다는 걸 알아듣게 하려고 애썼다. 내가 막무가내로 내 생각만 옳다고 주장했기 때문에 오빠가 하도 여러 말을 해서 자세한 중학교 3학년 것은 생각나지 않지만, ㉤ 도쿠야마, 아라이들이 당한 건 박해요 수난이요 치욕이지만, 우리는 그동안 편안히 특혜를 누려 왔다는 요지였다. 오빠는 그게 너무도 부끄러워 얼굴을 들 수가 없다고 했다. 저렇게라도 분풀이를 당했으니까 마을 청년 보기가 좀 덜 부끄러울 것 같다고도 했다.
-                        <br>
-                        나는 이윽고 조용하고 비통해졌다. 오빠한테 설득을 당해서가 아니라 헛된 분노 끝에 오는 허탈감 때문에 그랬고, 상처투성이가 된 우리 집 때문에도 그러했다. 우리는 그 집을 얼마나 사랑했던가. 오빠가 내 속을 알아차렸는지 실컷 울다가 내려가자고 했다.
-                        <br>
-                        - 박완서, &lt;그 많던 싱아는 누가 다 먹었을까&gt;-
-                        <br>
-                        * 기함 : 갑작스레 몹시 놀라거나 아프거나 하여 소리를 지르면서 넋을 잃음.
-                        <br>
-                        * 창씨개명 : 일제가 강제로 우리나라 사람의 성과 이름을 일본식으로 고치게 한 일.
-                        <img src="img/img01.png" alt="">
+
+    </div>
+    <div class="viewer-paper">
+      <div class="head">
+        <span class="txt">모의테스트(고)</span>
+        <i class="enterFullscreenBtn" style="align-items: center; justify-content: center;left: 50%; ">
+          <img th:src="@{/assets/upload/fullscreen.png}" alt="전체보기">
+        </i>
+
+      </div>
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" >
+            <div class="page type01" >
+              <div class="inner">
+                <div class="question type01">
+                  <div class="left">
+                    <div class="txt">
+                      (가) [앞부분 줄거리] ‘나’는 어릴 적에 아버지가 돌아가신 후, 개성 박적골에서 할아버지의 보살핌을 받♙며 자랐다. 큰아버지와 작은아버지는 일본식♙로 이름을 바꾸자고 주장했지만, 할아버지와 오빠의 반대로 바꾸지 않았다. 그래도 면사무소에서 일하는 큰아버지 덕에 오빠는 일본에 강제로 끌려가지도 않았고 집안도 평안하게 지낼 수 있었다.
+                      <br>
+                      우리가 일본이 망했다는 걸 안 것은 느닷없이 한 떼의 청년들이 몽둥이를 들고 우리 집으로 쳐들어오고 나서였다. 그들은 저희들끼리만 희희낙락 우쭐대면서 우지끈뚝딱 우리 집 세간이며 문짝을 때려 부수기 시작했다. 우리 마을 청년도 한두 명 섞여 있는 듯했지만 거의 모르는 얼굴들이었다.
+                      <br>
+                      그러나 그 고장 토박이인 큰숙모는 거의 다 안면이 있는 듯 자네들이 별안간 환장을 했나, 도대체 이게 무슨 짓인지 영문이나 좀 알자고 몸을 사시나무 떨 듯하면서도 의젓 하게 호령을 했다. 앞으로 나서진 못하고 뒤에 처졌던 박적골 청년이 잠시 피해있는 게 좋을 듯하다면서 일본이 망하고 우리나라가 해방이 됐다는 걸 우리에게 알려 주었다. 그러니까 박적골에선 우리 집이 친일파 집으로 몰려 분풀이를 당하고 있는 것이었다.
+                      <br>
+                      (중략)
+                      <br>
+                      튼튼한 대문짝까지 우지끈 깨부수고 난 ㉠ 청년 중의 하나가 문패를 떼서 패대기를 쳤다. 내가 어려서부터 익히 봐 온 할아버지의 문패였다. 할아버지가 돌아가시고 나서도 그 문패는 여전히 붙어 있었고, 숙부도 오빠도 그 옆이나 밑에 다른 문패를 추가하지 않았다.
+                      <br>
+                      ㉡ 나는 뭐라고 목청껏 악을 쓰며 그 청년을 향해 돌진했다. 할아버지 서책으로 그릇을 만드는 걸 볼 때는 재미만 있었는데 문패를 패대기치는 건 왜 그렇게 참을 수가 없었는지 모를 일이다. 난생 처음 보는 폭력 장면이 하나도 무섭지가 않았고 사생결단을 하다가 죽어도 좋다고 생각했다. 아마 오빠만 아니었다면 누구 한 사람 물어뜯기라도 하고 나서 기함*을 하고 나자빠졌을 것이다. 그보다 훨씬 어렸을 때이긴 하지만 자신도 제어할 수 없는 성깔 때문에 기함을 한 일이 더러 있었다.
+                      <br>
+                      오빠가 나를 질질 끌다시피 해서 집 뒤를 돌아 뒷동산에 올랐다. ㉢ 숙모와 할머니가 땅을 치며 통곡을 하고, 청년 중의 상당수는 고정하시라고 그들을 달래느라 쩔쩔매는 걸로 봐서 사람을 해칠 것 같지는 않았다. 그래도 나는 끌려가면서도 그들에게 정중하게 어른들의 안전을 부탁하는 오빠가 너무 바보 같고 어수룩해 보여서 기가 막혔다. 나는 뒷동산에 끌려가서도 오빠에게 마구 대들었다. 우리가 어째서 친일파냐? 우리는 창씨개명*도 안 했지 않느냐. 똥 묻은 개가 겨 묻은 개를 나무라도 분수가 있지. ㉣도쿠야마, 아라이, 기무라들이 뭐가 잘났다고 감히 반남 박씨 집을 때려 부수느냐는 게 내 항변의 대강의 요지였다.
+                      <br>
+                      오빠는 노한 청년들이 제풀에 물러날 때까지 속수무책으로 우리 집이 망가지는 걸 바라 보면서 한편 내 어깨를 다독거리며 내 생각이 옳지 않다는 걸 알아듣게 하려고 애썼다. 내가 막무가내로 내 생각만 옳다고 주장했기 때문에 오빠가 하도 여러 말을 해서 자세한 중학교 3학년 것은 생각나지 않지만, ㉤ 도쿠야마, 아라이들이 당한 건 박해요 수난이요 치욕이지만, 우리는 그동안 편안히 특혜를 누려 왔다는 요지였다. 오빠는 그게 너무도 부끄러워 얼굴을 들 수가 없다고 했다. 저렇게라도 분풀이를 당했으니까 마을 청년 보기가 좀 덜 부끄러울 것 같다고도 했다.
+                      <br>
+                      나는 이윽고 조용하고 비통해졌다. 오빠한테 설득을 당해서가 아니라 헛된 분노 끝에 오는 허탈감 때문에 그랬고, 상처투성이가 된 우리 집 때문에도 그러했다. 우리는 그 집을 얼마나 사랑했던가. 오빠가 내 속을 알아차렸는지 실컷 울다가 내려가자고 했다.
+                      <br>
+                      - 박완서, &lt;그 많던 싱아는 누가 다 먹었을까&gt;-
+                      <br>
+                      * 기함 : 갑작스레 몹시 놀라거나 아프거나 하여 소리를 지르면서 넋을 잃음.
+                      <br>
+                      * 창씨개명 : 일제가 강제로 우리나라 사람의 성과 이름을 일본식으로 고치게 한 일.
+                      <img src="img/img01.png" alt="">
+                    </div>
+                  </div>
+                  <div class="right">
+                    <div class="top">
+                      <span class="num">1</span>
+                      <span class="txt">(나)는 (가)를 재구성한 작품이다. (가)와 (나)를 비교한 설명으로 적절하지 않은 것을 고르시오.</span>
+                    </div>
+                    <ul class="answer-input-type radio">
+                      <li>
+                        <input type="radio" id="answer_radio01" name="q1" value="1" onclick="selectAnswer(1, 1)">
+                        <label for="answer_radio01">1</label>
+                        <span class="txt">(가)의 ㉠에서는 청년의 행동을 서술하고 있는데, (나)의 ⓐ에서는 청년의 행동을 보는 ‘나’의 반응을 ‘퍽’이라는 의성어로 드러내고 있다.</span>
+                      </li>
+                      <li>
+                        <input type="radio" id="answer_radio02" name="q1" value="2" onclick="selectAnswer(1, 2)">
+                        <label for="answer_radio02">2</label>
+                        <span class="txt">(가)의 ㉡에서는 ‘나’의 행동을 서술하고 있는데, (나)의 ⓑ에서는 ‘나’의 모습을 과장되게 그리고 있다.</span>
+                      </li>
+                      <li>
+                        <input type="radio" id="answer_radio03" name="q1" value="3" onclick="selectAnswer(1, 3)">
+                        <label for="answer_radio03">3</label>
+                        <span class="txt">(가)의 ㉢에서는 숙모와 할머니를 대하는 청년들의 행동을 서술하고 있지만, (나)의 ⓒ에서는 청년들의 행동을 제시하지 않았다.</span>
+                      </li>
+                      <li>
+                        <input type="radio" id="answer_radio04" name="q1" value="4" onclick="selectAnswer(1, 4)">
+                        <label for="answer_radio04">4</label>
+                        <span class="txt">(가)의 ㉣에서는 ‘나’의 항변의 요지만을 서술하고 있지만, (나)의 ⓓ에서는 ‘나’의 항변을 듣는 오빠의 표정도 보여 주고 있다.</span>
+                      </li>
+                      <li>
+                        <input type="radio" id="answer_radio05" name="q1" value="5" onclick="selectAnswer(1, 5)">
+                        <label for="answer_radio05">5</label>
+                        <span class="txt">(가)의 ㉤에서는 오빠가 한 말의 요지를 서술하고 있는데, (나)의 ⓔ에서는 말풍선 안에 넣어 오빠가 직접 말하는 것으로 표현하였다.</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="page">
+              <div class="inner">
+                <div class="question">
+                  <div class="top">
+                    <span class="num">2</span>
+                    <span class="txt">빈칸에 들어갈 낱말을 보기에서 골라 끌어 놓으시오.</span>
+                  </div>
+                  <div class="text-box">
+                    Our world is a collection of all kinds of ecosystems. Anecosystem is a community of all the living things, their habitats, and the climate in which they live. Everyone in these communities shares food and natural resources. Ecosystems can be as big as the whole world and as tiny as a rock. A <span class="drop"></span> is a great example of an ecosystem. It provides a habitat for small animals, birds, and insects. It provides shade for plants on the group. It drinks in sunlight to grow bigger and makes seeds that the small animals and birds eat and scatter around. And when it dies, it becomes a part of the ground again.
+                  </div>
+                </div>
+                <div class="answer-drag-type">
+                  <span>보기</span>
+                  <ul class="btn-text">
+                    <li class="drag" draggable="true" data-name="cloud">cloud</li>
+                    <li class="drag" draggable="true" data-name="desert">desert</li>
+                    <li class="drag" draggable="true" data-name="nest">nest</li>
+                    <li class="drag" draggable="true" data-name="river">river</li>
+                    <li class="drag" draggable="true" data-name="tree">tree</li>
+                  </ul>
+                </div>
+              </div>
+              <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="page">
+              <div class="inner">
+                <div class="question" data-qnum="2">
+                  <div class="top">
+                    <span class="num">3</span>
+                    <span class="txt">x = -3, y = 2 일 때, x² + xy의 값은?</span>
+                  </div>
+                  <ul class="answer-input-type radio" >
+                    <li>
+                      <input type="radio" name="answer" id="answer_radio06" value="0">
+                      <label for="answer_radio06"  onclick="selectAnswer(2, 1)">1</label>
+                      <span class="txt">-15</span>
+                    </li>
+                    <li>
+                      <input type="radio" name="answer" id="answer_radio07" value="1">
+                      <label for="answer_radio07"  onclick="selectAnswer(2, 2)">2</label>
+                      <span class="txt">-3</span>
+                    </li>
+                    <li>
+                      <input type="radio" name="answer" id="answer_radio08" value="2">
+                      <label for="answer_radio08" onclick="selectAnswer(2, 3)">3</label>
+                      <span class="txt">0</span>
+                    </li>
+                    <li>
+                      <input type="radio" name="answer" id="answer_radio09" value="3">
+                      <label for="answer_radio09" onclick="selectAnswer(2, 4)">4</label>
+                      <span class="txt">3</span>
+                    </li>
+                    <li>
+                      <input type="radio" name="answer" id="answer_radio10" value="4">
+                      <label for="answer_radio10" onclick="selectAnswer(2, 5)">5</label>
+                      <span class="txt">15</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="page">
+              <div class="inner">
+                <div class="question">
+                  <div class="top">
+                    <span class="num">4</span>
+                    <span class="txt">지도에 표시된 네 개 도시 중 현지 특파원이 옳게 보도한 도시 2개를 선택하시오.</span>
+                  </div>
+                  <div class="answer-map-type">
+                    <img src="../img/img02.png" alt="">
+                    <svg>
+                      <g>
+                        <circle cx="793" cy="777" r="20"></circle>
+                      </g>
+                      <g>
+                        <circle cx="170" cy="836" r="20"></circle>
+                      </g>
+                      <g>
+                        <circle cx="262" cy="722" r="20"></circle>
+                      </g>
+                      <g>
+                        <circle cx="485" cy="740" r="20"></circle>
+                      </g>
+                      <g>
+                        <circle cx="350" cy="840" r="20"></circle>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="page">
+              <div class="inner">
+                <div class="question">
+                  <div class="top">
+                    <span class="num">5</span>
+                    <span class="txt">지구계에서 수권과 기권의 상호작용에 의해 나타나는 현상을 모두 선택하시오.</span>
+                  </div>
+                  <ul class="answer-input-type checkbox image">
+                    <li>
+                      <input type="checkbox" id="answer_checkbox06" value="0">
+                      <label for="answer_checkbox06">✔</label>
+                      <span class="txt"><img src="img/img03.png" alt=""></span>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="answer_checkbox07" value="1">
+                      <label for="answer_checkbox07">✔</label>
+                      <span class="txt"><img src="img/img04.png" alt=""></span>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="answer_checkbox08" value="2">
+                      <label for="answer_checkbox08">✔</label>
+                      <span class="txt"><img src="img/img05.png" alt=""></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="page">
+              <div class="inner">
+                <div class="question">
+                  <div class="top">
+                    <span class="num">6</span>
+                    <span class="txt">다음 웹사이트에서 제시하는 3가지 정보를 활용하여 &lt;조건&gt;에 맞게 제시된 글을 완성하시오.</span>
+                  </div>
+                  <div class="bottom">
+                    <div class="tab-wrap">
+                      <div class="tab-btn">
+                        <a href="javascript:;" class="on">홍보 포스터</a>
+                        <a href="javascript:;">통계표</a>
+                        <a href="javascript:;">신문 기사</a>
+                      </div>
+                      <div class="tab-cnt">
+                        <div class="cnt on"><img src="img/img06.png" alt=""></div>
+                        <div class="cnt"><img src="img/img07.png" alt=""></div>
+                        <div class="cnt"><img src="img/img08.png" alt=""></div>
                       </div>
                     </div>
-                    <div class="right">
-                      <div class="top">
-                        <span class="num">1</span>
-                        <span class="txt">(나)는 (가)를 재구성한 작품이다. (가)와 (나)를 비교한 설명으로 적절하지 않은 것을 고르시오.</span>
-                      </div>
-                      <ul class="answer-input-type radio">
-                        <li>
-                          <input type="radio" id="answer_radio01" name="q1" value="1" onclick="selectAnswer(1, 1)">
-                          <label for="answer_radio01">1</label>
-                          <span class="txt">(가)의 ㉠에서는 청년의 행동을 서술하고 있는데, (나)의 ⓐ에서는 청년의 행동을 보는 ‘나’의 반응을 ‘퍽’이라는 의성어로 드러내고 있다.</span>
-                        </li>
-                        <li>
-                          <input type="radio" id="answer_radio02" name="q1" value="2" onclick="selectAnswer(1, 2)">
-                          <label for="answer_radio02">2</label>
-                          <span class="txt">(가)의 ㉡에서는 ‘나’의 행동을 서술하고 있는데, (나)의 ⓑ에서는 ‘나’의 모습을 과장되게 그리고 있다.</span>
-                        </li>
-                        <li>
-                          <input type="radio" id="answer_radio03" name="q1" value="3" onclick="selectAnswer(1, 3)">
-                          <label for="answer_radio03">3</label>
-                          <span class="txt">(가)의 ㉢에서는 숙모와 할머니를 대하는 청년들의 행동을 서술하고 있지만, (나)의 ⓒ에서는 청년들의 행동을 제시하지 않았다.</span>
-                        </li>
-                        <li>
-                          <input type="radio" id="answer_radio04" name="q1" value="4" onclick="selectAnswer(1, 4)">
-                          <label for="answer_radio04">4</label>
-                          <span class="txt">(가)의 ㉣에서는 ‘나’의 항변의 요지만을 서술하고 있지만, (나)의 ⓓ에서는 ‘나’의 항변을 듣는 오빠의 표정도 보여 주고 있다.</span>
-                        </li>
-                        <li>
-                          <input type="radio" id="answer_radio05" name="q1" value="5" onclick="selectAnswer(1, 5)">
-                          <label for="answer_radio05">5</label>
-                          <span class="txt">(가)의 ㉤에서는 오빠가 한 말의 요지를 서술하고 있는데, (나)의 ⓔ에서는 말풍선 안에 넣어 오빠가 직접 말하는 것으로 표현하였다.</span>
-                        </li>
+                    <div class="answer-drag-type">
+                      <span>조건</span>
+                      <ul class="list-text">
+                        <li>&lt;학생 글&gt;에 이어 두 문장 이상의 한 문단으로 작성할 것.</li>
+                        <li>반려견을 등록했을 때 얻을 수 있는 장점 두 가지를 &lt;자료&gt;의 '홍보 포스터'를 활용하여 쓸 것.</li>
+                        <li>반려견의 등록률을 높일 수 있는 구체적인 방안 두 가지를 &lt;자료&gt;의 '통계표'와 '신문 기사'에서 각각 한 가지씩 활용하여 쓸 것.</li>
                       </ul>
                     </div>
                   </div>
                 </div>
-                <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="page">
-                <div class="inner">
-                  <div class="question">
-                    <div class="top">
-                      <span class="num">2</span>
-                      <span class="txt">빈칸에 들어갈 낱말을 보기에서 골라 끌어 놓으시오.</span>
-                    </div>
-                    <div class="text-box">
-                      Our world is a collection of all kinds of ecosystems. Anecosystem is a community of all the living things, their habitats, and the climate in which they live. Everyone in these communities shares food and natural resources. Ecosystems can be as big as the whole world and as tiny as a rock. A <span class="drop"></span> is a great example of an ecosystem. It provides a habitat for small animals, birds, and insects. It provides shade for plants on the group. It drinks in sunlight to grow bigger and makes seeds that the small animals and birds eat and scatter around. And when it dies, it becomes a part of the ground again.
-                    </div>
-                  </div>
-                  <div class="answer-drag-type">
-                    <span>보기</span>
-                    <ul class="btn-text">
-                      <li class="drag" draggable="true" data-name="cloud">cloud</li>
-                      <li class="drag" draggable="true" data-name="desert">desert</li>
-                      <li class="drag" draggable="true" data-name="nest">nest</li>
-                      <li class="drag" draggable="true" data-name="river">river</li>
-                      <li class="drag" draggable="true" data-name="tree">tree</li>
-                    </ul>
+                <div class="answer-input-type">
+                  <div>
+                    반려동물 등록제는 생후 2개월 이상 된 반려견을 기를 경우, 시.군.구청에 의무적으로 반려견을 등록하도록 하는 제도이다. 현재 각 지자체는 단속을 통해 반려견을 등록하지 않은 사람들에게 과태료를 부과하고 있지만, 등록률은 여전히 낮은 편이다.
+                    <br>
+                    반려견을 등록하면
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
                   </div>
                 </div>
-                <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
               </div>
+              <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
             </div>
-            <div class="swiper-slide">
-              <div class="page">
-                <div class="inner">
-                  <div class="question" data-qnum="2">
-                    <div class="top">
-                      <span class="num">3</span>
-                      <span class="txt">x = -3, y = 2 일 때, x² + xy의 값은?</span>
+          </div>
+          <div class="swiper-slide">
+            <div class="page">
+              <div class="inner">
+                <div class="question">
+                  <div class="top">
+                    <span class="num">7</span>
+                    <span class="txt">다음은 여행 관련 Q&A 게시판에 올라온 글이다. 윗글의 내용과 일치하도록 &lt;조건&gt;에 맞게 단어를 끌어놓아 문장을 완성하시오.</span>
+                  </div>
+                  <div class="bottom">
+                    <div class="answer-drag-type">
+                      <span>조건</span>
+                      <ul class="list-text">
+                        <li>주어진 5개의 단어 중 3개만 사용할 것</li>
+                        <li>선택한 3개의 단어를 바르게 배열할 것</li>
+                        <li>단어의 형태를 변형하지 말 것</li>
+                      </ul>
                     </div>
-                    <ul class="answer-input-type radio" >
-                      <li>
-                        <input type="radio" name="answer" id="answer_radio06" value="0">
-                        <label for="answer_radio06"  onclick="selectAnswer(2, 1)">1</label>
-                        <span class="txt">-15</span>
-                      </li>
-                      <li>
-                        <input type="radio" name="answer" id="answer_radio07" value="1">
-                        <label for="answer_radio07"  onclick="selectAnswer(2, 2)">2</label>
-                        <span class="txt">-3</span>
-                      </li>
-                      <li>
-                        <input type="radio" name="answer" id="answer_radio08" value="2">
-                        <label for="answer_radio08" onclick="selectAnswer(2, 3)">3</label>
-                        <span class="txt">0</span>
-                      </li>
-                      <li>
-                        <input type="radio" name="answer" id="answer_radio09" value="3">
-                        <label for="answer_radio09" onclick="selectAnswer(2, 4)">4</label>
-                        <span class="txt">3</span>
-                      </li>
-                      <li>
-                        <input type="radio" name="answer" id="answer_radio10" value="4">
-                        <label for="answer_radio10" onclick="selectAnswer(2, 5)">5</label>
-                        <span class="txt">15</span>
-                      </li>
-                    </ul>
+                    <div class="drop-area">
+                      <img src="img/img09.png" alt="">
+                      <div class="border">
+                        <span class="drop"></span>
+                        <span class="drop"></span>
+                        <span class="drop"></span>
+                        <span class="drop"></span>
+                        <span class="drop"></span>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
-                <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
+                <div class="answer-drag-type ml65">
+                  <span>보기</span>
+                  <ul class="btn-text">
+                    <li class="drag" draggable="true" data-name="familiar">familiar</li>
+                    <li class="drag" draggable="true" data-name="desert">desert</li>
+                    <li class="drag" draggable="true" data-name="laws">laws</li>
+                    <li class="drag" draggable="true" data-name="plans">plans</li>
+                    <li class="drag" draggable="true" data-name="some">some</li>
+                    <li class="drag" draggable="true" data-name="unusual">unusual</li>
+                  </ul>
+                </div>
               </div>
+              <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
             </div>
-            <div class="swiper-slide">
-              <div class="page">
-                <div class="inner">
-                  <div class="question">
-                    <div class="top">
-                      <span class="num">4</span>
-                      <span class="txt">지도에 표시된 네 개 도시 중 현지 특파원이 옳게 보도한 도시 2개를 선택하시오.</span>
-                    </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="page">
+              <div class="inner">
+                <div class="question">
+                  <div class="top">
+                    <span class="num">8</span>
+                    <span class="txt">욕실에 있는 욕조가 불편하다고 느낀 현주는 그림과 같이 직육면체 모양의 욕조 내부에 사람이 앉을 수 있는 직육면체 모양의 의자가 있는 모형을 만들었다. 해당 모형에 시간당 일정한 양의 물을 가득 찰 때까지 넣을 때, 시간에 따른 물의 높이의 그래프 개형을 그리시오.</span>
+                  </div>
+                </div>
+                <div class="answer-canvas-type">
+                  <div class="canvas-wrap">
+                    <canvas id="drawCanvas" width="500" height="500"></canvas>
+                    <span class="height">높이</span>
+                    <span class="zero">0</span>
+                    <span class="time">시간</span>
+                  </div>
+                  <div>
+                    <button id="btnClea">지우기</button>
+                  </div>
+                </div>
+              </div>
+              <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="page">
+              <div class="inner">
+                <div class="question">
+                  <div class="top">
+                    <span class="num">9</span>
+                    <span class="txt">다음 대화를 읽고, 알맞은 문명의 위치를 표시하여 메시지를 보내시오.</span>
+                  </div>
+                  <div class="chat-area">
+                    <span class="txt">채팅방</span>
                     <div class="answer-map-type">
-                      <img src="../img/img02.png" alt="">
+                      <img src="img/img10.png" alt="">
                       <svg>
                         <g>
-                          <circle cx="793" cy="777" r="20"></circle>
+                          <circle cx="352" cy="493" r="15"></circle>
                         </g>
                         <g>
-                          <circle cx="170" cy="836" r="20"></circle>
+                          <circle cx="380" cy="550" r="15"></circle>
                         </g>
                         <g>
-                          <circle cx="262" cy="722" r="20"></circle>
+                          <circle cx="417" cy="520" r="15"></circle>
                         </g>
                         <g>
-                          <circle cx="485" cy="740" r="20"></circle>
+                          <circle cx="505" cy="538" r="15"></circle>
                         </g>
                         <g>
-                          <circle cx="350" cy="840" r="20"></circle>
+                          <circle cx="650" cy="512" r="15"></circle>
                         </g>
                       </svg>
+
                     </div>
+                    <button class="send-btn">보내기</button>
                   </div>
                 </div>
-                <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
               </div>
+              <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
             </div>
-            <div class="swiper-slide">
-              <div class="page">
-                <div class="inner">
-                  <div class="question">
-                    <div class="top">
-                      <span class="num">5</span>
-                      <span class="txt">지구계에서 수권과 기권의 상호작용에 의해 나타나는 현상을 모두 선택하시오.</span>
-                    </div>
-                    <ul class="answer-input-type checkbox image">
-                      <li>
-                        <input type="checkbox" id="answer_checkbox06" value="0">
-                        <label for="answer_checkbox06">✔</label>
-                        <span class="txt"><img src="img/img03.png" alt=""></span>
-                      </li>
-                      <li>
-                        <input type="checkbox" id="answer_checkbox07" value="1">
-                        <label for="answer_checkbox07">✔</label>
-                        <span class="txt"><img src="img/img04.png" alt=""></span>
-                      </li>
-                      <li>
-                        <input type="checkbox" id="answer_checkbox08" value="2">
-                        <label for="answer_checkbox08">✔</label>
-                        <span class="txt"><img src="img/img05.png" alt=""></span>
-                      </li>
-                    </ul>
+          </div>
+          <div class="swiper-slide">
+            <div class="page">
+              <div class="inner">
+                <div class="question">
+                  <div class="top">
+                    <span class="num">10</span>
+                    <span class="txt">광물과 광물의 성질에 대한 실험을 알맞게 연결하시오.</span>
                   </div>
                 </div>
-                <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="page">
-                <div class="inner">
-                  <div class="question">
-                    <div class="top">
-                      <span class="num">6</span>
-                      <span class="txt">다음 웹사이트에서 제시하는 3가지 정보를 활용하여 &lt;조건&gt;에 맞게 제시된 글을 완성하시오.</span>
-                    </div>
-                    <div class="bottom">
-                      <div class="tab-wrap">
-                        <div class="tab-btn">
-                          <a href="javascript:;" class="on">홍보 포스터</a>
-                          <a href="javascript:;">통계표</a>
-                          <a href="javascript:;">신문 기사</a>
-                        </div>
-                        <div class="tab-cnt">
-                          <div class="cnt on"><img src="img/img06.png" alt=""></div>
-                          <div class="cnt"><img src="img/img07.png" alt=""></div>
-                          <div class="cnt"><img src="img/img08.png" alt=""></div>
-                        </div>
+                <div class="answer-line-type">
+                  <div class="left-img">
+                    <img src="../img/img11.png" alt="">
+                    <img src="../img/img12.png" alt="">
+                    <img src="../img/img13.png" alt="">
+                  </div>
+                  <div class="form-joining" style="width:100%;display:flex;z-index:9999;position:relative;justify-content:center;padding-top:80px;">
+                    <span id="leftarea"></span>
+                    <span id="rightarea"></span>
+                    <div id="column1" style="width:150px;z-index:9999;">
+                      <div id="row1">
+                        <button id="1_1" row="1" column="1" class="dot" onclick="clickbtn(this)" link_num="2_3" line_num=""></button>
                       </div>
-                      <div class="answer-drag-type">
-                        <span>조건</span>
-                        <ul class="list-text">
-                          <li>&lt;학생 글&gt;에 이어 두 문장 이상의 한 문단으로 작성할 것.</li>
-                          <li>반려견을 등록했을 때 얻을 수 있는 장점 두 가지를 &lt;자료&gt;의 '홍보 포스터'를 활용하여 쓸 것.</li>
-                          <li>반려견의 등록률을 높일 수 있는 구체적인 방안 두 가지를 &lt;자료&gt;의 '통계표'와 '신문 기사'에서 각각 한 가지씩 활용하여 쓸 것.</li>
-                        </ul>
+                      <div id="row2">
+                        <button id="1_2" row="2" column="1" class="dot" onclick="clickbtn(this)" link_num="2_2" line_num=""></button>
+                      </div>
+                      <div id="row3">
+                        <button id="1_3" row="3" column="1" class="dot" onclick="clickbtn(this)" link_num="2_1" line_num=""></button>
+                      </div>
+                    </div>
+                    <div id="line"></div>
+                    <div id="column2" style="width:20px;z-index:9999;">
+                      <div id="row1">
+                        <button id="2_1" row="1" column="2" class="dot" onclick="clickbtn(this)" link_num="1_3" line_num=""></button>
+                      </div>
+                      <div id="row2">
+                        <button id="2_2" row="2" column="2" class="dot" onclick="clickbtn(this)" link_num="1_2" line_num=""></button>
+                      </div>
+                      <div id="row3">
+                        <button id="2_3" row="3" column="2" class="dot" onclick="clickbtn(this)" link_num="1_1" line_num=""></button>
+                      </div>
+                    </div>
+                    <div id="column3" style="width:150px;display:none;z-index:9999;">
+                      <div id="row1">
+                        <button id="3_1" row="1" column="3" class="dot" onclick="clickbtn(this)"></button>
+                      </div>
+                      <div id="row2">
+                        <button id="3_2" row="2" column="3" class="dot" onclick="clickbtn(this)"></button>
+                      </div>
+                      <div id="row3">
+                        <button id="3_3" row="3" column="3" class="dot" onclick="clickbtn(this)"></button>
+                      </div>
+                    </div>
+                    <div id="column4" style="width:20px;display:none;z-index:9999;">
+                      <div id="row1">
+                        <button id="4_1" row="1" column="4" class="dot" onclick="clickbtn(this)"></button>
+                      </div>
+                      <div id="row2">
+                        <button id="4_2" row="2" column="4" class="dot" onclick="clickbtn(this)"></button>
+                      </div>
+                      <div id="row3">
+                        <button id="4_3" row="3" column="4" class="dot" onclick="clickbtn(this)"></button>
                       </div>
                     </div>
                   </div>
-                  <div class="answer-input-type">
-                    <div>
-                      반려동물 등록제는 생후 2개월 이상 된 반려견을 기를 경우, 시.군.구청에 의무적으로 반려견을 등록하도록 하는 제도이다. 현재 각 지자체는 단속을 통해 반려견을 등록하지 않은 사람들에게 과태료를 부과하고 있지만, 등록률은 여전히 낮은 편이다.
-                      <br>
-                      반려견을 등록하면
-                      <textarea name="" id="" cols="30" rows="10"></textarea>
-                    </div>
-                  </div>
-                </div>
-                <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="page">
-                <div class="inner">
-                  <div class="question">
-                    <div class="top">
-                      <span class="num">7</span>
-                      <span class="txt">다음은 여행 관련 Q&A 게시판에 올라온 글이다. 윗글의 내용과 일치하도록 &lt;조건&gt;에 맞게 단어를 끌어놓아 문장을 완성하시오.</span>
-                    </div>
-                    <div class="bottom">
-                      <div class="answer-drag-type">
-                        <span>조건</span>
-                        <ul class="list-text">
-                          <li>주어진 5개의 단어 중 3개만 사용할 것</li>
-                          <li>선택한 3개의 단어를 바르게 배열할 것</li>
-                          <li>단어의 형태를 변형하지 말 것</li>
-                        </ul>
-                      </div>
-                      <div class="drop-area">
-                        <img src="img/img09.png" alt="">
-                        <div class="border">
-                          <span class="drop"></span>
-                          <span class="drop"></span>
-                          <span class="drop"></span>
-                          <span class="drop"></span>
-                          <span class="drop"></span>
-                        </div>
-                      </div>
-                      
-                    </div>
-                  </div>
-                  <div class="answer-drag-type ml65">
-                    <span>보기</span>
-                    <ul class="btn-text">
-                      <li class="drag" draggable="true" data-name="familiar">familiar</li>
-                      <li class="drag" draggable="true" data-name="desert">desert</li>
-                      <li class="drag" draggable="true" data-name="laws">laws</li>
-                      <li class="drag" draggable="true" data-name="plans">plans</li>
-                      <li class="drag" draggable="true" data-name="some">some</li>
-                      <li class="drag" draggable="true" data-name="unusual">unusual</li>
-                    </ul>
+                  <div class="right-txt">
+                    <span class="txt">석영</span>
+                    <span class="txt">방해석</span>
+                    <span class="txt">흑운모</span>
                   </div>
                 </div>
-                <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
               </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="page">
-                <div class="inner">
-                  <div class="question">
-                    <div class="top">
-                      <span class="num">8</span>
-                      <span class="txt">욕실에 있는 욕조가 불편하다고 느낀 현주는 그림과 같이 직육면체 모양의 욕조 내부에 사람이 앉을 수 있는 직육면체 모양의 의자가 있는 모형을 만들었다. 해당 모형에 시간당 일정한 양의 물을 가득 찰 때까지 넣을 때, 시간에 따른 물의 높이의 그래프 개형을 그리시오.</span>
-                    </div>
-                  </div>
-                  <div class="answer-canvas-type">
-                    <div class="canvas-wrap">
-                      <canvas id="drawCanvas" width="500" height="500"></canvas>
-                      <span class="height">높이</span>
-                      <span class="zero">0</span>
-                      <span class="time">시간</span>
-                    </div>
-                    <div>
-                      <button id="btnClea">지우기</button>
-                    </div>
-                  </div>
-                </div>
-                <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="page">
-                <div class="inner">
-                  <div class="question">
-                    <div class="top">
-                      <span class="num">9</span>
-                      <span class="txt">다음 대화를 읽고, 알맞은 문명의 위치를 표시하여 메시지를 보내시오.</span>
-                    </div>
-                    <div class="chat-area">
-                      <span class="txt">채팅방</span>
-                      <div class="answer-map-type">
-                        <img src="img/img10.png" alt="">
-                        <svg>
-                          <g>
-                            <circle cx="352" cy="493" r="15"></circle>
-                          </g>
-                          <g>
-                            <circle cx="380" cy="550" r="15"></circle>
-                          </g>
-                          <g>
-                            <circle cx="417" cy="520" r="15"></circle>
-                          </g>
-                          <g>
-                            <circle cx="505" cy="538" r="15"></circle>
-                          </g>
-                          <g>
-                            <circle cx="650" cy="512" r="15"></circle>
-                          </g>
-                        </svg>
-                        
-                      </div>
-                      <button class="send-btn">보내기</button>
-                    </div>
-                  </div>
-                </div>
-                <canvas class="sketchpad" style="cursor: crosshair;" width="1260" height="1216"></canvas>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="page">
-                <div class="inner">
-                  <div class="question">
-                    <div class="top">
-                      <span class="num">10</span>
-                      <span class="txt">광물과 광물의 성질에 대한 실험을 알맞게 연결하시오.</span>
-                    </div>
-                  </div>
-                  <div class="answer-line-type">
-                    <div class="left-img">
-                      <img src="../img/img11.png" alt="">
-                      <img src="../img/img12.png" alt="">
-                      <img src="../img/img13.png" alt="">
-                    </div>
-                    <div class="form-joining" style="width:100%;display:flex;z-index:9999;position:relative;justify-content:center;padding-top:80px;">
-                      <span id="leftarea"></span>
-                      <span id="rightarea"></span>
-                      <div id="column1" style="width:150px;z-index:9999;">
-                        <div id="row1">
-                          <button id="1_1" row="1" column="1" class="dot" onclick="clickbtn(this)" link_num="2_3" line_num=""></button>
-                        </div>
-                        <div id="row2">
-                          <button id="1_2" row="2" column="1" class="dot" onclick="clickbtn(this)" link_num="2_2" line_num=""></button>
-                        </div>
-                        <div id="row3">
-                          <button id="1_3" row="3" column="1" class="dot" onclick="clickbtn(this)" link_num="2_1" line_num=""></button>
-                        </div>
-                      </div>
-                      <div id="line"></div>
-                      <div id="column2" style="width:20px;z-index:9999;">
-                        <div id="row1">
-                          <button id="2_1" row="1" column="2" class="dot" onclick="clickbtn(this)" link_num="1_3" line_num=""></button>
-                        </div>
-                        <div id="row2">
-                          <button id="2_2" row="2" column="2" class="dot" onclick="clickbtn(this)" link_num="1_2" line_num=""></button>
-                        </div>
-                        <div id="row3">
-                          <button id="2_3" row="3" column="2" class="dot" onclick="clickbtn(this)" link_num="1_1" line_num=""></button>
-                        </div>
-                      </div>
-                      <div id="column3" style="width:150px;display:none;z-index:9999;">
-                        <div id="row1">
-                          <button id="3_1" row="1" column="3" class="dot" onclick="clickbtn(this)"></button>
-                        </div>
-                        <div id="row2">
-                          <button id="3_2" row="2" column="3" class="dot" onclick="clickbtn(this)"></button>
-                        </div>
-                        <div id="row3">
-                          <button id="3_3" row="3" column="3" class="dot" onclick="clickbtn(this)"></button>
-                        </div>
-                      </div>
-                      <div id="column4" style="width:20px;display:none;z-index:9999;">
-                        <div id="row1">
-                          <button id="4_1" row="1" column="4" class="dot" onclick="clickbtn(this)"></button>
-                        </div>
-                        <div id="row2">
-                          <button id="4_2" row="2" column="4" class="dot" onclick="clickbtn(this)"></button>
-                        </div>
-                        <div id="row3">
-                          <button id="4_3" row="3" column="4" class="dot" onclick="clickbtn(this)"></button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="right-txt">
-                      <span class="txt">석영</span>
-                      <span class="txt">방해석</span>
-                      <span class="txt">흑운모</span>
-                    </div>
-                  </div>
-                </div>
-                <canvas class="sketchpad" style="cursor: crosshair;z-index: 10000;" width="1260" height="1216"></canvas>
-              </div>
+              <canvas class="sketchpad" style="cursor: crosshair;z-index: 10000;" width="1260" height="1216"></canvas>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="footer"></div>
-    <div class="pop-memo">
-      <div class="pop-header">
-        <span class="txt">Memo</span>
-        <button type="button" class="pop-close">
-          <span class="hbar"></span>
-          <span class="hbar"></span>
-        </button>
-      </div>
-      <div class="pop-cnt">
-        <textarea name="" id="" cols="30" rows="10"></textarea>
-      </div>
+  </div>
+  <div class="footer"></div>
+  <div class="pop-memo">
+    <div class="pop-header">
+      <span class="txt">Memo</span>
+      <button type="button" class="pop-close">
+        <span class="hbar"></span>
+        <span class="hbar"></span>
+      </button>
+    </div>
+    <div class="pop-cnt">
+      <textarea name="" id="" cols="30" rows="10"></textarea>
     </div>
   </div>
+</div>
+<script th:src="@{/assets/js/test/line.js}"></script>
+<script th:src="@{/assets/js/test/exam.js}"></script>
 </body>
 </html>

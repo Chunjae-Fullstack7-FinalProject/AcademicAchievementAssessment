@@ -27,4 +27,20 @@ public class DummyController {
         return "test/testlist";
     }
 
+    @GetMapping("/main")
+    public String main() {
+        return "test/main";
+    }
+
+    @GetMapping("/intro")
+    public String intro() {
+        return "test/intro";
+    }
+
+    @GetMapping("/inform")
+    public String inform() {
+        return "test/inform";
+    }
+
+
 }

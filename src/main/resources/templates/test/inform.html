@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+      layout:decorate="~{test/header.html}">
+>
+<div layout:fragment="maincontent">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+    <link th:href="@{/assets/css/test/inform.css}" rel="stylesheet"/>
+</head>
+
+    <div class="board-container">
+        <!-- 게시판 테이블 -->
+        <table class="board-table">
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>구분</th>
+                <th>제목</th>
+                <th>등록일</th>
+                <th>조회수</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 페이지 1 -->
+            <tr>
+                <td>104</td>
+                <td>일반</td>
+                <td>밀크T / 티스푼 개인정보처리방침 개정 사전 안내</td>
+                <td>2024-12-16</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>103</td>
+                <td>일반</td>
+                <td>[밀크T아이] 밀크T아이 TV CF 오픈! 모두 다 밀크T아이!</td>
+                <td>2024-11-22</td>
+                <td>51</td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>일반</td>
+                <td>[공지] 밀크T아이 초등 정보 이관 안내</td>
+                <td>2024-11-04</td>
+                <td>96</td>
+            </tr>
+            <tr>
+                <td>101</td>
+                <td>일반</td>
+                <td>[공지] 밀크T아이 전면 리뉴얼 안내</td>
+                <td>2024-11-01</td>
+                <td>225</td>
+            </tr>
+            <tr>
+                <td>100</td>
+                <td>일반</td>
+                <td>[공지] 밀크T 시스템 점검 안내 (9월 28일 00:00~07:00)</td>
+                <td>2024-09-20</td>
+                <td>92</td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- 페이지네이션 -->
+        <div class="pagination">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+        </div>
+    </div>
+</div>
+</html>
