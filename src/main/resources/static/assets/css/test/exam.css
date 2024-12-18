@@ -1,0 +1,76 @@
+
+.container1 {
+    max-width: 1200px;
+    background: white;
+    padding: 20px;
+    overflow: visible;
+    height: 100%;
+    position: relative; /* 명확한 position 지정 */
+    z-index: 10; /* 다른 요소보다 높은 값 */
+    margin-top: 46px;
+}
+
+
+.questions .question {
+    margin: 15px 0;
+}
+
+.question span {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.button {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.results table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.results th, .results td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.results th {
+    background-color: #007BFF;
+    color: white;
+}
+
+.results tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.enterFullscreenBtn {
+    position: absolute; /* 부모 요소를 기준으로 위치 */
+    top: 50%; /* 수직 중앙 이동 */
+    left: 50%; /* 수평 중앙 이동 */
+    transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */
+    display: flex; /* Flexbox 설정 */
+    align-items: center; /* 내부 아이콘 수직 정렬 */
+    justify-content: center; /* 내부 아이콘 수평 정렬 */
+    width: 50px; /* 버튼 크기 */
+    height: 50px;
+}
+
+.enterFullscreenBtn img {
+    width: 100%; /* 이미지 크기를 버튼에 맞춤 */
+    height: auto;
+}
+
+
