@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+>
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>학업성취도평가 대비 시스템</title>
+    <link href="../kice/img/fav.png" rel="shortcut icon" />
+    <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+    <link th:href="@{/assets/test/css/test/style.css}" rel="stylesheet"/>
+
+    <script src="https://kit.fontawesome.com/266dd736a0.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css" rel="stylesheet">
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+
+</head>
+
+<body>
+<main id="main">
+
+    <!-- 상단 공통 영역 -->
+    <header id="header">
+        <nav class="menu">
+            <div class="container">
+                <ul class="justify_start" style="gap: 15px; padding-top: 12px;">
+                    <li><a href="#none">학업성취도 평가대비 교재 소개</a></li>
+                    <li><a href="#none">밀크T아이</a></li>
+                    <li><a href="#none">밀크T초등</a></li>
+                    <li><a href="#none">밀크T중등</a></li>
+                    <li><a href="#none">밀크T고등</a></li>
+                    <li><a href="#none"><i class="fa-regular fa-star mr05" style="color: #ffd800;"></i>즐겨찾기 추가</a></li>
+                </ul>
+
+            </div>
+        </nav>
+        <div class="container">
+            <div class="top">
+                <div class="justify_between">
+                    <div class="site_tit">학업성취도평가</div>
+
+                    <ul class="justify_between user_info">
+                        <li><a href="#none">김천재님</a></li>
+                        <li class="ml25"><a href="#none" class="btn logoutBtn">로그아웃</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 컨텐츠 영역 -->
+    <div id="content">
+        <div class="con_case">
+            <div class="container">
+                <div class="tabmenu">
+                    <ul class="justify_center">
+                        <li id="tab1" class="tab_btn">
+                            <input type="radio" name="tabmenu" id="tmenu1" class="tab">
+                            <label class="tlabel1 label" for="tmenu1">CBT대표유형</label>
+                            <div class="tab_con">
+                                <div class="cnt_box">
+                                    <div class="page_tit pb20"><em>CBT 대표 유형 테스트</em></div>
+                                    <p class="page_info pb55">아래의 내용을 확인한 후, [시험 시작] 버튼을 클릭하면 시험이 시작됩니다.</p>
+
+
+                                    <p class="mt100 mb100">해당 테스트는 CBT 기능과 문제 유형을 연습하기 위한 목적으로,<br>
+                                        정답 확인 및 풀이 결과를 제공하지 않습니다.
+                                    </p>
+
+                                    <div class="test_guide flex_end">
+                                        <ul>꼭-확인하세요.
+                                            <li><em>동영상, 듣기 내용은 한 번만 들려주는 문항이 있습니다. </em> &nbsp; 잘 청취하도록 유의 바랍니다.</li>
+                                            <li><em>헤드셋 혹은 이어폰을 착용</em>해 주시기 바랍니다.</li>
+                                        </ul>
+                                        <div class="btn testBtn"><a href="#none">시험 시작</a></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </li>
+                        <li id="tab1" class="tab_btn">
+                            <input type="radio" name="tabmenu" id="tmenu2" class="tab">
+                            <label class="tlabel2 label" for="tmenu2">실전시험Ⅰ</label>
+                            <div class="tab_con">
+                                <div class="cnt_box">
+                                    <div class="page_tit pb20"><em>동영상</em> 및 <em>소리</em> 테스트</div>
+                                    <p class="page_info pb40">동영상 테스트를 실시하여 주시기 바랍니다.<br>
+                                        이상이 없으면 <em>[이상 없습니다] 버튼을 클릭</em>하여 주시기 바랍니다.</p>
+
+                                    <div class="media_box">
+                                        <p class="page_info2 mb40">아래의 동영상을 플레이하여 <em>영상 및 소리가 정상적으로 나오는지 확인</em>해 주십시오.</p>
+
+                                        <div class="video">
+                                            <img src="./img/vid.png" alt="비디오">
+                                        </div>
+                                    </div>
+
+
+                                    <a class="btn chkBtn  mt60" href="#none">이상 없습니다</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li id="tab1" class="tab_btn">
+                            <input type="radio" checked name="tabmenu" id="tmenu3" class="tab">
+                            <label class="tlabel3 label" for="tmenu3">실전시험Ⅱ</label>
+                            <div class="tab_con">
+                                <!-- S: 230425 type01 추가-->
+                                <div class="tabmenu2 type01">
+                                    <!-- E: 230425 type01 추가-->
+                                    <ul class="justify_center">
+                                        <li id="tab2" class="tab_btn2">
+                                            <input type="radio" checked name="tabmenu_report" id="tmenu_r1" class="tab">
+                                            <label class="rlabel1 label" for="tmenu_r1">6학년<img src="./img/ico_new.png" alt="" class="ico_new"></label>
+
+                                            <div class="tab_con pt50">
+                                                <div class="cnt_box">
+                                                    <div class="page_tit pb20">시험 시간표 및 <em>시험응시</em></div>
+                                                    <p class="page_info pb55">교시별 시험 과목을 확인하고 <em>우측의 [응시하기] 버튼을 클릭</em>하여 주시기 바랍니다.</p>
+
+                                                    <table class="tbl_list">
+                                                        <caption></caption>
+                                                        <colgroup>
+                                                            <col width="10%">
+                                                            <col width="10%">
+                                                            <col width="20%">
+                                                            <col width="10%">
+                                                            <col width="10%">
+                                                        </colgroup>
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col" class="first">교시</th>
+                                                            <th scope="col">과목</th>
+                                                            <th scope="col">시험시간</th>
+                                                            <th scope="col">문항 수</th>
+                                                            <th scope="col">시험 응시</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td class="first">1교시</td>
+                                                            <td>국어</td>
+                                                            <td>응시 시각으로부터 60분</td>
+                                                            <td>20문항</td>
+                                                            <td><a href="#none" class="startBtn">응시하기</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="first">2교시</td>
+                                                            <td>영어</td>
+                                                            <td>응시 시각으로부터 60분</td>
+                                                            <td>20문항</td>
+                                                            <td><a href="#none" class="startBtn">응시하기</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="first">3교시</td>
+                                                            <td>수학</td>
+                                                            <td>응시 시각으로부터 60분</td>
+                                                            <td>20문항</td>
+                                                            <td><a href="#none" class="startBtn">응시하기</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="first">4교시</td>
+                                                            <td>사회</td>
+                                                            <td>응시 시각으로부터 60분</td>
+                                                            <td>20문항</td>
+                                                            <td><a href="#none" class="endBtn">종료</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="first">5교시</td>
+                                                            <td>과학</td>
+                                                            <td>응시 시각으로부터 60분</td>
+                                                            <td>20문항</td>
+                                                            <td><a href="#none" class="startBtn">응시하기</a></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+
+
+                                                    <div class="btn_info mt40">
+                                                        <div class="btn gray">종료</div>
+                                                        <p>시험이 종료된 상태</p>
+                                                        <div class="btn blue ml60">응시하기</div>
+                                                        <p>시험에 응시할 수 있는 상태</p>
+                                                    </div>
+                                                    <a class="btn resultBtn  mt100" href="#none">결과 보기</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li id="tab2" class="tab_btn2">
+                                            <input type="radio" name="tabmenu_report" id="tmenu_r2" class="tab">
+                                            <label class="rlabel1 label" for="tmenu_r2">5학년</label>
+                                            <div class="tab_con pt50">
+                                                <div class="cnt_box">
+                                                    <div class="page_tit pb20">시험 시간표 및 <em>시험응시</em></div>
+                                                    <p class="page_info pb55">교시별 시험 과목을 확인하고 <em>우측의 [응시하기] 버튼을 클릭</em>하여 주시기 바랍니다.</p>
+
+                                                    <table class="tbl_list">
+                                                        <caption></caption>
+                                                        <colgroup>
+                                                            <col width="10%">
+                                                            <col width="10%">
+                                                            <col width="20%">
+                                                            <col width="10%">
+                                                            <col width="10%">
+                                                        </colgroup>
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col" class="first">교시</th>
+                                                            <th scope="col">과목</th>
+                                                            <th scope="col">시험시간</th>
+                                                            <th scope="col">문항 수</th>
+                                                            <th scope="col">시험 응시</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td class="first">1교시</td>
+                                                            <td>국어</td>
+                                                            <td>응시 시각으로부터 60분</td>
+                                                            <td>20문항</td>
+                                                            <td><a href="#none" class="startBtn">응시하기</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="first">2교시</td>
+                                                            <td>영어</td>
+                                                            <td>응시 시각으로부터 60분</td>
+                                                            <td>20문항</td>
+                                                            <td><a href="#none" class="startBtn">응시하기</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="first">3교시</td>
+                                                            <td>수학</td>
+                                                            <td>응시 시각으로부터 60분</td>
+                                                            <td>20문항</td>
+                                                            <td><a href="#none" class="startBtn">응시하기</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="first">4교시</td>
+                                                            <td>사회</td>
+                                                            <td>응시 시각으로부터 60분</td>
+                                                            <td>20문항</td>
+                                                            <td><a href="#none" class="endBtn">종료</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="first">5교시</td>
+                                                            <td>과학</td>
+                                                            <td>응시 시각으로부터 60분</td>
+                                                            <td>20문항</td>
+                                                            <td><a href="#none" class="startBtn">응시하기</a></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+
+
+                                                    <div class="btn_info mt40">
+                                                        <div class="btn gray">종료</div>
+                                                        <p>시험이 종료된 상태</p>
+                                                        <div class="btn blue ml60">응시하기</div>
+                                                        <p>시험에 응시할 수 있는 상태</p>
+                                                    </div>
+                                                    <a class="btn resultBtn  mt100" href="#none">결과 보기</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li id="tab1" class="tab_btn">
+                            <input type="radio" name="tabmenu" id="tmenu4" class="tab">
+                            <label class="tlabel4 label" for="tmenu4">Report</label>
+                            <div class="tab_con">
+                                <div class="cnt_box">
+                                    <div class="page_tit pb20">시험 시간표 및 <em>시험응시</em></div>
+                                    <p class="page_info pb55">교시별 시험 과목을 확인하고 <em>우측의 [응시하기] 버튼을 클릭</em>하여 주시기 바랍니다.</p>
+
+                                    <table class="tbl_list">
+                                        <caption></caption>
+                                        <colgroup>
+                                            <col width="10%">
+                                            <col width="10%">
+                                            <col width="20%">
+                                            <col width="10%">
+                                            <col width="10%">
+                                        </colgroup>
+                                        <thead>
+                                        <tr>
+                                            <th scope="col" class="first">교시</th>
+                                            <th scope="col">과목</th>
+                                            <th scope="col">시험시간</th>
+                                            <th scope="col">문항 수</th>
+                                            <th scope="col">시험 응시</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="first">1교시</td>
+                                            <td>국어</td>
+                                            <td>응시 시각으로부터 60분</td>
+                                            <td>20문항</td>
+                                            <td><a href="#none" class="startBtn">응시하기</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first">2교시</td>
+                                            <td>영어</td>
+                                            <td>응시 시각으로부터 60분</td>
+                                            <td>20문항</td>
+                                            <td><a href="#none" class="startBtn">응시하기</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first">3교시</td>
+                                            <td>수학</td>
+                                            <td>응시 시각으로부터 60분</td>
+                                            <td>20문항</td>
+                                            <td><a href="#none" class="startBtn">응시하기</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first">4교시</td>
+                                            <td>사회</td>
+                                            <td>응시 시각으로부터 60분</td>
+                                            <td>20문항</td>
+                                            <td><a href="#none" class="endBtn">종료</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first">5교시</td>
+                                            <td>과학</td>
+                                            <td>응시 시각으로부터 60분</td>
+                                            <td>20문항</td>
+                                            <td><a href="#none" class="startBtn">응시하기</a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                    <div class="btn_info mt40">
+                                        <div class="btn gray">종료</div>
+                                        <p>시험이 종료된 상태</p>
+                                        <div class="btn blue ml60">응시하기</div>
+                                        <p>시험에 응시할 수 있는 상태</p>
+                                    </div>
+                                    <a class="btn resultBtn  mt100" href="#none">결과 보기</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+</main>
+
+</body>
+
+</html>

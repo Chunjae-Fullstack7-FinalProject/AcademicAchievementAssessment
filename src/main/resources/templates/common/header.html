@@ -1,0 +1,135 @@
+<header id="header">
+  <style>
+    #header {
+      width: 100%;
+      height: 140px;
+    }
+    #header .menu {
+      width: 100%;
+      height: 40px;
+      background-color: #2f538c;
+      color: #fff;
+    }
+    #header .menu ul {
+      height: 100%;
+    }
+    #header .menu ul li::after {
+      content: "|";
+      width: 10px;
+      height: 10px;
+      padding-left: 15px;
+      font-size: 13px;
+      line-height: 1;
+      vertical-align: top;
+    }
+    #header .menu ul li:last-child::after {
+      content: "";
+    }
+    #header .menu ul li a {
+      font-size: 14px;
+      color: #fff;
+      line-height: 1;
+      vertical-align: top;
+    }
+    #header .top {
+      padding: 35px 0;
+    }
+    #header .top .site_tit {
+      font-family: "SCoreDream";
+      font-size: 32px;
+      font-weight: 600;
+      color: #222;
+      cursor: pointer;
+      line-height: 1;
+      vertical-align: top;
+    }
+    /*#header .top .user_info {font-size: 18px;}*/
+    /*#header .top .user_info .logoutBtn {padding: 12px 18px; align-items: center;  background: var(--gray); color: #fff; border-radius: 20px;}*/
+
+    /* container */
+    .container {
+      max-width: 1130px;
+      min-width: 768px;
+      width: 100%;
+      padding: 0;
+      margin: auto;
+    }
+    .menu .container {
+      height: 27px;
+    }
+    .justify_between {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .justify_between.user_info {
+      align-items: center;
+    }
+    /*#main {padding-bottom: 40px; }*/
+  </style>
+  <nav class="menu">
+    <div class="container">
+      <ul class="justify_start" style="gap: 15px; padding-top: 12px">
+        <li>
+          <a
+            href="https://brand_achievement.chunjae.co.kr/achievement/index.html"
+            target="_blank"
+            >학업성취도 평가대비 교재 소개</a
+          >
+        </li>
+        <li>
+          <a href="https://i.milkt.co.kr/Main/frm_Main.aspx" target="_blank"
+            >밀크T아이</a
+          >
+        </li>
+        <li>
+          <a href="http://www.milkt.co.kr/Main/Main_new" target="_blank"
+            >밀크T초등</a
+          >
+        </li>
+        <li>
+          <a href="http://mid.milkt.co.kr/Main/frm_Main.aspx" target="_blank"
+            >밀크T중학</a
+          >
+        </li>
+        <li>
+          <a href="https://high.milkt.co.kr/Main/frm_Main.aspx" target="_blank"
+            >밀크T고등</a
+          >
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="top">
+      <div class="justify_between">
+        <div class="site_tit" onclick="gotoMain();" style="cursor: pointer">
+          온라인 학업성취도 평가
+        </div>
+
+        <ul class="justify_between user_info">
+          <li th:if="${accessToken != null}">
+            <a href="#none" th:text="${name}"></a>
+          </li>
+          <li th:if="${accessToken != null}" class="ml25">
+            <a href="/user/logout" class="btn logoutBtn">로그아웃</a>
+          </li>
+          <li th:if="${accessToken == null}" class="ml10">
+            <a
+              href="/user/login"
+              class="btn logoutBtn"
+              style="background: #2f538c"
+              >로그인</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    function gotoMain(){
+      location.href = "/";
+    }
+  </script>
+</header>
