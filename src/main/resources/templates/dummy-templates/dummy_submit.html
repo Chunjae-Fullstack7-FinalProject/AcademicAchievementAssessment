@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="submitExam()">제출하기</button>
+    <button id="btn">제출하기</button>
+
+    <script>
+        function submitExam() {
+            // 폼 생성
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/exams/submit';
+
+            // examId 추가
+            const examIdInput = document.createElement('input');
+            examIdInput.type = 'hidden';
+            examIdInput.name = 'examId';
+            examIdInput.value = '1';
+            form.appendChild(examIdInput);
+
+            // 답안 데이터
+            const answers = [
+                { questionId: 966536,
+                    answer: "1",
+                    timeSpent: 15
+                },
+                { questionId: 1588525,
+                    answer: "5",
+                    timeSpent: 10
+                },
+                { questionId: 1588526,
+                    answer: "3",
+                    timeSpent: 25
+                },
+                { questionId: 1589103,
+                    answer: "4",
+                    timeSpent: 17
+                },
+                { questionId: 1589104,
+                    answer: "2",
+                    timeSpent: 18
+                }
+            ];
+
+            // 답안 입력 필드 추가
+            answers.forEach((answer, index) => {
+                // questionId
+                const questionIdInput = document.createElement('input');
+                questionIdInput.type = 'hidden';
+                questionIdInput.name = `answers[${index}].questionId`;
+                questionIdInput.value = answer.questionId;
+                form.appendChild(questionIdInput);
+
+                // answer
+                const answerInput = document.createElement('input');
+                answerInput.type = 'hidden';
+                answerInput.name = `answers[${index}].answer`;
+                answerInput.value = answer.answer;
+                form.appendChild(answerInput);
+
+                // timeSpent
+                const timeSpentInput = document.createElement('input');
+                timeSpentInput.type = 'hidden';
+                timeSpentInput.name = `answers[${index}].timeSpent`;
+                timeSpentInput.value = answer.timeSpent;
+                form.appendChild(timeSpentInput);
+            });
+
+            // form을 body에 추가하고 제출
+            document.body.appendChild(form);
+            // form.submit();
+            console.log(form);
+        }
+    </script>
+
+    <script>
+        document.getElementById("btn").addEventListener("click", function() {
+            console.log("제출하기");
+            
+            const answers = [
+                { questionId: 966536, answer: "1", timeSpent: 15 },
+                { questionId: 1588525, answer: "5", timeSpent: 10 },
+                { questionId: 1588526, answer: "3", timeSpent: 25 },
+                { questionId: 1589103, answer: "4", timeSpent: 17 },
+                { questionId: 1589104, answer: "2", timeSpent: 18 }
+            ];
+            
+            const requestData = {
+                examId: 1,
+                answers: answers
+            };
+    
+            fetch("/exams/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch(error => {
+                console.log(requestData);
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
