@@ -14,6 +14,11 @@ public class ExternalExamResponseDTO {
     private String successYn;
     private List<ItemDTO> itemList;
 
+
+    @ToString
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Data
     public static class ItemDTO {
         private Long itemId;

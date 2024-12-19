@@ -13,7 +13,12 @@ import java.util.List;
 public class SubmitExamDTO {
     private Long examId;
     private List<AnswerDTO> answers;
+    private String subjectName;
 
+    @ToString
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Data
     public static class AnswerDTO {
         private Long itemId;

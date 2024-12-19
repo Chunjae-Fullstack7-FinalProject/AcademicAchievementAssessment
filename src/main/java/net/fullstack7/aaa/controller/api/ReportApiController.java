@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/repost")
+@RequestMapping("/api/report/")
 @RequiredArgsConstructor
 @Logging
 public class ReportApiController {
@@ -21,10 +21,13 @@ public class ReportApiController {
         String memberId = "member1";
         try {
             reportService.examSubmission(memberId, submitExamDTO);
-            return ResponseEntity.ok(Map.of("message", "시험 제출 완료"));
+            String redirectUrl = "/report/list/" + memberId + "/" + submitExamDTO.getExamId()+ "?subjectName=" + submitExamDTO.getSubjectName();
+
+            return ResponseEntity.ok(Map.of("redirectUrl", redirectUrl));
+            //return ResponseEntity.ok(Map.of("message", "시험 제출 완료"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("error", e.getMessage()));
+                    .body(Map.of("message", e.getMessage()));
         }
     }
 }
