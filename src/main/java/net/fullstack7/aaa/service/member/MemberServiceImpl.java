@@ -10,6 +10,7 @@ import net.fullstack7.aaa.config.SecurityConfig;
 import net.fullstack7.aaa.domain.Member;
 import net.fullstack7.aaa.dto.member.MemberDTO;
 import net.fullstack7.aaa.repository.MemberRepository;
+import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -47,8 +48,14 @@ public class MemberServiceImpl implements MemberServiceIf {
         memberRepository.save(member);
     }
 
+    // 아이디 중복 체크
+    public void checkIdDuplicate(String memberId) {
+        if(memberRepository.findByMemberId(memberId).isPresent()) {
+            throw new RuntimeException("이미 사용 중인 아이디입니다.");
+        }
+    }
     //이메일 중복 체크
-    private void checkEmailDuplicate(String email) {
+    public void checkEmailDuplicate(String email) {
         if(memberRepository.findByEmail(email).isPresent()) {
             throw new RuntimeException("이미 사용 중인 이메일입니다.");
         }
