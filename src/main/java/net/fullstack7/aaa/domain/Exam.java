@@ -3,10 +3,14 @@ package net.fullstack7.aaa.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.Getter;
+import lombok.*;
 
-@Getter
 @Entity
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Exam {
     @Id
     @Column(name="examId", nullable=false)

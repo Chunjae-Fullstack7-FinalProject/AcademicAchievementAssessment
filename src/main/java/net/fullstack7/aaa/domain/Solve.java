@@ -1,12 +1,17 @@
 package net.fullstack7.aaa.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Solve {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT 설정
@@ -31,7 +36,7 @@ public class Solve {
     @Column(nullable = false)
     private int time; // 문제별 풀이시간
 
-    @Column(name = "regDate", nullable = false)
-    private LocalDateTime regDate; // 저장일
+    @Column(name = "submittedAt", nullable = false)
+    private LocalDateTime submittedAt; // 저장일
 
 }
