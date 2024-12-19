@@ -1,4 +1,4 @@
-package net.fullstack7.aaa.controller;
+package net.fullstack7.aaa.controller.api;
 import lombok.RequiredArgsConstructor;
 import net.fullstack7.aaa.common.annotation.Logging;
 import net.fullstack7.aaa.dto.report.SubmitExamDTO;
@@ -13,7 +13,7 @@ import java.util.Map;
 @RequestMapping("/repost")
 @RequiredArgsConstructor
 @Logging
-public class ReportController {
+public class ReportApiController {
     private final ReportServiceImpl reportService;
 
     @PostMapping("/submit")

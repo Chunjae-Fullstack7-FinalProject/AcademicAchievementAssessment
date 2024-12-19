@@ -6,63 +6,50 @@
   layout:decorate="~{layout/layout.html}"
 >
 <div layout:fragment="main">
-  <div class="con_case">
-    <div class="container">
-      <div class="tabmenu">
-        <ul class="justify_center">
-          <li id="tab1" class="tab_btn">
-            <a
-              href="/main/cbt-exam"
-              class="tlabel1 label"
-            >CBT 대표유형</a
-            >
-          </li>
-          <li id="tab2" class="tab_btn">
-            <a
-              href="/main/cbt-real"
-              class="tlabel2 label"
-            >실전시험</a
-            >
-          </li>
-          <li id="tab3" class="tab_btn hereLi">
-            <a href="/main/report" class="tlabel2 label" style="color: white">Report</a>
-          </li>
-        </ul>
-
-        <div class="tab_con" style="display: block">
-          <div class="cnt_box">
-            <div class="page_tit pb20">
-              <em>CBT 대표 유형 테스트</em>
-            </div>
-            <p class="page_info pb30">
-              아래의 내용을 확인한 후, [시험 시작] 버튼을 클릭하면 시험이
-              시작됩니다.
-            </p>
-
-            <p class="mt30">
-              해당 테스트는 CBT 기능과 문제 유형을 연습하기 위한 목적으로,
-            </p>
-            <p
-              class="mb30"
-              style="color: #ff0000; text-decoration: underline"
-            >
-              정답 확인 및 풀이 결과를 제공하지 않습니다.
-            </p>
-
-            <div class="test_guide flex_end">
-              <ul>꼭-확인하세요.
-                <li><em>동영상, 듣기 내용은 한 번만 들려주는 문항이 있습니다. </em> &nbsp; 잘 청취하도록 유의 바랍니다.</li>
-                <li><em>헤드셋 혹은 이어폰을 착용</em>해 주시기 바랍니다.</li>
-              </ul>
-              <a href="#"
-              ><div class="btn testBtn" id="testBtn">시험 시작</div></a
-              >
-            </div>
-          </div>
-        </div>
-
+  <div class="container">
+    <!-- 시험 참여 정보 -->
+    <div class="exam-info">
+      <h2>시험참여 정보</h2>
+      <div class="info-box">
+        <div class="info-item"><strong>이름</strong> | 김민석</div>
+        <div class="info-item"><strong>학년</strong> | 3학년</div>
+        <div class="info-item"><strong>응시과목</strong> | 국어</div>
+        <div class="info-item"><strong>응시일자</strong> | 2024-12-18</div>
       </div>
     </div>
+
+    <!-- 점수 -->
+    <div class="score-section">
+      <h3>0점 / 100점</h3>
+    </div>
+
+    <!-- 채점 결과 -->
+    <table class="result-table">
+      <thead>
+      <tr>
+        <th>번호</th>
+        <th>채점 결과</th>
+        <th>문제 및 해설 보기</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td><span class="result incorrect">✗</span></td>
+        <td><button class="detail-button">상세 보기</button></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><span class="result incorrect">✗</span></td>
+        <td><button class="detail-button">상세 보기</button></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><span class="result incorrect">✗</span></td>
+        <td><button class="detail-button">상세 보기</button></td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 </html>
