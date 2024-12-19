@@ -56,4 +56,9 @@ public class DummyController {
     public String dummySubmit() {
         return "dummy-templates/dummy_submit";
     }
+
+    @GetMapping("/reportTest")
+    public String repostTest() {
+        return "report/reportTest";
+    }
 }
