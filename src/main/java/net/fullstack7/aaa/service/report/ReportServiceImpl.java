@@ -50,7 +50,7 @@ public class ReportServiceImpl {
 
         for (SubmitExamDTO.AnswerDTO userAnswer : submitExamDTO.getAnswers()) {
             String correctAnswer = answerMap.get(userAnswer.getItemId());
-            boolean isCorrect = correctAnswer != null && correctAnswer.equals(userAnswer.getAnswer());
+            boolean isCorrect = correctAnswer != null && correctAnswer.trim().equals(userAnswer.getAnswer().trim());
 
             Solve existingSolve = solveRepository.findByExamIdAndMember_MemberIdAndItemId(
                     submitExamDTO.getExamId(),

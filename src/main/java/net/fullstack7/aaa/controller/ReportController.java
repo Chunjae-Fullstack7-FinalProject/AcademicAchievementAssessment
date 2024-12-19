@@ -29,6 +29,8 @@ public class ReportController {
         model.addAttribute("result", resultDTO);
         return "report/reportTest";
     }
+
+    
     @GetMapping("/explanation/{itemId}")
     public String explanation(@PathVariable("itemId") Long itemId, Model model) {
         return "report/explanation";
