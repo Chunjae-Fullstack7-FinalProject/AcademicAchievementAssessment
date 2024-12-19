@@ -32,4 +32,8 @@ public class MemberDTO {
     private String schoolLevel;
     private LocalDateTime regDate;
     private LocalDateTime modifyDate;
+
+    public String getSchoolLevel() {
+        return schoolLevel != null ? schoolLevel : "M";
+    }
 }
