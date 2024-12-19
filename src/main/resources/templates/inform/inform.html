@@ -2,16 +2,16 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
-      layout:decorate="~{test/header.html}">
+      layout:decorate="~{layout/layout.html}"
 >
-<div layout:fragment="maincontent">
+<div layout:fragment="main">
 <head>
     <meta charset="UTF-8">
     <title>공지사항</title>
     <link th:href="@{/assets/css/test/inform.css}" rel="stylesheet"/>
 </head>
 
-    <div class="board-container">
+    <div class="board-container" style="margin-top: 60px;">
         <!-- 게시판 테이블 -->
         <table class="board-table">
             <thead>

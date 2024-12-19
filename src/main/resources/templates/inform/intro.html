@@ -2,16 +2,16 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
-      layout:decorate="~{test/header.html}">
+      layout:decorate="~{layout/layout.html}"
 >
-<div layout:fragment="maincontent">
+<div layout:fragment="main">
 <head>
     <meta charset="UTF-8">
     <title>회사 소개</title>
     <link th:href="@{/assets/css/test/intro.css}" rel="stylesheet"/>
 </head>
 
-    <section id="company">
+    <section id="company"  style="margin-top:60px;">
         <h1 class="section-title">회사소개</h1>
 
         <div class="banner">
