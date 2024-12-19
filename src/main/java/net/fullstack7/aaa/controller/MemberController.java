@@ -30,26 +30,32 @@ public class MemberController {
     public String signUp() { return "sign/signUp";}
 
     @PostMapping("/sign-up")
-    public ModelAndView signUp(@ModelAttribute MemberDTO memberDTO, @Valid BindingResult bindingResult) {
+    public ModelAndView signUp(@Valid @ModelAttribute MemberDTO memberDTO, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
+
+        if(bindingResult.hasErrors()) {
+            modelAndView.setViewName("sign/signUp");
+            modelAndView.addObject("bindingResult", bindingResult);
+            return modelAndView;
+        }
 
         try{
             memberService.checkIdDuplicate(memberDTO.getMemberId());
         } catch (RuntimeException e) {
             bindingResult.rejectValue("memberId", "error.memberId", "이미 사용 중인 아이디입니다.");
-            return new ModelAndView("sign/signUp");
+            modelAndView.setViewName("sign/signUp");
+            return modelAndView;
         }
 
         try{
             memberService.checkEmailDuplicate(memberDTO.getEmail());
         } catch (RuntimeException e) {
             bindingResult.rejectValue("email", "error.email", "이미 사용 중인 이메일입니다.");
-            return new ModelAndView("sign/signUp");
+            modelAndView.setViewName("sign/signUp");
+            return modelAndView;
         }
         
-        if(bindingResult.hasErrors()) {
-            return new ModelAndView("sign/signUp");
-        }
+
         try{
             memberService.signUp(memberDTO);
             log.info("회원가입성공"+memberDTO);

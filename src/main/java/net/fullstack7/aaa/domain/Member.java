@@ -3,6 +3,7 @@ package net.fullstack7.aaa.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Table(name = "Member")
 public class Member {
     public Member(String memberId){ this.memberId = memberId; };
     @Id

@@ -17,6 +17,7 @@
             <label for="idSave">아이디 저장</label>
           </div>
           <button type="button" onclick="login();">로그인</button>
+          <button type="button" onclick="window.location.href='/sign/signUp';">회원가입</button>
         </form>
       </div>
     </div>
@@ -28,6 +29,7 @@
     loginForm.method = "post";
     loginForm.submit();
   }
+
 
   document.addEventListener("DOMContentLoaded", function () {
     const userId = getCookie();

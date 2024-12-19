@@ -22,12 +22,12 @@
         <label for="memberId">아이디</label>
         <input type="text" id="memberId" name="memberId" placeholder="아이디를 입력하세요" required>
         <button type="button" id="checkIdButton">중복 확인</button>
+        <!-- 아이디 검증 메시지 -->
+        <div class="success-message hide">사용할 수 있는 아이디입니다</div>
+        <div class="failure-message hide">아이디는 4~12글자이어야 합니다</div>
+        <div class="failure-message2 hide">영어 또는 숫자만 가능합니다</div>
         <div id="idMessage" class="hide"></div>
       </div>
-      <!-- 아이디 검증 메시지 -->
-      <div class="success-message hide">사용할 수 있는 아이디입니다</div>
-      <div class="failure-message hide">아이디는 4~12글자이어야 합니다</div>
-      <div class="failure-message2 hide">영어 또는 숫자만 가능합니다</div>
 
       <div class="form-group">
         <label for="password">비밀번호</label>
@@ -112,6 +112,7 @@
 
 
 
+
   // 비밀번호 유효성 검사
   elInputPassword.addEventListener('input', function () {
     const inputValue = elInputPassword.value;
@@ -152,29 +153,24 @@
   elInputName.addEventListener('input', function (){
     const inputValue = elInputName.value;
 
-    if(inputValue.length !== 0){
-      if(!onlyKorean(inputValue)){
-        elSuccessMessageName.classList.add('hide');
-        elFailureMessageName.classList.add('hide');
-        elFailureMessageTwoName.classList.remove('hide');
+    // 기본적으로 모든 메시지 숨기기
+    elSuccessMessageName.classList.add('hide');
+    elFailureMessageName.classList.add('hide');
+    elFailureMessageTwoName.classList.add('hide');
+
+    // 이름이 비어 있으면 한글만 표시 메시지를 숨김
+    if(inputValue.length !== 0) {
+      if (!onlyKorean(inputValue)) {
+        elFailureMessageTwoName.classList.remove('hide'); // 한글만 입력 가능
+      } else if (!nameLength(inputValue)) {
+        elFailureMessageName.classList.remove('hide'); // 길이가 2~10자가 아니면
+      } else {
+        elSuccessMessageName.classList.remove('hide'); // 유효한 이름
       }
-      else if(!nameLength(inputValue)) {
-        elSuccessMessageName.classList.add('hide');
-        elFailureMessageName.classList.remove('hide');
-        elFailureMessageTwoName.classList.add('hide');
-      }
-      else {
-        elSuccessMessageName.classList.remove('hide');
-        elFailureMessageName.classList.add('hide');
-        elFailureMessageTwoName.classList.add('hide');
-      }
+    } else {
+      elFailureMessageTwoName.classList.remove('hide'); // 이름을 입력해주세요 메시지
     }
-    else{
-      elSuccessMessageName.classList.add('hide');
-      elFailureMessageName.classList.add('hide');
-      elFailureMessageTwoName.classList.remove('hide');
-    }
-  })
+  });
 </script>
 
   <script th:inline="javascript">
@@ -227,6 +223,10 @@
               })
               .catch(error => console.error('Error checking ID:', error));
     });
+    // 값 변경될때마다 중복확인 다시 하기
+    document.getElementById('memberId').addEventListener('input', function (){
+      idChecked = false;
+    });
 
     // 아이디 유효성 검사
     elInputMemberId.addEventListener('input', function () {
@@ -244,19 +244,16 @@
           elSuccessMessage.classList.add('hide');
           elFailureMessage.classList.add('hide');
           elFailureMessageTwo.classList.remove('hide');
-        }
-        else if (!idLength(inputValue)) {
+        } else if (!idLength(inputValue)) {
           elSuccessMessage.classList.add('hide');
           elFailureMessage.classList.remove('hide');
           elFailureMessageTwo.classList.add('hide');
-        }
-        else {
+        } else {
           elSuccessMessage.classList.remove('hide');
           elFailureMessage.classList.add('hide');
           elFailureMessageTwo.classList.add('hide');
         }
-      }
-      else {
+      } else {
         elSuccessMessage.classList.add('hide');
         elFailureMessage.classList.add('hide');
         elFailureMessageTwo.classList.add('hide');
@@ -304,6 +301,11 @@
                 emailMessage.classList.remove('hide');
               })
               .catch(error => console.error('Error checking email:', error));
+    });
+
+    // 값 변경될때마다 중복확인 다시 하기
+    document.getElementById('email').addEventListener('input', function (){
+      emailChecked = false;
     });
 
     document.getElementById('email').addEventListener('input', function () {

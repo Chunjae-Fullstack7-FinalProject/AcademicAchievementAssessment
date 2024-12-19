@@ -22,30 +22,33 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Log4j2
 @Service
+@Transactional
 public class MemberServiceImpl implements MemberServiceIf {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
-
     //회원가입
-    @Transactional
     public void signUp(MemberDTO memberDTO) {
-        checkEmailDuplicate(memberDTO.getEmail());
+        try {
+            checkEmailDuplicate(memberDTO.getEmail());
+            String encodePassword = passwordEncoder.encode(memberDTO.getPassword());
+            Member member = Member.builder()
+                    .memberId(memberDTO.getMemberId())
+                    .password(encodePassword)
+                    .name(memberDTO.getName())
+                    .email(memberDTO.getEmail())
+                    .phone(memberDTO.getPhone())
+                    .schoolLevel(memberDTO.getSchoolLevel())
+                    .regDate(LocalDateTime.now())
+                    .build();
+            Member savedMember = memberRepository.save(member);
+//            log.info("Member saved: {}", savedMember.getMemberId());
 
-        String encodePassword = passwordEncoder.encode(memberDTO.getPassword());
-
-        Member member = Member.builder()
-                .memberId(memberDTO.getMemberId())
-                .password(encodePassword)
-                .name(memberDTO.getName())
-                .email(memberDTO.getEmail())
-                .phone(memberDTO.getPhone())
-                .schoolLevel(memberDTO.getSchoolLevel())
-                .regDate(LocalDateTime.now())
-                .modifyDate(LocalDateTime.now())
-                .build();
-        memberRepository.save(member);
+        } catch (Exception e) {
+//            log.error("Error during signup: ", e);
+            throw e;
+        }
     }
 
     // 아이디 중복 체크

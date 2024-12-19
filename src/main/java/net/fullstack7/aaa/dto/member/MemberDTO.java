@@ -19,9 +19,10 @@ public class MemberDTO {
     @Pattern(regexp = "^[a-z0-9]+$", message = "회원 ID는 영어 소문자와 숫자만 포함할 수 있습니다.")
     private String memberId;
     @NotBlank(message = "비밀번호를 입력해주세요.")
-    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,20}$", message = "비밀번호는 영어, 숫자, 특수문자를 포함해야 하며, 10~20자여야 합니다.")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,20}$", message = "비밀번호는 영어, 숫자, 특수문자를 포함해야 하며, 8~20자여야 합니다.")
     private String password;
     @NotBlank(message = "이름을 입력해주세요.")
+    @Pattern(regexp = "^[가-힣]{2,10}$", message = "2~10글자 이내의 한글만 입력해주세요.")
     private String name;
     @NotBlank(message = "이메일을 입력해주세요.")
     @Email(message = "유효한 이메일 형식이 아닙니다.")
