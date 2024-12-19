@@ -1,0 +1,67 @@
+/* General styling for the login wrapper */
+.login-wrap {
+    width: 100%;
+    max-width: 400px; /* Adjust width for responsiveness */
+    margin: 200px auto; /* Center the login form */
+    padding: 20px;
+    border: 1px solid #ddd; /* Light border for distinction */
+    border-radius: 10px;
+    background-color: #f9f9f9; /* Light background color */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center;
+}
+
+/* Heading styling */
+.login-wrap h1 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Input fields */
+.input-box input.line {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #fff;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.input-box input.line:focus {
+    border-color: #0f74bc; /* Highlight color for focus */
+}
+
+/* Checkbox section */
+.input-box .check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.input-box .check input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Login button */
+.input-box button {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #248dda;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.input-box button:hover {
+    background-color: #075891; /* Slightly darker green for hover effect */
+}
