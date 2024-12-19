@@ -26,4 +26,9 @@ public class MainController {
   public String report() {
     return "report/report";
   }
+
+  @GetMapping("/main")
+  public String main() {
+    return "main/main";
+  }
 }

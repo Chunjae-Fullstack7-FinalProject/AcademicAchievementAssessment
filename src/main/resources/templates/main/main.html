@@ -1,9 +1,161 @@
 <!DOCTYPE html>
 <html
-  lang="ko"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{layout/layout.html}"
+        lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout.html}"
 >
-<div layout:fragment="main">Report</div>
+<div layout:fragment="main">
+    <head>
+
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+        <script src="https://kit.fontawesome.com/266dd736a0.js" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+        <script src="https://kit.fontawesome.com/266dd736a0.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <style>
+            .swiper-button-next:after, .swiper-button-prev:after {
+                font-family: swiper-icons;
+                text-transform: none !important;
+                letter-spacing: 0;
+                font-variant: initial;
+                line-height: 1;
+            }
+            .swiper-button-next:after, .swiper-button-prev:after {
+                font-size: 18px;
+                font-weight: 900;
+            }
+            .swiper-button-next, .swiper-button-prev {
+                position: absolute;
+                top: var(--swiper-navigation-top-offset, 50%);
+                width: calc(var(--swiper-navigation-size) / 44* 27);
+                height: var(--swiper-navigation-size);
+                margin-top: calc(0px -(var(--swiper-navigation-size) / 2));
+                z-index: 10;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <div class="tab-wrap">
+        <!-- S: 로그인 후 노출되는 타이틀 주석-->
+        <!--<ul class="tab-btn">
+                          <li class="on">
+                              <a href="#">초등</a>
+                          </li>
+                      </ul>-->
+        <!-- E: 로그인 후 노출되는 타이틀 주석 -->
+        <section class="banner">
+            <div class="main-banner" id="mainBanner" style="height: 500px; width: 100%; margin-top: 40px;">
+                <img th:src="@{/assets/img/test/mainbanner1.png}" class="active" style="min-height: 500px;width: 100%;" />
+                <img th:src="@{/assets/img/test/mainbanner3.png}" style="min-height: 500px;width: 100%;" />
+                <div class="banner-dots" id="bannerDots"></div>
+                <!-- 이전 버튼 -->
+                <button id="prevBtn" class="banner-btn prev-btn" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); z-index: 10; color: white">
+                    ◀
+                </button>
+                <!-- 다음 버튼 -->
+                <button id="nextBtn" class="banner-btn next-btn" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 10;color: white">
+                    ▶
+                </button>
+            </div>
+            <script th:src="@{/assets/js/test/banner.js}"></script>
+        </section>
+
+        <div class="footer" style="margin-top: 20px;">
+            <div class="notice-list">
+                <div class="inner">
+            <span class="tit" style="font-size: 20px;">
+                <em style="margin-left: 35px;">NOTICE</em>
+            </span>
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="tit">
+                                    <em class="cate2">오픈</em>
+                                    <span class="txt">국가수준 학업성취도 평가 대비 시스템 공지사항 입니다.</span>
+                                </div>
+                                <span class="date">2022.08.10</span>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="tit">
+                                    <em class="cate2">오픈</em>
+                                    <span class="txt">국가수준 학업성취도 평가 대비 시스템 공지사항 입니다.</span>
+                                </div>
+                                <span class="date">2022.08.11</span>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="tit">
+                                    <em class="cate2">오픈</em>
+                                    <span class="txt">국가수준 학업성취도 평가 대비 시스템 공지사항 입니다.</span>
+                                </div>
+                                <span class="date">2022.08.12</span>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div><script th:src="@{/assets/js/main/main.js}"></script></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-cnt on">
+            <ul class="cnt-list">
+                <!--S: 220808 CBT 스타일 추가 -->
+                <li class="cbt-box">
+                    <a href="/main/cbt-exam">
+                        <span class="tit">CBT기능/유형 연습</span>
+                        <span class="txt"
+                        >실제 평가 시스템과<br />100% 동일한 화면으로<br />기능/ 유형
+                연습</span
+                        >
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/main/cbt-real">
+                        <span class="tit">실전시험</span>
+                        <span class="txt"
+                        >기출문제를 CBT로<br />재구성한 문제로<br />실전 모의고사
+                응시</span
+                        >
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/main/report">
+                        <span class="tit">시험결과 REPORT</span>
+                        <span class="txt"
+                        >나의 성취도 파악과<br />취약점 분석,<br />시험 대비 학습
+              </span>
+                    </a>
+                </li>
+            </ul>
+            <p class="quide_txt">
+                ※ CBT 연습 일부 문항은 한국교육과정평가원의 문항을 사용하였으며, 각
+                문항별 출처표기를 하였습니다.
+            </p>
+        </div>
+    </div>
+    <!-- footer -->
+    <div class="footer">
+      <span
+              class="service_center"
+              style="
+          display: block;
+          color: #8f8f8f;
+          font-size: 14px;
+          text-align: center;
+        "
+      >고객센터 1577-0902 (평일 09:00 ~ 17:30)</span
+      >
+        <span class="copyright"
+        >COPYRIGHT© 2022 BY CHUNJAE CO.LTD ALL RIGHTS RESERVED.</span
+        >
+    </div>
+    <!-- footer -->
+</div>
 </html>

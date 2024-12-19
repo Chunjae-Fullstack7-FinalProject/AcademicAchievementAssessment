@@ -70,9 +70,9 @@
     }
     /*#main {padding-bottom: 40px; }*/
   </style>
-    <!--    <link th:href="@{/assets/css/test/header.css}" rel="stylesheet"/>-->
+        <link th:href="@{/assets/css/test/header.css}" rel="stylesheet"/>
   </head>
-  <nav class="menu">
+  <nav class="menu" id="main">
     <div class="container">
       <ul class="justify_start" style="gap: 15px; padding-top: 12px">
         <li>
@@ -106,30 +106,67 @@
     </div>
   </nav>
   <div class="container">
-    <div class="top">
-      <div class="justify_between">
-        <div class="site_tit" onclick="gotoMain();" style="cursor: pointer">
-          온라인 학업성취도 평가
-        </div>
 
-        <ul class="justify_between user_info">
-          <li th:if="${accessToken != null}">
-            <a href="#none" th:text="${name}"></a>
-          </li>
-          <li th:if="${accessToken != null}" class="ml25">
-            <a href="/user/logout" class="btn logoutBtn">로그아웃</a>
-          </li>
-          <li th:if="${accessToken == null}" class="ml10">
-            <a
-              href="/user/login"
-              class="btn logoutBtn"
-              style="background: #2f538c"
-              >로그인</a
-            >
-          </li>
-        </ul>
+    <header class="header">
+      <div th:replace="test/up :: up"></div>
+      <div class="logo">
+        <a href="/main/main"><img th:src="@{/assets/img/test/logo3.png}" alt="로고" ></a>
       </div>
-    </div>
+      <nav class="navbar">
+        <ul class="menu-list">
+          <div class="menu-icon dropdown">
+            <a href="/inform/list">과목별 시험 조회</a>
+          </div>
+          <div class="menu-icon dropdown">
+            <a href="#">시험 풀이 방법</a>
+          </div>
+          <div class="menu-icon dropdown">
+            <a href="/inform/intro">회사 소개</a>
+            <!--                        <ul class="dropdown-menu">-->
+            <!--                            <li><a href="/main/footer/business">사업 공고</a></li>-->
+            <!--                            <li><a href="/main/notice/list">공지 사항</a></li>-->
+            <!--                        </ul>-->
+          </div>
+          <div class="menu-icon dropdown">
+            <a href="/inform/inform">공지 사항</a>
+          </div>
+        </ul>
+      </nav>
+      <div th:if="${session.memberDTO != null}" class="user-actions">
+        <a href="/login/login" id="loginBtn">로그인</a>
+        <a href="/login/memberchose" id="registBtn">회원가입</a>
+      </div>
+      <div th:if="${session.memberDTO == null}" class="user-actions">
+        <nav class="navbar">
+          <ul class="menu-list">
+            <a href="/mypage/myclass" style="color: black;margin-right: -15px;margin-top: 20px;">000님</a>
+            <div class="menu-icon dropdown">
+              <a class="dropdown-btn1"><img th:src="@{/assets/img/test/man.png}" style="width:65px;margin-left: -13px;margin-top: -10px;"></a>
+              <ul class="dropdown-menu" style="width: 230px; height: 280px;">
+                <img th:src="@{/assets/img/test/man.png}" style="width:70px; ">
+                <hr>
+                <li><a href="#"><img
+                        th:src="@{/assets/img/test/a3.png}"
+                        style="width: 30px; margin-right: 4px; "/> 내 시험</a>
+                </li>
+                <li><a href="#"><img
+                        th:src="@{/assets/img/test/a2.png}"
+                        style="width: 30px; margin-right: 4px; "/>REPORT</a>
+                </li>
+                <li><a href="#"><img
+                        th:src="@{/assets/img/test/a1.png}"
+                        style="width: 30px; margin-right: 4px;"/> 개인정보관리</a></li>
+                <hr>
+                <li><a href="#"><img
+                        th:src="@{/assets/img/test/logout.png}"
+                        style="width: 26px; margin-right: 4px; margin-bottom: 4px;"/> 로그아웃</a></li>
+              </ul>
+            </div>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
   </div>
   <script>
     function gotoMain(){
