@@ -1,4 +1,4 @@
-package net.fullstack7.aaa.dto.examReqRes;
+package net.fullstack7.aaa.dto.exam;
 
 import java.util.List;
 import lombok.Data;

@@ -3,7 +3,7 @@ package net.fullstack7.aaa.service.exam;
 import lombok.RequiredArgsConstructor;
 import net.fullstack7.aaa.domain.Exam;
 import net.fullstack7.aaa.domain.Item;
-import net.fullstack7.aaa.dto.examReqRes.ExamRequestDTO;
+import net.fullstack7.aaa.dto.exam.ExamRequestDTO;
 import net.fullstack7.aaa.repository.ExamRepository;
 import net.fullstack7.aaa.repository.ItemRepository;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ExamService {
+public class ExamServiceImpl implements ExamServiceIf {
     private final ExamRepository examRepository;
     private final ItemRepository itemRepository;
 
+    @Override
     @Transactional
     public void saveExamAndItems(ExamRequestDTO request) {
         Exam exam = Exam.builder()
