@@ -16,8 +16,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import jakarta.servlet.http.HttpServletRequest;
 import net.fullstack7.aaa.common.annotation.Logging;
 import net.fullstack7.aaa.common.util.ApiResponseUtil;
-import net.fullstack7.aaa.dto.exam.ItemListResponse;
-import net.fullstack7.aaa.dto.exam.ItemInfo;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpHeaders;
@@ -33,7 +31,7 @@ public class DummyApiController {
     // 시험지 더미데이터
     public static Integer[] itemIdList = { 966536, 1588525, 1588526, 1589103, 1589104 };
     
-    
+
     @GetMapping("/items")
     @Logging(message = "문제 아이디 리스트 조회 API")
     public ApiResponseUtil<?> dummy1() {

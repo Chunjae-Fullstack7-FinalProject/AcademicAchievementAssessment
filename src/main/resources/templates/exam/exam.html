@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문제 페이지</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link th:href="@{/assets/css/test/paper.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/test/reset.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/test/exam.css}" rel="stylesheet" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.0.0-alpha1.js"></script> -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+    <script th:src="@{/assets/js/apiBaseUrl.js}"></script>
+    <!-- MathJax 라이브러리 -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+    <script th:src="@{/assets/js/mathjax-config.js}"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="header">
+            <div class="logo">logo</div>
+            <div class="top-area">
+                <!-- s: 220711 추가 -->
+                <div class="btn-wrap">
+                    <!-- <button type="button" class="pop-btn">메모장</button>
+            <button type="button" class="drawing-btn" id="drawing_btn">그리기</button>
+            <button type="button" class="clear-btn">지우기</button> -->
+                </div>
+                <!-- e: 220711 추가 -->
+                <div class="time-box">
+                    <span class="txt">남은<br>시간</span>
+                    <span class="time-txt">00:00</span>
+                </div>
+                <a href="javascript:;" class="btn-submit">최종제출</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="viewer-omr">
+                <!-- <div class="swiper-pagination"></div> -->
+
+                <div class="container1">
+                    <div class="btn-wrap"
+                        style="display: flex; justify-content: center; align-items: center; height: 50px;">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                    <!-- Results Table -->
+                    <div class="results">
+                        <h2 style="margin-top: 25px;">문제 정답 정오표</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>문제</th>
+                                    <th>답</th>
+                                </tr>
+                            </thead>
+                            <tbody id="results-body">
+                                <!-- 결과 테이블 내용 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="viewer-paper">
+                <div class="head">
+                    <span class="txt">[[${ itemList.examName }]]</span>
+                    <i class="enterFullscreenBtn" style="align-items: center; justify-content: center;left: 50%; ">
+                        <img th:src="@{/assets/upload/fullscreen.png}" alt="전체보기">
+                    </i>
+
+                </div>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer"></div>
+    </div>
+    <data th:data-item-id-list="${itemList.itemIdList}" style="display: none;"/>
+    <script th:inline="javascript">
+        window.examData = {
+            itemIdList: [[${ itemList.itemIdList }]]
+        };
+    </script>
+    <script th:src="@{/assets/js/test/exam.js}"></script>
+</body>
+
+</html>
