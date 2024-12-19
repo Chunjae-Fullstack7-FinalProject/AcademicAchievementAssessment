@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout.html}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 페이지 로그인</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/assets/css/common/reset.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/common/style.css}" />
+</head>
+<body class="h100">
+<div class="wrap" layout:fragment="main">
+    <div class="login-wrap">
+        <h1>로그인</h1>
+        <div class="input-box">
+            <input type="text" id="id" class="line" placeholder="아이디를 입력하세요">
+            <input type="password" id="password" class="line" placeholder="비밀번호를 입력하세요">
+            <div class="check">
+                <input type="checkbox" id="idSave">
+                <label for="idSave">아이디 저장</label>
+            </div>
+            <button type="button">로그인</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
