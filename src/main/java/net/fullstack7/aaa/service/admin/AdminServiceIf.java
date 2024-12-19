@@ -10,5 +10,7 @@ public interface AdminServiceIf {
 
     String login(AdminLoginDTO adminLoginDTO);
 
+    String modifyNotice(NoticeDTO dto);
+    String deleteNotice(int noticeId, String adminId);
     String insertNotice(NoticeDTO dto);
 }

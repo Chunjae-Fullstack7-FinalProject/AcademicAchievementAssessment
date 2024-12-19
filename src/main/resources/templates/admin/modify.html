@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout">
+<style>
+    /* 부모 컨테이너 스타일 */
+    .button-container {
+        text-align: right; /* 오른쪽 정렬 */
+        margin-top: 20px; /* 위쪽 여백 */
+    }
+
+    /* 버튼 스타일 */
+    .informModify, .informDelete {
+        display: inline-block;
+        padding: 10px 15px;
+        margin: 5px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .informModify {
+        background-color: rgba(66, 66, 66, 0.52); /* 수정 버튼 색상 */
+    }
+
+
+    .informDelete {
+        background-color: rgba(66, 66, 66, 0.52); /* 삭제 버튼 색상 */
+    }
+
+
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/assets/css/common/reset.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/admin/common.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/admin/main.css}" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+    <script th:src="@{/assets/js/admin/common.js}"></script>
+    <title>공지사항 상세 보기</title>
+</head>
+<body>
+<div class="wrap">
+
+    <div class="list-wrap">
+        <ul class="list-tab">
+            <li class="active">
+                <a th:href="@{/admin/main}">공지사항 관리</a>
+            </li>
+            <li>
+                <a th:href="@{/admin/main}">회원 관리</a>
+            </li>
+        </ul>
+    </div>
+    <!-- s: 공지사항 속성 팝업 -->
+    <div>
+        <div class="pop-header">
+            <h1 style="margin-bottom: 30px; font-size: 20px;">공지사항 상세 보기</h1>
+        </div>
+
+            <div class="cnt-wrap">
+                <div class="property type02">
+                    <table>
+                        <tr>
+                            <th>제목</th>
+                            <td>
+                                <input type="text" th:value="${item.title}">
+                            </td>
+                        </tr>
+                        <tr style="height: 300px;">
+                            <th>내용</th>
+                            <td th:text="${item.content}">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>작성일</th>
+                            <td th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd HH:mm:ss')}">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="button-container">
+                    <a class="informModify" th:href="@{/admin/main}">목록 으로</a>
+                    <a class="informModify" th:href="@{/admin/main}">게시물 수정</a>
+                    <a class="informDelete">게시물 삭제</a>
+                </div>
+
+            </div>
+
+    </div>
+    <!-- e: 공지사항 속성 팝업 -->
+
+</div>
+</body>
+</html>

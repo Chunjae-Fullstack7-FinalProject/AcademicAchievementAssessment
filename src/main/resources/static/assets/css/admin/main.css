@@ -111,10 +111,10 @@ table input[type="checkbox"] {
 
 .table-top .btn-wrap a {
     margin-left: 10px;
-    color: #45a5ed;
+    color: rgba(0, 0, 0, 0.66);
     text-decoration: none;
     padding: 8px 15px;
-    border: 1px solid #4ea7e8;
+    border: 1px solid #000000;
     border-radius: 5px;
     transition: all 0.3s ease;
 }

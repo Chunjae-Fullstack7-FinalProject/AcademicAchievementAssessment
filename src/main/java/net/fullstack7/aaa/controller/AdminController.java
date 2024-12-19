@@ -86,6 +86,29 @@ public class AdminController {
     public String noticeViewGet(Model model, @PathVariable String noticeId, RedirectAttributes redirectAttributes) {
         if (noticeId == null || noticeId.equals("0") || !noticeId.matches("^\\d+$")) {
             redirectAttributes.addFlashAttribute("errors", "조회할 수 없는 게시글입니다.");
+
+            return "redirect:/admin/main";
+        }
+
+        int id = Integer.parseInt(noticeId);
+
+        Notice view = noticeService.view(id);
+
+        if (view == null) {
+            redirectAttributes.addFlashAttribute("errors", "조회할 수 없는 게시글입니다.");
+            return "redirect:/admin/main";
+        }
+
+        model.addAttribute("item", view);
+        log.info(view);
+
+        return "admin/view";
+    }
+
+    @GetMapping("/modify/{noticeId}")
+    public String noticeModifyGet(Model model, @PathVariable String noticeId, RedirectAttributes redirectAttributes) {
+        if (noticeId == null || noticeId.equals("0") || !noticeId.matches("^\\d+$")) {
+            redirectAttributes.addFlashAttribute("errors", "조회할 수 없는 게시글입니다.");
             return "redirect:/admin/main";
         }
 
@@ -100,8 +123,31 @@ public class AdminController {
 
         model.addAttribute("item", view);
 
-        return "admin/main";
+        return "admin/modify";
     }
 
+    @PostMapping("/modify/{noticeId}")
+    public String noticeModifyPost(@Valid NoticeDTO noticeDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes
+            , @PathVariable String noticeId
+            , HttpSession session) {
+        if (noticeId == null || noticeId.equals("0") || !noticeId.matches("^\\d+$")) {
+            redirectAttributes.addFlashAttribute("errors", "조회할 수 없는 게시글입니다.");
+            return "redirect:/admin/main";
+        }
+        if (bindingResult.hasErrors()) {
+            String message = bindingResult.getAllErrors().get(0).getDefaultMessage();
+            if(message != null && message.startsWith("Failed")) {
+                message = "필드 값 오류";
+            }
+            redirectAttributes.addFlashAttribute("errors", message);
+
+            return "redirect:/admin/modify/"+noticeId;
+        }
+        noticeDTO.setAdminId((String) session.getAttribute("loginAdminId"));
+
+        adminService.modifyNotice(noticeDTO);
+
+        return "redirect:/admin/main";
+    }
 
 }

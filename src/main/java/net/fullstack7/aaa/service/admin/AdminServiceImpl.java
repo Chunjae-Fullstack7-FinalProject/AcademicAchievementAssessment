@@ -56,4 +56,31 @@ public class AdminServiceImpl implements AdminServiceIf {
         return null;
     }
 
+    @Override
+    public String modifyNotice(NoticeDTO dto) {
+        if(noticeRepository.findById(dto.getNoticeId()).orElse(null) == null) {
+            return "존재하지 않는 게시글입니다.";
+        }
+        if(!adminRepository.existsById(dto.getAdminId())) {
+            return "관리자 권한 계정만 수정 가능합니다.";
+        }
+        if(noticeRepository.updateNotice(dto.getNoticeId(), dto.getTitle(), dto.getContent(), dto.getImportance()) > 0) {
+            return "수정 완료";
+        }
+        return "수정 실패. 다시 시도해주세요.";
+    }
+
+    @Override
+    public String deleteNotice(int noticeId, String adminId) {
+        if(!adminRepository.existsById(adminId))
+            return "관리자 권한 계정만 삭제 가능합니다.";
+
+        Notice notice = noticeRepository.findById(noticeId).orElse(null);
+        if(notice != null) {
+            noticeRepository.delete(notice);
+            return "삭제 완료";
+        }
+        return "존재하지 않는 게시글입니다.";
+    }
+
 }

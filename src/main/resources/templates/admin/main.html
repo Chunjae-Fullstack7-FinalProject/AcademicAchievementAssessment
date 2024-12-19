@@ -52,12 +52,10 @@
                     <div class="btn-wrap">
 <!--                        <a href="javascript:;" class="pop-open" data-name="pop-paper">시험지 등록</a>-->
                         <a href="javascript:;" class="pop-open" data-name="pop-template">공지사항 등록</a>
-                        <a href="javascript:;" class="pop-open" data-name="pop-delete">삭제</a>
                     </div>
                 </div>
                 <table>
                     <colgroup>
-                        <col width="3%">
                         <col width="3%">
                         <col width="30%">
                         <col width="20%">
@@ -65,35 +63,24 @@
                     </colgroup>
                     <thead>
                     <tr>
-                        <th>
-                            <input type="checkbox" name="chk_all" id="chk_all" >
-                        </th>
                         <th>번호</th>
                         <th>제목</th>
                         <th>작성자</th>
                         <th>등록일</th>
-                        <th>속성/편집</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     <tr th:each="item, status:${pageinfo}">
-                        <td>
-                            <input type="checkbox" name="chk01" id="chk01">
-                        </td>
                         <td th:text="${item.noticeId}"></td>
                         <td>
                             <a style="background-color: white" th:text="${item.title}" th:href="@{/admin/view/{noticeId}(noticeId=${item.noticeId})}"></a>
                         </td>
                         <td th:text="${item.adminName}"></td>
                         <td th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                        <td>
-                            <a href="javascript:;" class="pop-open" data-name="pop-property">속성</a>
-                            <a href="javascript:;">편집</a>
-                        </td>
                     </tr>
                     <tr th:if="${pageinfo.isEmpty()}">
-                        <td colspan="6">검색 결과가 없습니다.</td>
+                        <td colspan="5">검색 결과가 없습니다.</td>
                     </tr>
                     <tr>
 <!--                        <td colspan="6">-->
