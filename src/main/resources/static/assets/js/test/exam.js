@@ -9,22 +9,12 @@ function renderQuestions(questions) {
 function createQuestionSlide(question) {
     const slide = document.createElement('div');
     slide.className = 'swiper-slide';
-    /*
-    if (questionFormCode >= '10' && questionFormCode <= '50') {
-        return '객관식';
-    } else if (questionFormCode >= '60' && questionFormCode <= '99') {
-        return '주관식';
-    } else {
-        return ''; // 다른 형식이 있다면 여기에 추가
-    }
-     */
     // 문제 유형에 따라 다른 템플릿 적용
     if (question.questionFormCode >= '10' && question.questionFormCode <= '50') { // 5지선다
         slide.innerHTML = createMultipleChoiceTemplate(question);
     } else if (question.questionFormCode >= '60' && question.questionFormCode <= '99') { // 단답형
         slide.innerHTML = createShortAnswerTemplate(question);
     }
-    
     return slide;
 }
 
@@ -91,15 +81,14 @@ function createChoices(question) {
     ].filter(choice => choice);
 
     return choices.map((choice, index) => `
-        <li onclick="console.log('li clicked');">
+        <li>
             <input type="radio" 
                    id="answer_radio${question.itemNo}_${index + 1}" 
+                   data-item-id="${question.itemId}"
                    name="q${question.itemNo}" 
                    value="${index + 1}"
-                   onclick="console.log('radio clicked', this.name, this.value);"
                    >
-            <label for="answer_radio${question.itemNo}_${index + 1}" 
-                   onclick="console.log('label clicked for:', '${question.itemNo}_${index + 1}');">
+            <label for="answer_radio${question.itemNo}_${index + 1}">
                 ${index + 1}
             </label>
             <span class="txt question">${choice}</span>
@@ -139,7 +128,21 @@ function renderOMRTable(questions) {
 function initializeAnswerTracking() {
     const results = {};
     
-    // 객관식 답안 선택 이벤트
+    document.addEventListener('click', function(e) {
+        const li = e.target.closest('.answer-input-type.radio li');
+        if (li) {
+            const radio = li.querySelector('input[type="radio"]');
+            if (radio) {
+                radio.checked = true;
+                const questionNumber = radio.name.substring(1);
+                const selectedAnswer = radio.value;
+                const itemId = radio.getAttribute('data-item-id');
+                // console.log('Selected:', {questionNumber, selectedAnswer, itemId});
+                updateAnswer(questionNumber, selectedAnswer, itemId);
+            }
+        }
+    });
+
     document.addEventListener('change', function(e) {
         if (e.target.type === 'radio' && e.target.name.startsWith('q')) {
             const questionNumber = e.target.name.substring(1);
@@ -148,7 +151,6 @@ function initializeAnswerTracking() {
         }
     });
 
-    // 단답형 답안 입력 이벤트
     document.addEventListener('input', function(e) {
         if (e.target.classList.contains('input_question_text_box')) {
             const questionNumber = e.target.closest('.swiper-slide').querySelector('.num').textContent;
@@ -157,24 +159,26 @@ function initializeAnswerTracking() {
         }
     });
 
-    function updateAnswer(questionNumber, answer) {
-        results[questionNumber] = answer;
+    function updateAnswer(questionNumber, answer, itemId) {
+        // console.log('Updating answer:', {questionNumber, answer, itemId});
+        results[questionNumber] = {
+            itemId: Number(itemId),
+            answer: answer
+        };
         const resultCell = document.getElementById(`result-q${questionNumber}`);
         if (resultCell) {
             resultCell.textContent = answer;
         }
     }
 
-    // 제출 버튼 이벤트
     const submitButton = document.querySelector('.btn-submit');
     submitButton?.addEventListener('click', function() {
-        const finalAnswers = Object.entries(results).map(([questionNo, answer]) => ({
-            itemNo: parseInt(questionNo),
-            userAnswer: answer
+        // console.log('Raw results:', results);
+        const finalAnswers = Object.entries(results).map(([questionNo, data]) => ({
+            itemId: Number(data.itemId),
+            userAnswer: data.answer
         }));
-        
         console.log('제출할 답안:', finalAnswers);
-        // TODO: API 호출로 답안 제출
     });
 }
 
@@ -199,7 +203,7 @@ function initializeSwiper() {
 
 function moveToQuestion(index) {
     if (swiper) {
-        console.log(index-1);
+        // console.log(index-1);
         swiper.slideTo(index-1);
     }
 }
@@ -236,6 +240,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     if (typeof MathJax !== 'undefined') {
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        console.log('MathJax rendered');
+        // console.log('MathJax rendered');
     }
 });
