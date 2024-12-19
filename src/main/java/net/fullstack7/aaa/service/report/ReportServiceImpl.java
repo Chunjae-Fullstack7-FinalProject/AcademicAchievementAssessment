@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Logging
+@Logging(message = "ReportService ㅁㄴㅇㄻㄴㅇㄹ")
 @Log4j2
 public class ReportServiceImpl {
 
