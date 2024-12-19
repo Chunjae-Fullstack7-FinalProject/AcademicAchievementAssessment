@@ -13,7 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-@Logging
+
+import java.util.HashMap;
+import java.util.Map;
+
+//@Logging
 @Controller
 @Log4j2
 @RequestMapping("/sign")
@@ -28,6 +32,21 @@ public class MemberController {
     @PostMapping("/sign-up")
     public ModelAndView signUp(@ModelAttribute MemberDTO memberDTO, @Valid BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
+
+        try{
+            memberService.checkIdDuplicate(memberDTO.getMemberId());
+        } catch (RuntimeException e) {
+            bindingResult.rejectValue("memberId", "error.memberId", "이미 사용 중인 아이디입니다.");
+            return new ModelAndView("sign/signUp");
+        }
+
+        try{
+            memberService.checkEmailDuplicate(memberDTO.getEmail());
+        } catch (RuntimeException e) {
+            bindingResult.rejectValue("email", "error.email", "이미 사용 중인 이메일입니다.");
+            return new ModelAndView("sign/signUp");
+        }
+        
         if(bindingResult.hasErrors()) {
             return new ModelAndView("sign/signUp");
         }
@@ -57,4 +76,35 @@ public class MemberController {
             return ResponseEntity.badRequest().body("로그인 실패: "+e.getMessage());
         }
     }
+
+    // 아이디 중복 체크
+    @PostMapping("/check-id")
+    @ResponseBody
+    public ResponseEntity<Map<String, Boolean>> checkId(@RequestBody Map<String, String> request){
+        String memberId = request.get("memberId");
+        Map<String, Boolean> response = new HashMap<>();
+        try{
+            memberService.checkIdDuplicate(memberId);
+            response.put("isAvailable", true);
+        } catch (RuntimeException e){
+            response.put("isAvailable", false);
+        }
+        return ResponseEntity.ok(response);
+    }
+
+    // 이메일 중복 체크
+    @PostMapping("/check-email")
+    @ResponseBody
+    public ResponseEntity<Map<String, Boolean>> checkEmail(@RequestBody Map<String, String> request){
+        String email = request.get("email");
+        Map<String, Boolean> response = new HashMap<>();
+        try{
+            memberService.checkEmailDuplicate(email);
+            response.put("isAvailable", true);
+        } catch (RuntimeException e){
+            response.put("isAvailable", false);
+        }
+        return ResponseEntity.ok(response);
+    }
+
 }
