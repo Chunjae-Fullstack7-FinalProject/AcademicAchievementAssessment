@@ -5,64 +5,943 @@
   xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{layout/layout.html}"
 >
-<div layout:fragment="main">
-  <div class="con_case">
-    <div class="container">
-      <div class="tabmenu">
-        <ul class="justify_center">
-          <li id="tab1" class="tab_btn">
-            <a
-              href="/main/cbt-exam"
-              class="tlabel1 label"
-            >CBT 대표유형</a
-            >
-          </li>
-          <li id="tab2" class="tab_btn">
-            <a
-              href="/main/cbt-real"
-              class="tlabel2 label"
-            >실전시험</a
-            >
-          </li>
-          <li id="tab3" class="tab_btn hereLi">
-            <a href="/main/report" class="tlabel2 label" style="color: white">Report</a>
-          </li>
-        </ul>
-
-        <div class="tab_con" style="display: block">
-          <div class="cnt_box">
-            <div class="page_tit pb20">
-              <em>CBT 대표 유형 테스트</em>
-            </div>
-            <p class="page_info pb30">
-              아래의 내용을 확인한 후, [시험 시작] 버튼을 클릭하면 시험이
-              시작됩니다.
-            </p>
-
-            <p class="mt30">
-              해당 테스트는 CBT 기능과 문제 유형을 연습하기 위한 목적으로,
-            </p>
-            <p
-              class="mb30"
-              style="color: #ff0000; text-decoration: underline"
-            >
-              정답 확인 및 풀이 결과를 제공하지 않습니다.
-            </p>
-
-            <div class="test_guide flex_end">
-              <ul>꼭-확인하세요.
-                <li><em>동영상, 듣기 내용은 한 번만 들려주는 문항이 있습니다. </em> &nbsp; 잘 청취하도록 유의 바랍니다.</li>
-                <li><em>헤드셋 혹은 이어폰을 착용</em>해 주시기 바랍니다.</li>
-              </ul>
-              <a href="#"
-              ><div class="btn testBtn" id="testBtn">시험 시작</div></a
+  <div layout:fragment="main">
+    <div class="con_case">
+      <div class="container">
+        <div class="tabmenu">
+          <ul class="justify_center">
+            <li id="tab1" class="tab_btn">
+              <a href="/main/cbt-exam" class="tlabel1 label">CBT 대표유형</a>
+            </li>
+            <li id="tab2" class="tab_btn">
+              <a href="/main/cbt-real" class="tlabel2 label">실전시험</a>
+            </li>
+            <li id="tab3" class="tab_btn hereLi">
+              <a href="/main/report" class="tlabel2 label" style="color: white"
+                >Report</a
               >
+            </li>
+          </ul>
+
+          <div class="tab_con" style="display: block">
+            <div class="tabmenu2 mt40">
+              <ul class="justify_center">
+                <li class="tab_btn2">
+                  <input
+                    type="radio"
+                    checked
+                    name="tabmenu_report"
+                    id="tmenu_r1"
+                    class="tab"
+                  />
+                  <label class="rlabel1 label" for="tmenu_r1"
+                    >기본 리포트</label
+                  >
+                  <div class="tab_con pt20 pb100">
+                    <div class="box_wrap" id="studnet_info">
+                      <div class="box_tit">
+                        <i class="fa-regular fa-pen-to-square"></i>시험참여 정보
+                      </div>
+                      <div class="box box1" style="padding: 50px 70px">
+                        <input
+                          type="hidden"
+                          id="nickname"
+                          value="${nickname}"
+                        />
+                        <ul style="padding-bottom: 20px">
+                          <i
+                            class="fa-solid fa-rectangle-vertical"
+                            style="
+                              width: 10px;
+                              border-radius: 0;
+                              vertical-align: middle;
+                            "
+                          ></i
+                          >이름&nbsp&nbsp&nbsp&nbsp
+                          <li>${nickname}</li>
+                        </ul>
+                        <ul style="padding-bottom: 20px">
+                          <i
+                            class="fa-solid fa-rectangle-vertical"
+                            style="
+                              width: 10px;
+                              border-radius: 0;
+                              vertical-align: middle;
+                            "
+                          ></i
+                          >학년&nbsp&nbsp&nbsp&nbsp
+                          <li>
+                            <c:choose>
+                              <c:when test="${schoolLevel eq 'SL01'}"
+                                >6학년</c:when
+                              >
+                              <c:when test="${schoolLevel eq 'SL02'}"
+                                >3학년</c:when
+                              >
+                              <c:otherwise>2학년</c:otherwise>
+                            </c:choose>
+                          </li>
+                        </ul>
+                        <ul style="padding-bottom: 20px">
+                          <i
+                            class="fa-solid fa-rectangle-vertical"
+                            style="
+                              width: 10px;
+                              border-radius: 0;
+                              vertical-align: middle;
+                            "
+                          ></i
+                          >응시과목
+                          <li class="last">
+                            <c:if test="${params.subject_id eq 14}">국어</c:if>
+                            <c:if test="${params.subject_id eq 15}">영어</c:if>
+                            <c:if test="${params.subject_id eq 16}">수학</c:if>
+                            <c:if test="${params.subject_id eq 17}">사회</c:if>
+                            <c:if test="${params.subject_id eq 18}">과학</c:if>
+                          </li>
+                        </ul>
+                        <input
+                          type="hidden"
+                          id="examStartTime"
+                          name="examStartTime"
+                          value="${params.exam_start_time}"
+                        />
+                        <ul style="padding-bottom: 20px">
+                          <i
+                            class="fa-solid fa-rectangle-vertical"
+                            style="
+                              width: 10px;
+                              border-radius: 0;
+                              vertical-align: middle;
+                            "
+                          ></i
+                          >응시일자
+                          <li class="last">
+                            <div
+                              id="examStartTimeDiv"
+                              style="
+                                overflow: hidden;
+                                white-space: nowrap;
+                                display: inline-block;
+                                vertical-align: middle;
+                              "
+                            ></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="score_box">
+                      <div class="score_txt">
+                        <span>나의 점수</span>
+                        <span class="score"><em>X개</em> / X개</span>
+                      </div>
+                    </div>
+
+                    <table class="tbl_list2 mt60">
+                      <caption></caption>
+                      <colgroup>
+                        <col width="10%" />
+                        <col width="28%" />
+                        <col width="62%" />
+                      </colgroup>
+                      <thead>
+                        <tr>
+                          <th scope="col" class="first">번호</th>
+                          <th scope="col">채점 결과</th>
+                          <th scope="col">문제 보기</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!--                      tr 이거each로돌릴거-->
+                        <tr>
+                          <td class="first">1</td>
+                          <td><i class="fa-regular fa-circle-check"></i></td>
+                          <td>
+                            <a href="#none" class="viewBtn">이거each로돌릴거</a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </li>
+                <li class="tab_btn2">
+                  <input
+                    type="radio"
+                    name="tabmenu_report"
+                    id="tmenu_r2"
+                    class="tab"
+                  />
+                  <label class="rlabel1 label" for="tmenu_r2"
+                    >상세 리포트</label
+                  >
+                  <div class="tab_con pt60">
+                    <div class="detail_box">
+                      <!--첫번째 단락-->
+                      <div class="justify_between mb90">
+                        <div class="box_wrap">
+                          <div class="box_tit">
+                            <i class="fa-regular fa-pen-to-square"></i>시험참여
+                            정보
+                          </div>
+                          <div class="box box1">
+                            <ul>
+                              <i class="fa-regular fa-user"></i
+                              >이름
+                              <li>김천재</li>
+                            </ul>
+                            <ul>
+                              <i class="fa-solid fa-school"></i
+                              >학년
+                              <li>중학교 3학년</li>
+                            </ul>
+                            <ul>
+                              <i class="fa-regular fa-calendar-days"></i
+                              >응시일
+                              <li class="last">
+                                2022년 6월 28일 15:00 ~ 15:30
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="box_wrap">
+                          <div class="box_tit">
+                            <i class="fa-regular fa-pen-to-square"></i>평가결과
+                            요약
+                          </div>
+                          <div class="box box2">
+                            <table class="summary">
+                              <caption></caption>
+                              <colgroup>
+                                <col width="10%" />
+                                <col width="10%" />
+                                <col width="10%" />
+                                <col width="10%" />
+                              </colgroup>
+                              <thead>
+                                <tr>
+                                  <th scope="col">평가 문항 수</th>
+                                  <th scope="col">정답 문항 수</th>
+                                  <th scope="col">종합 성취율</th>
+                                  <th scope="col">판단결과</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>25</td>
+                                  <td>22</td>
+                                  <td>88%</td>
+                                  <td>4</td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            <div class="bar_wrap pt20">
+                              <span class="user_name"
+                                >김천재 <i class="fa-solid fa-caret-down"></i
+                              ></span>
+                              <div class="bar">
+                                <div><em>1</em></div>
+                                <div><em>2</em></div>
+                                <div><em>3</em></div>
+                                <div><em>4</em></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--첫번째 단락-->
+                      <!--두번째 단락-->
+                      <div class="justify_between mb90">
+                        <div class="box_wrap">
+                          <div class="box_tit">
+                            <i class="fa-regular fa-pen-to-square"></i>교과
+                            역량별 성취율
+                          </div>
+                          <div class="box box3">
+                            <table class="tbl_list3 mb30">
+                              <caption></caption>
+                              <colgroup>
+                                <col width="10%" />
+                                <col width="10%" />
+                                <col width="10%" />
+                                <col width="10%" />
+                                <col width="10%" />
+                                <col width="10%" />
+                              </colgroup>
+                              <thead>
+                                <tr>
+                                  <th scope="col"></th>
+                                  <th scope="col">계산이해</th>
+                                  <th scope="col">추론</th>
+                                  <th scope="col">문제해결</th>
+                                  <th scope="col">정보처리</th>
+                                  <th scope="col">의사소통</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>평균</td>
+                                  <td>90</td>
+                                  <td>75</td>
+                                  <td>80</td>
+                                  <td>75</td>
+                                  <td>65</td>
+                                </tr>
+                                <tr class="blue">
+                                  <td>김천재</td>
+                                  <td>95</td>
+                                  <td>94</td>
+                                  <td>91</td>
+                                  <td>93</td>
+                                  <td>85</td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            <!--그래프 영역-->
+                            <div class="graph_area">
+                              <canvas
+                                id="radarChart"
+                                width="678"
+                                height="250"
+                              ></canvas>
+                            </div>
+                            <!--그래프 영역-->
+                          </div>
+                        </div>
+
+                        <div class="box_wrap">
+                          <div class="box_tit">
+                            <i class="fa-regular fa-pen-to-square"></i>문항
+                            난이도별 성취율
+                          </div>
+                          <div class="box box4">
+                            <div class="justify_between">
+                              <table class="tbl_list3 mb30">
+                                <caption></caption>
+                                <colgroup>
+                                  <col width="10%" />
+                                  <col width="10%" />
+                                  <col width="10%" />
+                                </colgroup>
+                                <thead>
+                                  <tr>
+                                    <th scope="col">난이도</th>
+                                    <th scope="col" style="color: #4b78ca">
+                                      김천재
+                                    </th>
+                                    <th scope="col">전체 평균</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>최상</td>
+                                    <td class="blue">-</td>
+                                    <td>-</td>
+                                  </tr>
+                                  <tr>
+                                    <td>상</td>
+                                    <td class="blue">80</td>
+                                    <td>70</td>
+                                  </tr>
+                                  <tr>
+                                    <td>중</td>
+                                    <td class="blue">80</td>
+                                    <td>75</td>
+                                  </tr>
+                                  <tr>
+                                    <td>하</td>
+                                    <td class="blue">100</td>
+                                    <td>95</td>
+                                  </tr>
+                                  <tr>
+                                    <td>최하</td>
+                                    <td class="blue">100</td>
+                                    <td>95</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+
+                              <!--그래프 영역-->
+                              <div class="graph_area ml20">
+                                <canvas
+                                  id="scatterChart"
+                                  width="430"
+                                  height="250"
+                                ></canvas>
+                              </div>
+                              <!--그래프 영역-->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--두번째 단락-->
+
+                      <!--세번째 단락-->
+                      <div class="justify_between mb90">
+                        <div class="box_wrap">
+                          <div class="box_tit">
+                            <i class="fa-regular fa-pen-to-square"></i>(수학)
+                            교과 내용 영역별 성취율
+                          </div>
+                          <div class="box box5">
+                            <table class="tbl_list4 mb30">
+                              <caption></caption>
+                              <colgroup>
+                                <col width="10%" />
+                                <col width="10%" />
+                                <col width="10%" />
+                              </colgroup>
+                              <thead>
+                                <tr>
+                                  <th scope="col">내용영역</th>
+                                  <th scope="col">김천재</th>
+                                  <th scope="col">전체평균</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>수와 연산</td>
+                                  <td class="blue">90</td>
+                                  <td>80</td>
+                                </tr>
+                                <tr>
+                                  <td>도형</td>
+                                  <td class="blue">90</td>
+                                  <td>80</td>
+                                </tr>
+                                <tr>
+                                  <td>측정</td>
+                                  <td class="blue">80</td>
+                                  <td>75</td>
+                                </tr>
+                                <tr>
+                                  <td>자료와 가능성</td>
+                                  <td class="blue">70</td>
+                                  <td>80</td>
+                                </tr>
+                                <tr>
+                                  <td>규칙성</td>
+                                  <td class="blue">90</td>
+                                  <td>60</td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            <!--그래프 영역-->
+                            <div class="graph_area">
+                              <canvas
+                                id="barLineChart1"
+                                width="538"
+                                height="300"
+                              ></canvas>
+                            </div>
+                            <!--그래프 영역-->
+                          </div>
+                        </div>
+
+                        <div class="box_wrap">
+                          <div class="box_tit">
+                            <i class="fa-regular fa-pen-to-square"></i>(수학)
+                            교과 행동 영역별 성취율
+                          </div>
+                          <div class="box box6">
+                            <table class="tbl_list4 mb50">
+                              <caption></caption>
+                              <colgroup>
+                                <col width="10%" />
+                                <col width="10%" />
+                                <col width="10%" />
+                              </colgroup>
+                              <thead>
+                                <tr>
+                                  <th scope="col">행동영역</th>
+                                  <th scope="col">김천재</th>
+                                  <th scope="col">전체평균</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>계산력</td>
+                                  <td class="blue">90</td>
+                                  <td>80</td>
+                                </tr>
+                                <tr>
+                                  <td>이해력</td>
+                                  <td class="blue">90</td>
+                                  <td>80</td>
+                                </tr>
+                                <tr>
+                                  <td>문제 해결력</td>
+                                  <td class="blue">80</td>
+                                  <td>75</td>
+                                </tr>
+                                <tr>
+                                  <td>추론력</td>
+                                  <td class="blue">70</td>
+                                  <td>80</td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            <!--그래프 영역-->
+                            <div class="graph_area">
+                              <canvas
+                                id="barLineChart2"
+                                width="648"
+                                height="300"
+                              ></canvas>
+                            </div>
+                            <!--그래프 영역-->
+                          </div>
+                        </div>
+                      </div>
+                      <!--세번째 단락-->
+
+                      <!--네번째 단락-->
+                      <div class="justify_between mb90">
+                        <div class="box_wrap">
+                          <div class="box_tit">
+                            <i class="fa-regular fa-pen-to-square"></i>문항
+                            난이도별 문제 풀이 소요 시간
+                          </div>
+                          <div class="box box7">
+                            <table class="tbl_list4 mb30">
+                              <caption></caption>
+                              <colgroup>
+                                <col width="10%" />
+                                <col width="10%" />
+                                <col width="10%" />
+                              </colgroup>
+                              <thead>
+                                <tr>
+                                  <th scope="col">난이도</th>
+                                  <th scope="col" style="color: #4b78ca">
+                                    김천재
+                                  </th>
+                                  <th scope="col">전체평균</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>최상</td>
+                                  <td class="blue">40초</td>
+                                  <td>50초</td>
+                                </tr>
+                                <tr>
+                                  <td>상</td>
+                                  <td class="blue">40초</td>
+                                  <td>40초</td>
+                                </tr>
+                                <tr>
+                                  <td>중</td>
+                                  <td class="blue">30초</td>
+                                  <td>25초</td>
+                                </tr>
+                                <tr>
+                                  <td>하</td>
+                                  <td class="blue">30초</td>
+                                  <td>25초</td>
+                                </tr>
+                                <tr>
+                                  <td>최하</td>
+                                  <td class="blue">20초</td>
+                                  <td>20초</td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            <!--그래프 영역-->
+                            <div class="graph_area">
+                              <canvas
+                                id="barLineChart3"
+                                width="648"
+                                height="300"
+                              ></canvas>
+                            </div>
+                            <!--그래프 영역-->
+                          </div>
+                        </div>
+
+                        <div class="box_wrap">
+                          <div class="box_tit">
+                            <i class="fa-regular fa-pen-to-square"></i>교과 내용
+                            영역별 평균 풀이 소요 시간
+                          </div>
+                          <div class="box box8">
+                            <table class="tbl_list4 mb30">
+                              <caption></caption>
+                              <colgroup>
+                                <col width="10%" />
+                                <col width="10%" />
+                                <col width="10%" />
+                              </colgroup>
+                              <thead>
+                                <tr>
+                                  <th scope="col">영역</th>
+                                  <th scope="col" style="color: #4b78ca">
+                                    김천재
+                                  </th>
+                                  <th scope="col">전체평균</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>수와 연산</td>
+                                  <td class="blue">70</td>
+                                  <td>80</td>
+                                </tr>
+                                <tr>
+                                  <td>도형</td>
+                                  <td class="blue">40</td>
+                                  <td>90</td>
+                                </tr>
+                                <tr>
+                                  <td>측정</td>
+                                  <td class="blue">50</td>
+                                  <td>100</td>
+                                </tr>
+                                <tr>
+                                  <td>자료와 가능성</td>
+                                  <td class="blue">30</td>
+                                  <td>60</td>
+                                </tr>
+                                <tr>
+                                  <td>규칙성</td>
+                                  <td class="blue">20</td>
+                                  <td>30</td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            <!--그래프 영역-->
+                            <div class="graph_area">
+                              <canvas
+                                id="barLineChart4"
+                                width="648"
+                                height="300"
+                              ></canvas>
+                            </div>
+                            <!--그래프 영역-->
+                          </div>
+                        </div>
+                      </div>
+                      <!--네번째 단락-->
+
+                      <!--다섯번째 단락-->
+                      <div class="justify_between mb90">
+                        <div class="box_wrap">
+                          <div class="box_tit">
+                            <i class="fa-regular fa-pen-to-square"></i>문항별
+                            정오표
+                          </div>
+                          <div class="box box9">
+                            <table class="tbl_list2">
+                              <caption></caption>
+                              <colgroup>
+                                <col width="5%" />
+                                <col width="8%" />
+                                <col width="10%" />
+                                <col width="5%" />
+                                <col width="8%" />
+                                <col width="10%" />
+                                <col width="15%" />
+                              </colgroup>
+                              <thead>
+                                <tr>
+                                  <th scope="col">번호</th>
+                                  <th scope="col">교과 영역</th>
+                                  <th scope="col">관련 단원</th>
+                                  <th scope="col">정답</th>
+                                  <th scope="col">본인 응답</th>
+                                  <th scope="col">채점결과</th>
+                                  <th scope="col">시험응시자 평균 정답률</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>1</td>
+                                  <td>계산 이해</td>
+                                  <td>분수의나눗셈</td>
+                                  <td>1</td>
+                                  <td>1</td>
+                                  <td>
+                                    <i class="fa-regular fa-circle-check"></i>
+                                  </td>
+                                  <td>80%</td>
+                                </tr>
+                                <tr>
+                                  <td>2</td>
+                                  <td>계산 이해</td>
+                                  <td>비례식과 비례배분</td>
+                                  <td>2</td>
+                                  <td>3</td>
+                                  <td>
+                                    <i class="fa-regular fa-circle-xmark"></i>
+                                  </td>
+                                  <td>70%</td>
+                                </tr>
+                                <tr>
+                                  <td>3</td>
+                                  <td>계산 이해</td>
+                                  <td>소수의나눗셈</td>
+                                  <td>3</td>
+                                  <td>3</td>
+                                  <td>
+                                    <i class="fa-regular fa-circle-check"></i>
+                                  </td>
+                                  <td>60%</td>
+                                </tr>
+                                <tr>
+                                  <td>4</td>
+                                  <td>계산 이해</td>
+                                  <td>분수의나눗셈</td>
+                                  <td>4</td>
+                                  <td>4</td>
+                                  <td>
+                                    <i class="fa-regular fa-circle-check"></i>
+                                  </td>
+                                  <td>50%</td>
+                                </tr>
+                                <tr>
+                                  <td>5</td>
+                                  <td>계산 이해</td>
+                                  <td>공간과 입체</td>
+                                  <td>1</td>
+                                  <td>1</td>
+                                  <td>
+                                    <i class="fa-regular fa-circle-check"></i>
+                                  </td>
+                                  <td>80%</td>
+                                </tr>
+                                <tr>
+                                  <td>6</td>
+                                  <td>추론</td>
+                                  <td>비례식과 비례배분</td>
+                                  <td>2</td>
+                                  <td>2</td>
+                                  <td>
+                                    <i class="fa-regular fa-circle-check"></i>
+                                  </td>
+                                  <td>70%</td>
+                                </tr>
+                                <tr>
+                                  <td>7</td>
+                                  <td>추론</td>
+                                  <td>소수의나눗셈</td>
+                                  <td>3</td>
+                                  <td>2</td>
+                                  <td>
+                                    <i class="fa-regular fa-circle-xmark"></i>
+                                  </td>
+                                  <td>60%</td>
+                                </tr>
+                                <tr>
+                                  <td>8</td>
+                                  <td>추론</td>
+                                  <td>분수의나눗셈</td>
+                                  <td>4</td>
+                                  <td>4</td>
+                                  <td>
+                                    <i class="fa-regular fa-circle-check"></i>
+                                  </td>
+                                  <td>50%</td>
+                                </tr>
+                                <tr>
+                                  <td>9</td>
+                                  <td>추론</td>
+                                  <td>공간과 입체</td>
+                                  <td>1</td>
+                                  <td>1</td>
+                                  <td>
+                                    <i class="fa-regular fa-circle-check"></i>
+                                  </td>
+                                  <td>80%</td>
+                                </tr>
+                                <tr>
+                                  <td>~</td>
+                                  <td>~</td>
+                                  <td>~</td>
+                                  <td>~</td>
+                                  <td>~</td>
+                                  <td>~</td>
+                                  <td>~</td>
+                                </tr>
+                                <tr>
+                                  <td>20</td>
+                                  <td>추론</td>
+                                  <td>비례식과 배분</td>
+                                  <td>3</td>
+                                  <td>3</td>
+                                  <td>
+                                    <i class="fa-regular fa-circle-check"></i>
+                                  </td>
+                                  <td>60%</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <!--다섯번째 단락-->
+
+                      <!--여섯번째 단락-->
+                      <div class="justify_between mb90">
+                        <div class="box_wrap">
+                          <div class="box_tit">
+                            <i class="fa-regular fa-pen-to-square"
+                              >eNAEA 문제 유형별 정답률</i
+                            >
+                          </div>
+                          <div class="box box10">
+                            <table class="tbl_list4 mb20">
+                              <caption></caption>
+                              <colgroup>
+                                <col width="10%" />
+                                <col width="10%" />
+                                <col width="10%" />
+                              </colgroup>
+                              <thead>
+                                <tr>
+                                  <th scope="col">문제 유형</th>
+                                  <th scope="col" style="color: #4b78ca">
+                                    김천재
+                                  </th>
+                                  <th scope="col">전체 평균</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>단순 제시형</td>
+                                  <td class="blue">90</td>
+                                  <td>80</td>
+                                </tr>
+                                <tr>
+                                  <td>정보 활용형</td>
+                                  <td class="blue">80</td>
+                                  <td>80</td>
+                                </tr>
+                                <tr>
+                                  <td>미디어 활용형</td>
+                                  <td class="blue">80</td>
+                                  <td>70</td>
+                                </tr>
+                                <tr>
+                                  <td>조작형</td>
+                                  <td class="blue">100</td>
+                                  <td>80</td>
+                                </tr>
+                                <tr>
+                                  <td>대화형</td>
+                                  <td class="blue">100</td>
+                                  <td>80</td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            <!--그래프 영역-->
+                            <div class="graph_area">
+                              <canvas
+                                id="lineChart1"
+                                width="478"
+                                height="290"
+                              ></canvas>
+                            </div>
+                            <!--그래프 영역-->
+                          </div>
+                        </div>
+
+                        <div class="box_wrap">
+                          <div class="box_tit">
+                            <i class="fa-regular fa-pen-to-square"></i>eNAEA
+                            응답 유형별 정답률
+                          </div>
+                          <div class="box box11">
+                            <table class="tbl_list4 mb10">
+                              <caption></caption>
+                              <colgroup>
+                                <col width="10%" />
+                                <col width="10%" />
+                                <col width="10%" />
+                              </colgroup>
+                              <thead>
+                                <tr>
+                                  <th scope="col">응답 유형</th>
+                                  <th scope="col" style="color: #4b78ca">
+                                    김천재
+                                  </th>
+                                  <th scope="col">전체 평균</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>선다형</td>
+                                  <td class="blue">90</td>
+                                  <td>80</td>
+                                </tr>
+                                <tr>
+                                  <td>확장 선택형</td>
+                                  <td class="blue">80</td>
+                                  <td>80</td>
+                                </tr>
+                                <tr>
+                                  <td>자료 연결형</td>
+                                  <td class="blue">80</td>
+                                  <td>70</td>
+                                </tr>
+                                <tr>
+                                  <td>순서 배열형</td>
+                                  <td class="blue">100</td>
+                                  <td>60</td>
+                                </tr>
+                                <tr>
+                                  <td>단답형</td>
+                                  <td class="blue">100</td>
+                                  <td>70</td>
+                                </tr>
+                                <tr>
+                                  <td>서술형</td>
+                                  <td class="blue">80</td>
+                                  <td>80</td>
+                                </tr>
+                                <tr>
+                                  <td>수정형</td>
+                                  <td class="blue">100</td>
+                                  <td>80</td>
+                                </tr>
+                                <tr>
+                                  <td>그래프 그림 완성형</td>
+                                  <td class="blue">100</td>
+                                  <td>90</td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            <!--그래프 영역-->
+                            <div class="graph_area">
+                              <canvas
+                                id="lineChart2"
+                                width="478"
+                                height="210"
+                              ></canvas>
+                            </div>
+                            <!--그래프 영역-->
+                          </div>
+                        </div>
+                      </div>
+                      <!--여섯번째 단락-->
+                    </div>
+
+                    <a href="#" class="downBtn btn">다운로드</a>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
-</div>
 </html>
