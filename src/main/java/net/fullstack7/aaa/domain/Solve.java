@@ -33,7 +33,6 @@ public class Solve {
     @Column(name = "isCorrect",nullable = false)
     private Boolean isCorrect; // true 정답 false 오답
 
-    @Column(nullable = false)
     private int time; // 문제별 풀이시간
 
     @Column(name = "submittedAt", nullable = false)

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html
-  lang="ko"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{layout/layout.html}"
+        lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout.html}"
 >
 <div layout:fragment="main">
   <div class="container">
@@ -11,16 +11,15 @@
     <div class="exam-info">
       <h2>시험참여 정보</h2>
       <div class="info-box">
-        <div class="info-item"><strong>이름</strong> | 김민석</div>
-        <div class="info-item"><strong>학년</strong> | 3학년</div>
-        <div class="info-item"><strong>응시과목</strong> | 국어</div>
-        <div class="info-item"><strong>응시일자</strong> | 2024-12-18</div>
+        <div class="info-item"><strong>이름</strong> | <span th:text="${result.name}">김민석</span></div>
+        <div class="info-item"><strong>응시과목</strong> | <span th:text="${result.subjectName}">국어</span></div>
+        <div class="info-item"><strong>제출일자</strong> | <span th:text="${result.submitAt}">2024-12-18</span></div>
       </div>
     </div>
 
     <!-- 점수 -->
     <div class="score-section">
-      <h3>0점 / 100점</h3>
+      <h3 th:text="${result.correctItem} + '개 / ' + ${result.totalItem} + '개'">0개 / 10개</h3>
     </div>
 
     <!-- 채점 결과 -->
@@ -33,20 +32,17 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>1</td>
-        <td><span class="result incorrect">✗</span></td>
-        <td><button class="detail-button">상세 보기</button></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td><span class="result incorrect">✗</span></td>
-        <td><button class="detail-button">상세 보기</button></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td><span class="result incorrect">✗</span></td>
-        <td><button class="detail-button">상세 보기</button></td>
+      <tr th:each="questionResult, iterStat : ${result.questionResults}">
+        <td th:text="${iterStat.count}">1</td>
+        <td>
+          <span th:class="${questionResult.isCorrect ? 'result correct' : 'result incorrect'}"
+                th:text="${questionResult.isCorrect ? '✓' : '✗'}">
+            ✗
+          </span>
+        </td>
+        <td>
+          <a th:href="${questionResult.explanationUrl}" class="detail-button" target="explanationWindow">상세 보기</a>
+        </td>
       </tr>
       </tbody>
     </table>
