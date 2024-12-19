@@ -4,13 +4,15 @@ import lombok.RequiredArgsConstructor;
 import net.fullstack7.aaa.domain.Exam;
 import net.fullstack7.aaa.domain.Item;
 import net.fullstack7.aaa.dto.exam.ExamRequestDTO;
+import net.fullstack7.aaa.dto.exam.ItemList;
 import net.fullstack7.aaa.repository.ExamRepository;
 import net.fullstack7.aaa.repository.ItemRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import net.fullstack7.aaa.dto.exam.ItemDTO;
 
 @Service
 @RequiredArgsConstructor
@@ -48,5 +50,18 @@ public class ExamServiceImpl implements ExamServiceIf {
         }
     }
 
-    
+    @Override
+    public ItemList getItemList(Long examId) {
+        Exam exam = examRepository.findById(examId)
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 시험입니다."));
+        List<Item> items = itemRepository.findByExam(exam);
+        return ItemList.builder()
+                .examId(exam.getExamId())
+                .examName(exam.getExamName())
+                .subjectName(exam.getSubjectName())
+                .teacherId(exam.getTeacherId())
+                .teacherName(exam.getTeacherName())
+                .itemIdList(items.stream().map(Item::getItemId).collect(Collectors.toList()))
+                .build();
+    }
 }

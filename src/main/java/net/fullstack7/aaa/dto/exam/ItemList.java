@@ -17,5 +17,5 @@ public class ItemList {
     private String subjectName;
     private String teacherId;
     private String teacherName;
-    private List<ItemDTO> itemList;
+    private List<Long> itemIdList;
 }

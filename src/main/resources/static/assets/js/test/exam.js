@@ -49,6 +49,7 @@ function createMultipleChoiceTemplate(question) {
 
 function createShortAnswerTemplate(question) {
     return `
+    <div class="swiper-slide">
         <div class="page type01">
             <div class="inner">
                 <div class="question type01">
@@ -68,6 +69,7 @@ function createShortAnswerTemplate(question) {
                 </div>
             </div>
         </div>
+    </div>
     `;
 }
 
@@ -208,6 +210,7 @@ function moveToQuestion(index) {
     }
 }
 
+const { itemIdList } = window.examData;
 
 // 문제 데이터 조회
 document.addEventListener('DOMContentLoaded', async function() {
@@ -219,7 +222,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ 
-                itemIdList: [966536, 1588525, 1588526, 1589103, 1589104, 494519, 494520] 
+                itemIdList: itemIdList
             })
         });
 
