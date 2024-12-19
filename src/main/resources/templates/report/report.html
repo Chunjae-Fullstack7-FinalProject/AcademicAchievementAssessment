@@ -6,6 +6,23 @@
   layout:decorate="~{layout/layout.html}"
 >
   <div layout:fragment="main">
+    <head>
+      <link rel="stylesheet" href="/assets/css/report/report.css" />
+      <script
+        src="https://kit.fontawesome.com/266dd736a0.js"
+        crossorigin="anonymous"
+      ></script>
+      <link
+        href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"
+        rel="stylesheet"
+      />
+      <link
+        href="https://webfontworld.github.io/SCoreDream/SCoreDream.css"
+        rel="stylesheet"
+      />
+      <script src="/assets/js/chart.js-3.8.0/package/dist/chart.js"></script>
+      <script src="/assets/js/report/reportPage.js"></script>
+    </head>
     <div class="con_case">
       <div class="container">
         <div class="tabmenu">
@@ -152,7 +169,7 @@
                   <div class="tab_con pt60">
                     <div class="detail_box">
                       <div class="justify_between mb90">
-                        <div class="box_wrap">
+                        <div class="box_wrap" id="student_summary">
                           <div class="box_tit">
                             <i class="fa-regular fa-pen-to-square"></i>평가결과
                             요약
@@ -171,32 +188,109 @@
                                   <th scope="col">평가 문항 수</th>
                                   <th scope="col">정답 문항 수</th>
                                   <th scope="col">종합 성취율</th>
-                                  <th scope="col">판단결과</th>
+                                  <th scope="col">성취수준</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
-                                  <td>25</td>
-                                  <td>22</td>
-                                  <td>88%</td>
-                                  <td>4</td>
+                                  <!-- th:text="${} 사용 예정 -->
+                                  <!-- th:text="${#numbers.formatInteger(detailReportInfo.item_cnt, 0) -->
+                                  <td>평가문항수</td>
+                                  <td>정답 문항 수</td>
+                                  <td>종합 성취율</td>
+                                  <td>
+                                    <!-- <th:block th:if="${성취수준}"
+                                      >1수준</th:block
+                                    >
+                                    <th:block th:if="${성취수준}"
+                                      >2수준</th:block
+                                    >
+                                    <th:block th:if="${성취수준}"
+                                      >3수준</th:block
+                                    >
+                                    <th:block th:if="${성취수준}"
+                                      >4수준</th:block
+                                    > -->
+                                    1수준
+                                  </td>
                                 </tr>
                               </tbody>
                             </table>
 
-                            <div class="bar_wrap pt20">
-                              <span class="user_name"
-                                >김천재 <i class="fa-solid fa-caret-down"></i
-                              ></span>
-                              <div class="bar">
-                                <div><em>1</em></div>
-                                <div><em>2</em></div>
-                                <div><em>3</em></div>
-                                <div><em>4</em></div>
+                            <div
+                              class="bar_wrap pt30"
+                              style="position: relative; left: 16.5px"
+                            >
+                              <!-- <span
+                                class="user_name"
+                                th:style="'right: ' + ${(1 - detailReportInfo.achievePer) * 100 <= 90 ? 
+                                                                    (1 - detailReportInfo.achievePer) * 100 : 90} + '%; left: auto;'"
+                              > -->
+                              <span
+                                class="user_name"
+                                th:style="${'right: 10%; left: auto'}"
+                              >
+                                내 성취수준
+                                <i
+                                  class="fa-solid fa-caret-down"
+                                  style="padding-left: 40px; width: 35px"
+                                ></i>
+                              </span>
+                            </div>
+                            <div class="bar_wrap">
+                              <div
+                                class="bar"
+                                style="position: absolute; display: block"
+                              >
+                                <div style="width: 19%">
+                                  <em style="padding: 18px">1수준</em>
+                                  <p
+                                    style="
+                                      font-size: 16px;
+                                      padding-bottom: 40px;
+                                    "
+                                  >
+                                    기초학력 미달
+                                  </p>
+                                </div>
+                                <div style="width: 32%">
+                                  <em style="padding: 18px">2수준</em>
+                                  <p
+                                    style="
+                                      font-size: 16px;
+                                      padding-bottom: 40px;
+                                    "
+                                  >
+                                    기초학력
+                                  </p>
+                                </div>
+                                <div style="width: 29%">
+                                  <em style="padding: 18px">3수준</em>
+                                  <p
+                                    style="
+                                      font-size: 16px;
+                                      padding-bottom: 40px;
+                                    "
+                                  >
+                                    보통학력
+                                  </p>
+                                </div>
+                                <div style="width: 20%">
+                                  <em style="padding: 18px">4수준</em>
+                                  <p
+                                    style="
+                                      font-size: 16px;
+                                      padding-bottom: 40px;
+                                    "
+                                  >
+                                    우수학력
+                                  </p>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
+
                         <div class="box_wrap">
                           <div class="box_tit">
                             <i class="fa-regular fa-pen-to-square"></i>문항
@@ -215,7 +309,8 @@
                                   <tr>
                                     <th scope="col">난이도</th>
                                     <th scope="col" style="color: #4b78ca">
-                                      김천재
+                                      <!-- 사용자 이름 들어갈 예정 -->
+                                      이름
                                     </th>
                                     <th scope="col">전체 평균</th>
                                   </tr>
@@ -278,7 +373,8 @@
                                 <tr>
                                   <th scope="col">난이도</th>
                                   <th scope="col" style="color: #4b78ca">
-                                    김천재
+                                    <!-- 사용자 이름 들어갈 예정 -->
+                                    이름
                                   </th>
                                   <th scope="col">전체평균</th>
                                 </tr>
@@ -374,110 +470,13 @@
                                   </td>
                                   <td>70%</td>
                                 </tr>
-                                <tr>
-                                  <td>3</td>
-                                  <td>계산 이해</td>
-                                  <td>소수의나눗셈</td>
-                                  <td>3</td>
-                                  <td>3</td>
-                                  <td>
-                                    <i class="fa-regular fa-circle-check"></i>
-                                  </td>
-                                  <td>60%</td>
-                                </tr>
-                                <tr>
-                                  <td>4</td>
-                                  <td>계산 이해</td>
-                                  <td>분수의나눗셈</td>
-                                  <td>4</td>
-                                  <td>4</td>
-                                  <td>
-                                    <i class="fa-regular fa-circle-check"></i>
-                                  </td>
-                                  <td>50%</td>
-                                </tr>
-                                <tr>
-                                  <td>5</td>
-                                  <td>계산 이해</td>
-                                  <td>공간과 입체</td>
-                                  <td>1</td>
-                                  <td>1</td>
-                                  <td>
-                                    <i class="fa-regular fa-circle-check"></i>
-                                  </td>
-                                  <td>80%</td>
-                                </tr>
-                                <tr>
-                                  <td>6</td>
-                                  <td>추론</td>
-                                  <td>비례식과 비례배분</td>
-                                  <td>2</td>
-                                  <td>2</td>
-                                  <td>
-                                    <i class="fa-regular fa-circle-check"></i>
-                                  </td>
-                                  <td>70%</td>
-                                </tr>
-                                <tr>
-                                  <td>7</td>
-                                  <td>추론</td>
-                                  <td>소수의나눗셈</td>
-                                  <td>3</td>
-                                  <td>2</td>
-                                  <td>
-                                    <i class="fa-regular fa-circle-xmark"></i>
-                                  </td>
-                                  <td>60%</td>
-                                </tr>
-                                <tr>
-                                  <td>8</td>
-                                  <td>추론</td>
-                                  <td>분수의나눗셈</td>
-                                  <td>4</td>
-                                  <td>4</td>
-                                  <td>
-                                    <i class="fa-regular fa-circle-check"></i>
-                                  </td>
-                                  <td>50%</td>
-                                </tr>
-                                <tr>
-                                  <td>9</td>
-                                  <td>추론</td>
-                                  <td>공간과 입체</td>
-                                  <td>1</td>
-                                  <td>1</td>
-                                  <td>
-                                    <i class="fa-regular fa-circle-check"></i>
-                                  </td>
-                                  <td>80%</td>
-                                </tr>
-                                <tr>
-                                  <td>~</td>
-                                  <td>~</td>
-                                  <td>~</td>
-                                  <td>~</td>
-                                  <td>~</td>
-                                  <td>~</td>
-                                  <td>~</td>
-                                </tr>
-                                <tr>
-                                  <td>20</td>
-                                  <td>추론</td>
-                                  <td>비례식과 배분</td>
-                                  <td>3</td>
-                                  <td>3</td>
-                                  <td>
-                                    <i class="fa-regular fa-circle-check"></i>
-                                  </td>
-                                  <td>60%</td>
-                                </tr>
                               </tbody>
                             </table>
                           </div>
                         </div>
                         <div class="box_wrap">
                           <div class="box_tit">
-                            <i class="fa-regular fa-pen-to-square"></i>eNAEA
+                            <i class="fa-regular fa-pen-to-square"></i>
                             응답 유형별 정답률
                           </div>
                           <div class="box box11">
@@ -492,51 +491,37 @@
                                 <tr>
                                   <th scope="col">응답 유형</th>
                                   <th scope="col" style="color: #4b78ca">
-                                    김천재
+                                    <!-- 사용자 이름 들어갈 예정 -->
+                                    이름
                                   </th>
                                   <th scope="col">전체 평균</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
-                                  <td>선다형</td>
+                                  <td>5지 선택</td>
                                   <td class="blue">90</td>
                                   <td>80</td>
                                 </tr>
                                 <tr>
-                                  <td>확장 선택형</td>
+                                  <td>단답 유순형</td>
                                   <td class="blue">80</td>
                                   <td>80</td>
                                 </tr>
                                 <tr>
-                                  <td>자료 연결형</td>
+                                  <td>단답 무순형</td>
                                   <td class="blue">80</td>
                                   <td>70</td>
                                 </tr>
                                 <tr>
-                                  <td>순서 배열형</td>
+                                  <td>자유 선지형</td>
                                   <td class="blue">100</td>
                                   <td>60</td>
                                 </tr>
                                 <tr>
-                                  <td>단답형</td>
+                                  <td>서술형</td>
                                   <td class="blue">100</td>
                                   <td>70</td>
-                                </tr>
-                                <tr>
-                                  <td>서술형</td>
-                                  <td class="blue">80</td>
-                                  <td>80</td>
-                                </tr>
-                                <tr>
-                                  <td>수정형</td>
-                                  <td class="blue">100</td>
-                                  <td>80</td>
-                                </tr>
-                                <tr>
-                                  <td>그래프 그림 완성형</td>
-                                  <td class="blue">100</td>
-                                  <td>90</td>
                                 </tr>
                               </tbody>
                             </table>
