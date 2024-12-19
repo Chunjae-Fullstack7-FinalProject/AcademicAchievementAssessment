@@ -109,7 +109,8 @@ select.active { border-color: #1e90ff;}
 
 .page .question.type01 .left img { width: 100%; }
 
-.page .question.type01 .left .txt { padding: 10px; border: 1px solid #000; font-size: 20px; text-align: justify;}
+/* .page .question.type01 .left .txt { padding: 10px; border: 1px solid #000; font-size: 20px; text-align: justify;} */
+.page .question.type01 .left .txt { padding: 10px; font-size: 20px; text-align: justify;}
 
 .page .question.type01 .right { width: 502px; }
 
