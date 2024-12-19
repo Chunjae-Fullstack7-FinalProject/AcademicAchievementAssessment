@@ -21,7 +21,7 @@ public class MemberController {
     public String signUp() { return "sign/signUp";}
 
     @PostMapping("/sign-up")
-    public ResponseEntity<String> signUp(@RequestBody MemberDTO memberDTO){
+    public ResponseEntity<String> signUp(@ModelAttribute MemberDTO memberDTO){
         try{
             memberService.signUp(memberDTO);
             return ResponseEntity.ok("회원가입 완료");
